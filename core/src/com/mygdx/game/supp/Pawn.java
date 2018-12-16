@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.views.PlayScreen;
@@ -106,6 +108,17 @@ public class Pawn
     {
         dice -= 1;
         SequenceAction sequenceAction = new SequenceAction();
+
+        // Creating our Runable Action and adding it at the end of a sequential set of actions of the Pawn,
+        // so our popup window shows up after all other actions have been completed
+        RunnableAction runPopup = new RunnableAction() {
+            @Override
+            public void run() {
+                QuestionPopup.showQuestionWindow();
+//                System.out.println("sadfasdfsdaf");
+            }
+        };
+
         while(dice >= 0)
         {
             tileNum -= dice;
@@ -121,6 +134,8 @@ public class Pawn
             sequenceAction.addAction(Actions.moveTo((Float) targetTileProperties.get("x"), (Float) targetTileProperties.get("y"), 1, Interpolation.smooth));
         }
 
+        // Setting the showing of our popup after all other actions have been completed
+        sequenceAction.addAction(runPopup);
         pawn.addAction(sequenceAction);
     }
 }

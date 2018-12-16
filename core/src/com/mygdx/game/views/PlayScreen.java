@@ -88,12 +88,12 @@ public class PlayScreen implements Screen
                 if (activePlayer.equals("player1")) {
                     System.out.println("Player1 Plays");
                     Dice2.rollAndMove(player1, player1.getTileNum());
-                    QuestionPopup.showQuestionWindow();
+//                    QuestionPopup.showQuestionWindow();
                     activePlayer = "player2";
                 } else {
                     System.out.println("Player2 Plays");
                     Dice2.rollAndMove(player2, player2.getTileNum());
-                    QuestionPopup.showQuestionWindow();
+//                    QuestionPopup.showQuestionWindow();
                     activePlayer = "player1";
                 }
             }
@@ -102,7 +102,7 @@ public class PlayScreen implements Screen
             {
                 System.out.println("Player1 Plays");
                 Dice2.rollAndMove(player1, player1.getTileNum());
-                QuestionPopup.showQuestionWindow();
+//                QuestionPopup.showQuestionWindow();
             }
         }
     }

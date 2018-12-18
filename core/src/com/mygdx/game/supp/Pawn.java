@@ -118,7 +118,7 @@ public class Pawn
             @Override
             public void run() {
                 QuestionPopup.showQuestionWindow();
-//                System.out.println("sadfasdfsdaf");
+                // System.out.println("sadfasdfsdaf");
             }
         };
 
@@ -126,7 +126,7 @@ public class Pawn
         {
             tileNum -= dice;
             MapProperties tileProperties = getTileProperties(tileNum);
-            sequenceAction.addAction(Actions.moveTo((Float) tileProperties.get("x"), (Float) tileProperties.get("y"), .5f, Interpolation.smooth));
+            sequenceAction.addAction(Actions.moveTo((Float) tileProperties.get("x"), (Float) tileProperties.get("y"), .4f, Interpolation.smooth));
             tileNum += dice;
             dice -= 1;
         }
@@ -138,7 +138,7 @@ public class Pawn
         }
 
         // Setting the showing of our popup after all other actions have been completed
-        sequenceAction.addAction(runPopup);
+        sequenceAction.addAction(Actions.delay(.3f,runPopup));
         pawn.addAction(sequenceAction);
     }
 }

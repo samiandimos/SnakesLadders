@@ -52,6 +52,7 @@ public class Dice2
                 }
 
                 if(playingPawn.getTileNum() == 100) {
+                    playingPawn.movePawn(tileNum, targetTileNum, dice);
                     PlayScreen.parent.changeScreen(TileBoard3.ENDGAME);
                 }
             } else {

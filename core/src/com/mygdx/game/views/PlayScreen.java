@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
+import com.sun.org.apache.bcel.internal.classfile.Unknown;
+import org.omg.CORBA.UNKNOWN;
 
 
 public class PlayScreen implements Screen
@@ -43,7 +45,7 @@ public class PlayScreen implements Screen
             player1 = new Pawn();
             player1.setName("Player1");
 //            System.out.println(player1.getName());
-            this.noOfPlayers = noOfPlayers;
+            PlayScreen.noOfPlayers = noOfPlayers;
         }
         if(noOfPlayers == 2)
         {
@@ -52,7 +54,7 @@ public class PlayScreen implements Screen
             player2 = new Pawn();
             player2.setName("Player2");
 //            System.out.println(player1.getName() + " \n" + player2.getName());
-            this.noOfPlayers = noOfPlayers;
+            PlayScreen.noOfPlayers = noOfPlayers;
         }
     }
 
@@ -74,33 +76,40 @@ public class PlayScreen implements Screen
         }
 
         // Setting in the playStage our question popup window
+        QuestionPopup.createQuestionWindow();
     }
+
+
+    // Setting variables (activeInputState and inactiveInputState) for getting the com.badlogic.gdx.Input.Keys
+    // manipulating this way when the players are able to play
+    // (Used in AnswerButtons listener)
+    private int inactiveInputState = Input.Keys.UNKNOWN;
+    public static int activeInputState = Input.Keys.SPACE;
+    public static int inputActivationState = activeInputState;
 
     public static String activePlayer = "player1";
     private void checkAndPlay()
     {
-        if (noOfPlayers == 2) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        if (Gdx.input.isKeyJustPressed(inputActivationState))
+        {
+            inputActivationState = inactiveInputState;
+            if (noOfPlayers == 2) {
                 if (activePlayer.equals("player1")) {
                     System.out.println("Player1 Plays");
                     System.out.println("Player1 Score:" + Score.getPlScore1());
                     Dice2.rollAndMove(player1, player1.getTileNum());
-//                    QuestionPopup.showQuestionWindow();
-//                    activePlayer = "player2";
+
                 } else {
                     System.out.println("Player2 Plays");
                     System.out.println("Player 2 Score: " + Score.getPlScore2());
                     Dice2.rollAndMove(player2, player2.getTileNum());
                 }
-            }
-        }else{
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
-            {
+
+            } else {
                 activePlayer = "player1";
                 System.out.println("Player1 Plays");
                 System.out.println("Player1 Score :" + Score.getPlScore1());
                 Dice2.rollAndMove(player1, player1.getTileNum());
-//                QuestionPopup.showQuestionWindow();
             }
         }
     }
@@ -124,7 +133,6 @@ public class PlayScreen implements Screen
         playStage.draw();
 
         checkAndPlay();
-
     }
 
     @Override
@@ -150,12 +158,10 @@ public class PlayScreen implements Screen
     @Override
     public void dispose()
     {
-
         playStage.dispose();
         parent.dispose();
         tiledMap.dispose();
         renderer.dispose();
         DiceDisplay.tex.dispose();
-
     }
 }

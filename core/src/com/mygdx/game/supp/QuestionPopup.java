@@ -33,20 +33,37 @@ public class QuestionPopup {
 
         Label label = new Label(name, skin, "title");
         label.setWrap(true);
-//        skin.dispose();
         return label;
     }
 
+    // Setting once inside the stage the transparent background
+    private static void transparentBackground() {
+        texture = new Texture(Gdx.files.internal("transparency.png"));
+        transparentImg = new Image(texture);
+        transparentImg.setColor(1, 1, 1, 0);
 
-    public static void createQuestionWindow(final int randNr) {
+        PlayScreen.playStage.addActor(transparentImg);
+    }
 
+    // Used in the show() method of the PlayScreen class to create
+    // and setup our question window and transparency inside the stage
+    public static void createQuestionWindow()
+    {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         // Set a darker transparent background
         transparentBackground();
-
-
         window = new Window("Question", skin);
+        // Start by hiding the window (setting the alpha value zero)
+        window.setColor(1, 1, 1, 0);
 
+
+        window.setResizable(false);
+        window.setMovable(false);
+        PlayScreen.playStage.addActor(window);
+    }
+
+    // Updating the elements of the window
+    private static void updateQuestionWindow(final int randNr) {
 
         if (CourseProperties.checkForPbl()) {
 
@@ -90,47 +107,34 @@ public class QuestionPopup {
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][2],alg.getRightAnswer());
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][3],alg.getRightAnswer());
 
-
         }
 
-
         window.pack();
-        window.setResizable(false);
-        window.setMovable(false);
         window.setPosition((PlayScreen.mapW - window.getWidth()) / 2f, ((PlayScreen.mapH - window.getHeight()) / 2f) + 4);
-        window.toFront();
-
-        // Start by hiding the window (setting the alpha value zero)
-
-        window.setColor(1, 1, 1, 0);
-
-        PlayScreen.playStage.addActor(window);
         Gdx.input.setInputProcessor(PlayScreen.playStage);
-//        skin.dispose();
+        window.toFront();
     }
 
-    // Setting once inside the stage the transparent background
-    public static void transparentBackground() {
-        texture = new Texture(Gdx.files.internal("transparency.png"));
-        transparentImg = new Image(texture);
-        transparentImg.setColor(1, 1, 1, 0);
-
-        PlayScreen.playStage.addActor(transparentImg);
-    }
-
-    public static void showQuestionWindow() {
+    // Used in runable action of movePawn() method
+    public static void showQuestionWindow()
+    {
         int randNr = random.nextInt(50);
-        createQuestionWindow(randNr);
+        updateQuestionWindow(randNr);
 
-        window.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
         transparentImg.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
+        window.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
     }
 
-    public static void hideQuestionWindow(){
-        window.addAction(Actions.after(sequence(Actions.fadeOut(1f, Interpolation.smooth))));
-        transparentImg.addAction(Actions.after(Actions.fadeOut(1f, Interpolation.smooth)));
+    // Used in AnswerButtons button listener
+    public static void hideQuestionWindow()
+    {
+        transparentImg.addAction(Actions.after(Actions.fadeOut(.6f, Interpolation.smooth)));
+        window.addAction(Actions.after(sequence(Actions.fadeOut(.6f, Interpolation.smooth), new RunnableAction(){
+            @Override
+            public void run() {
+                window.clear();
+            }
+        })));
     }
 
 }
-
-

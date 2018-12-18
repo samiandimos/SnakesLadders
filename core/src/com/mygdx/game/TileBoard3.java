@@ -29,6 +29,7 @@ public class TileBoard3 extends Game
         setScreen(loadingScreen);
     }
 
+    // noOfPlayers variable updated inside menuScreen
     public static int noOfPlayers;
     public void changeScreen(int screen){
         switch(screen){

@@ -13,8 +13,6 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class PlayScreen implements Screen
 {

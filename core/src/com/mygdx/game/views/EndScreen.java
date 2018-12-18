@@ -36,7 +36,7 @@ public class EndScreen implements Screen {
 
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        TextButton mainMenu = new TextButton("Main Menu",skin);
+        final TextButton mainMenu = new TextButton("Main Menu",skin);
         TextButton exit = new TextButton("Exit",skin);
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("passed.jpg"))));
@@ -48,7 +48,9 @@ public class EndScreen implements Screen {
         mainMenu.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+
                 parent.changeScreen(TileBoard3.MENU);
+                mainMenu.debug();
             }
         });
         exit.addListener(new ChangeListener() {
@@ -59,7 +61,7 @@ public class EndScreen implements Screen {
         });
 
         stage.addActor(table);
-        skin.dispose();
+//        skin.dispose();
     }
 
     @Override

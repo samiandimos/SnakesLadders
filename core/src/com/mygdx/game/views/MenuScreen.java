@@ -37,8 +37,8 @@ public class MenuScreen implements Screen {
 
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        TextButton onePlayer = new TextButton("One Player",skin);
-        TextButton twoPlayers = new TextButton("Two players", skin);
+        final TextButton onePlayer = new TextButton("One Player",skin);
+        final TextButton twoPlayers = new TextButton("Two players", skin);
 
         TextButton exit = new TextButton("Exit",skin);
 
@@ -63,6 +63,7 @@ public class MenuScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 TileBoard3.noOfPlayers = 1;
                 parent.changeScreen(TileBoard3.PLAYGAME);
+
             }
         });
 
@@ -71,6 +72,7 @@ public class MenuScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 TileBoard3.noOfPlayers = 2;
                 parent.changeScreen(TileBoard3.PLAYGAME);
+
             }
         });
         stage.addActor(table);

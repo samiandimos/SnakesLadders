@@ -21,7 +21,7 @@ public class AnswerButtons {
 
     public static void createButton(final String text, final String rightAnswer){
 
-        QuestionPopup.transparentBackground();
+//        QuestionPopup.transparentBackground();
 
         final Button button = new TextButton(text,skin);
         button.setTransform(true);

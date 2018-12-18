@@ -156,7 +156,7 @@ public class ALGQuestions {
 
             {"[1 0 1 3;3 2 −5 11;2 1 -2 7]","[1 0 1;3 2 −5;2 1 -2]","[1 3 2;0 2 1;11 −5 −2;3 1 7]","none of the mentioned"},
 
-            {"none of the mentioned","[1 0 1 3;0 1 -4 1;0 0 0 0],[1 0 0;0 1 0; 0 0 1],[0]"},
+            {"none of the mentioned","[1 0 1 3;0 1 -4 1;0 0 0 0]","[1 0 0;0 1 0; 0 0 1]","[0]"},
 
             {"The system is inconsistent."," x1 = 2,x2 = 5,x3 = 1 is one among several of the solutions","x1 =1,x2 =3,x3 =3 is the only solution of the system.", "none of the mentioned"},
 

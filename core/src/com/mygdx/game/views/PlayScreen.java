@@ -11,9 +11,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
-import com.mygdx.game.supp.Dice2;
-import com.mygdx.game.supp.Pawn;
-import com.mygdx.game.supp.QuestionPopup;
+import com.mygdx.game.supp.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +30,7 @@ public class PlayScreen implements Screen
     // Creating an instance of the Class Pawn so to be able to use it's non static methods inside a static context
     private Pawn player1;
     private Pawn player2;
-    private int noOfPlayers;
+    public static int noOfPlayers;
 
     // Dimensions of TiledMap
     public static int mapW = 1408;
@@ -87,20 +85,22 @@ public class PlayScreen implements Screen
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 if (activePlayer.equals("player1")) {
                     System.out.println("Player1 Plays");
+                    System.out.println("Player1 Score:" + Score.getPlScore1());
                     Dice2.rollAndMove(player1, player1.getTileNum());
 //                    QuestionPopup.showQuestionWindow();
-                    activePlayer = "player2";
+//                    activePlayer = "player2";
                 } else {
                     System.out.println("Player2 Plays");
+                    System.out.println("Player 2 Score: " + Score.getPlScore2());
                     Dice2.rollAndMove(player2, player2.getTileNum());
-//                    QuestionPopup.showQuestionWindow();
-                    activePlayer = "player1";
                 }
             }
         }else{
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
             {
+                activePlayer = "player1";
                 System.out.println("Player1 Plays");
+                System.out.println("Player1 Score :" + Score.getPlScore1());
                 Dice2.rollAndMove(player1, player1.getTileNum());
 //                QuestionPopup.showQuestionWindow();
             }
@@ -127,11 +127,6 @@ public class PlayScreen implements Screen
 
         checkAndPlay();
 
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.D))
-        {
-            QuestionPopup.showQuestionWindow();
-        }
     }
 
     @Override
@@ -157,7 +152,12 @@ public class PlayScreen implements Screen
     @Override
     public void dispose()
     {
-        tiledMap.dispose();
+
         playStage.dispose();
+        parent.dispose();
+        tiledMap.dispose();
+        renderer.dispose();
+        DiceDisplay.tex.dispose();
+
     }
 }

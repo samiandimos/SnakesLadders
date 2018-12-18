@@ -24,6 +24,7 @@ public class Pawn
     private int tileNum = 0;
     private String name = "";
 
+
     // Current tile number setter
     public void setTileNum(int tileNum)
     {
@@ -48,6 +49,7 @@ public class Pawn
     }
 
     private Texture texture;
+
     public void setInStage (int playerStartingPosition)
     {
         // Getting the starting position of the pawn Depending on the Player Number
@@ -65,6 +67,7 @@ public class Pawn
         pawn.setSize(texture.getWidth() * .8f, texture.getHeight() * .8f);
         pawn.setPosition((Float) startingTileProperties.get("x"), (Float) startingTileProperties.get("y"));
         PlayScreen.playStage.addActor(pawn);
+//        texture.dispose();
     }
 
 

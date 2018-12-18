@@ -18,24 +18,30 @@ import static com.badlogic.gdx.math.MathUtils.random;
 
 public class QuestionPopup {
 
-    private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
     private static Window window;
     private static Image transparentImg;
+    private static Texture texture;
 
     public static Window getWindow() {
         return window;
     }
 
 
+
     private static Label questionDisplay(String name) {
+        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
         Label label = new Label(name, skin, "title");
         label.setWrap(true);
+//        skin.dispose();
         return label;
     }
 
 
     public static void createQuestionWindow(final int randNr) {
+
+        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         // Set a darker transparent background
         transparentBackground();
 
@@ -72,8 +78,10 @@ public class QuestionPopup {
         }
 
 
+
+
         if (CourseProperties.checkForAlgebra()) {
-            final QAStorage alg = new QAStorage(ALGQuestions.algQues[randNr], ALGQuestions.algAns[randNr], ALGQuestions.algAns[randNr][ALGQuestions.algRightAns[randNr]]);
+            QAStorage alg = new QAStorage(ALGQuestions.algQues[randNr], ALGQuestions.algAns[randNr], ALGQuestions.algAns[randNr][ALGQuestions.algRightAns[randNr]]);
 
             window.add(questionDisplay(alg.getQuestion())).prefWidth(800).pad(20);
             window.row();
@@ -82,6 +90,7 @@ public class QuestionPopup {
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][1],alg.getRightAnswer());
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][2],alg.getRightAnswer());
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][3],alg.getRightAnswer());
+
 
         }
 
@@ -98,7 +107,7 @@ public class QuestionPopup {
 
         PlayScreen.playStage.addActor(window);
         Gdx.input.setInputProcessor(PlayScreen.playStage);
-
+//        skin.dispose();
     }
 
     public static void showQuestionWindow() {
@@ -111,12 +120,20 @@ public class QuestionPopup {
 
 
     public static void transparentBackground() {
-        Texture texture = new Texture(Gdx.files.internal("transparency.png"));
+        texture = new Texture(Gdx.files.internal("transparency.png"));
         transparentImg = new Image(texture);
         transparentImg.setColor(1, 1, 1, 0);
 
         PlayScreen.playStage.addActor(transparentImg);
+//        texture.dispose();
+
     }
+
+    public static void hideTransparency(){
+        window.addAction(after(Actions.fadeOut(1.5f, Interpolation.smooth)));
+        transparentImg.addAction(sequence(Actions.fadeOut(1.5f, Interpolation.smooth)));
+    }
+
 }
 
 

@@ -16,7 +16,7 @@ public class DiceSound {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
             diceShake.play();
-
+        diceShake.dispose();
     }
 
 }

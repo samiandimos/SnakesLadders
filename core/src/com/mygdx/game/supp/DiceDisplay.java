@@ -11,15 +11,14 @@ public class DiceDisplay {
     private static int dicePosX = 265 * 4;
     private static int dicePosY = 240;
 
-    private static Texture tex;
-    private static Image img;
+    public static Texture tex;
 
     public static void diceImage(int dice) {
 
         tex = new Texture(Gdx.files.internal("dice" + dice + ".png"));
 
 
-        img  = new Image(tex);
+        Image img = new Image(tex);
         img.setPosition(dicePosX, dicePosY);
         img.setSize(tex.getWidth()/10f,tex.getHeight()/10f);
 //        img.toBack();

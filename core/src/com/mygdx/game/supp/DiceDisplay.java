@@ -17,11 +17,10 @@ public class DiceDisplay {
 
         tex = new Texture(Gdx.files.internal("dice" + dice + ".png"));
 
-
         Image img = new Image(tex);
         img.setPosition(dicePosX, dicePosY);
         img.setSize(tex.getWidth()/10f,tex.getHeight()/10f);
-//        img.toBack();
+        img.toBack();
 
 //        tex.dispose();
 

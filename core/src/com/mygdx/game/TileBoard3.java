@@ -39,6 +39,7 @@ public class TileBoard3 extends Game
                 break;
             case PLAYGAME:
                 if(playScreen == null) playScreen = new PlayScreen(this, noOfPlayers);
+//                menuScreen.dispose();
                 this.setScreen(playScreen);
                 break;
             case ENDGAME:

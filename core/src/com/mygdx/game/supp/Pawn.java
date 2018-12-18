@@ -17,10 +17,10 @@ public class Pawn
     private static MapLayers layerList;
     private static MapLayer layer;
     private static MapObjects tileList; // List of objects
-    private static MapObject tile; // An object from the list
+    public static MapObject tile; // An object from the list
     public static MapProperties tileProperties; // List with object properties
 
-    private Image pawn;
+    public Image pawn;
     private int tileNum = 0;
     private String name = "";
 
@@ -137,8 +137,16 @@ public class Pawn
             sequenceAction.addAction(Actions.moveTo((Float) targetTileProperties.get("x"), (Float) targetTileProperties.get("y"), 1, Interpolation.smooth));
         }
 
-        // Setting the showing of our popup after all other actions have been completed
-        sequenceAction.addAction(Actions.delay(.3f,runPopup));
+
+        // Debug code
+        /*if (sequenceAction.getActions().size == 0)
+        {
+            System.out.println("\nList is EMPTY\n");
+        }else{
+            System.out.printf("\nList NOT Empty: list size %d\n", sequenceAction.getActions().size);
+        }*/
+
+        sequenceAction.addAction(Actions.delay(.3f, runPopup));
         pawn.addAction(sequenceAction);
     }
 }

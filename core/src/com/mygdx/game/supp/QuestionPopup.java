@@ -121,7 +121,7 @@ public class QuestionPopup {
         int randNr = random.nextInt(50);
         updateQuestionWindow(randNr);
 
-        transparentImg.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
+        transparentImg.addAction(Actions.after(Actions.delay(.1f, Actions.fadeIn(.6f, Interpolation.smooth))));
         window.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
     }
 

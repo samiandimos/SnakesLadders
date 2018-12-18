@@ -2,6 +2,8 @@ package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.views.PlayScreen;
 
@@ -11,7 +13,6 @@ public class Dice2
 {
    public static int tileNum;
     private static int targetTileNum;
-
     private static Random random = new Random();
     public static int dice;
 
@@ -35,31 +36,47 @@ public class Dice2
             dice = random.nextInt(6) + 1;
             DiceDisplay.diceImage(dice);
             tileNum += dice;
-            if (tileNum <= 100)
-            {
+            if (tileNum <= 100) {
                 if (playingPawn.checkTileForSpecial(tileNum)) // If contains special
+                // Movement to special tile
                 {
-                    targetTileNum = playingPawn.getTargetTileNum(playingPawn.getTileProperties(tileNum));
+                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
+//                    targetTileNum = tileNum; // Debug code
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
                     // Setting the new tile number and save it for the current player
                     tileNum = targetTileNum;
                     playingPawn.setTileNum(tileNum);
                     // Clearing the targetTileNum for the next occurrence of special tile
                     targetTileNum = 0;
-                } else {
+
+                } else { // Normal movement from tile to tile
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
                     playingPawn.setTileNum(tileNum);
                 }
 
-                if(playingPawn.getTileNum() == 100) {
-                    playingPawn.movePawn(tileNum, targetTileNum, dice);
-                    PlayScreen.parent.changeScreen(TileBoard3.ENDGAME);
+                if (playingPawn.getTileNum() == 100) {
+                    playingPawn.pawn.addAction(Actions.after(new RunnableAction(){
+                        @Override
+                        public void run() {
+                            PlayScreen.parent.changeScreen(TileBoard3.ENDGAME);
+                        }
+                    }));
                 }
+
             } else {
                 tileNum -= dice;
+                playingPawn.pawn.clearActions();
+                // QuestionPopup.showQuestionWindow() method, has been inserted as runnable action with a small delay
+                // This delay fixes the occasion where its nested method updateQuestionWindow(randNr) don't have the
+                // time to get and set the question and its answers inside the window
+                playingPawn.pawn.addAction(Actions.delay(.3f, new RunnableAction(){
+                    @Override
+                    public void run() {
+                        QuestionPopup.showQuestionWindow();
+                    }
+                }));
             }
 
             System.out.println(dice + "  " + tileNum);
-
     }
 }

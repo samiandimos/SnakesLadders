@@ -146,6 +146,9 @@ public class Pawn
             System.out.printf("\nList NOT Empty: list size %d\n", sequenceAction.getActions().size);
         }*/
 
+        // QuestionPopup.showQuestionWindow() method, has been inserted as runnable action with a small delay
+        // This delay fixes the occasion where its nested method updateQuestionWindow(randNr) don't have the
+        // time to get and set the question and its answers inside the window
         sequenceAction.addAction(Actions.delay(.3f, runPopup));
         pawn.addAction(sequenceAction);
     }

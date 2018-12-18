@@ -21,7 +21,7 @@ public class Pawn
     public static MapProperties tileProperties; // List with object properties
 
     public Image pawn;
-    private int tileNum = 0;
+    private int tileNum = 95;
     private String name = "";
 
 

@@ -55,6 +55,8 @@ public class Dice2
                 }
 
                 if (playingPawn.getTileNum() == 100) {
+                    // Runnable action added so the pawn moves first to the
+                    // 100th tile and after that the EndScreens shows up
                     playingPawn.pawn.addAction(Actions.after(new RunnableAction(){
                         @Override
                         public void run() {

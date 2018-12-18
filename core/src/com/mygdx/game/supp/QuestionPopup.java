@@ -6,15 +6,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.views.PlayScreen;
 
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.after;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
-
 import static com.badlogic.gdx.math.MathUtils.random;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class QuestionPopup {
 
@@ -110,28 +109,26 @@ public class QuestionPopup {
 //        skin.dispose();
     }
 
-    public static void showQuestionWindow() {
-        int randNr = random.nextInt(50);
-        createQuestionWindow(randNr);
-
-        window.addAction(after(Actions.fadeIn(.6f, Interpolation.smooth)));
-        transparentImg.addAction(sequence(Actions.fadeIn(.6f, Interpolation.smooth)));
-    }
-
-
+    // Setting once inside the stage the transparent background
     public static void transparentBackground() {
         texture = new Texture(Gdx.files.internal("transparency.png"));
         transparentImg = new Image(texture);
         transparentImg.setColor(1, 1, 1, 0);
 
         PlayScreen.playStage.addActor(transparentImg);
-//        texture.dispose();
-
     }
 
-    public static void hideTransparency(){
-        window.addAction(after(Actions.fadeOut(1.5f, Interpolation.smooth)));
-        transparentImg.addAction(sequence(Actions.fadeOut(1.5f, Interpolation.smooth)));
+    public static void showQuestionWindow() {
+        int randNr = random.nextInt(50);
+        createQuestionWindow(randNr);
+
+        window.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
+        transparentImg.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
+    }
+
+    public static void hideQuestionWindow(){
+        window.addAction(Actions.after(sequence(Actions.fadeOut(1f, Interpolation.smooth))));
+        transparentImg.addAction(Actions.after(Actions.fadeOut(1f, Interpolation.smooth)));
     }
 
 }

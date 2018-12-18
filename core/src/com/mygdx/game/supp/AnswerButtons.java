@@ -46,8 +46,8 @@ public class AnswerButtons {
                     }
 
                     button.addAction(parallel(fadeIn(.2f),color(Color.GREEN)));
-                    QuestionPopup.getWindow().addAction(Actions.fadeOut(1.5f, Interpolation.smooth));
-                    QuestionPopup.hideTransparency();
+//                    QuestionPopup.getWindow().addAction(Actions.fadeOut(1.5f, Interpolation.smooth));
+                    QuestionPopup.hideQuestionWindow();
 //                    PlayScreen.activePlayer = "player1";
 
                 } else{
@@ -58,8 +58,8 @@ public class AnswerButtons {
                     }
 
                     button.addAction(parallel(fadeIn(.2f),color(Color.RED)));
-                    QuestionPopup.getWindow().addAction(Actions.fadeOut(1.5f, Interpolation.smooth));
-                    QuestionPopup.hideTransparency();
+//                    QuestionPopup.getWindow().addAction(Actions.fadeOut(1.5f, Interpolation.smooth));
+                    QuestionPopup.hideQuestionWindow();
 
                     System.out.println("this is not the right answer");
                 }

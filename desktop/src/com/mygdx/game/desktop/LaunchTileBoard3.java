@@ -11,8 +11,8 @@ LaunchTileBoard3
     {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-        config.width = 900;
-        config.height = 600;
+        config.width = 1200;
+        config.height = 800;
 //        config.backgroundFPS = 60;
 //        config.foregroundFPS = 60;
 

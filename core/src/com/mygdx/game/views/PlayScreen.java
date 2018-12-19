@@ -75,8 +75,11 @@ public class PlayScreen implements Screen
             player2.setInStage(2000);
         }
 
-        // Setting in the playStage our question popup window
+        // Setting inside the playStage our question popup window
         QuestionPopup.createQuestionWindow();
+        // Setting inside the playStage the two score windows
+        ScoreWindow.createScoreWindow1();
+        ScoreWindow.createScoreWindow2();
     }
 
 
@@ -94,6 +97,7 @@ public class PlayScreen implements Screen
         {
             inputActivationState = inactiveInputState;
             if (noOfPlayers == 2) {
+                ScoreWindow.showScoreWindow(noOfPlayers);
                 if (activePlayer.equals("player1")) {
                     System.out.println("Player1 Plays");
                     System.out.println("Player1 Score:" + Score.getPlScore1());
@@ -106,6 +110,7 @@ public class PlayScreen implements Screen
                 }
 
             } else {
+                ScoreWindow.showScoreWindow(noOfPlayers);
                 activePlayer = "player1";
                 System.out.println("Player1 Plays");
                 System.out.println("Player1 Score :" + Score.getPlScore1());

@@ -52,7 +52,7 @@ public class QuestionPopup {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         // Set a darker transparent background
         transparentBackground();
-        window = new Window("Question", skin);
+        window = new Window("Quiz", skin);
         // Start by hiding the window (setting the alpha value zero)
         window.setColor(1, 1, 1, 0);
 

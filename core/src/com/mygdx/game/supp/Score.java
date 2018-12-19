@@ -11,6 +11,11 @@ public class Score {
         Score.plScore1 += plScore1;
     }
 
+    public static int getPlScore1(){
+        return plScore1;
+    }
+
+
     public static int getPlScore2() {
         return plScore2;
     }
@@ -18,12 +23,4 @@ public class Score {
     public static void setPlScore2(int plScore2) {
         Score.plScore2 += plScore2;
     }
-
-    public static int getPlScore1(){
-
-        return plScore1;
-
-    }
-
-
 }

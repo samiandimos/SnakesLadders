@@ -1,6 +1,7 @@
 package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -16,12 +17,11 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 public class AnswerButtons {
 
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-    private static Image transparentImg;
-
+    private static Sound correct = Gdx.audio.newSound(Gdx.files.internal("audio/correct.mp3"));
+    private static Sound wrong = Gdx.audio.newSound(Gdx.files.internal("audio/wrong.mp3"));
+    static int score ;
 
     public static void createButton(final String text, final String rightAnswer){
-
-//        QuestionPopup.transparentBackground();
 
         final Button button = new TextButton(text,skin);
         button.setTransform(true);
@@ -32,9 +32,11 @@ public class AnswerButtons {
 
         button.addListener(new ClickListener(){
             @Override
-            public void clicked(InputEvent event, float x, float y){
-
-                if(text.equals(rightAnswer)){
+            public void clicked(InputEvent event, float x, float y)
+            {
+                if(text.equals(rightAnswer))
+                {
+                    correct.play();
 
                     if(PlayScreen.activePlayer.equals("player1")){
                         Score.setPlScore1(5);
@@ -45,20 +47,28 @@ public class AnswerButtons {
                     }
 
                     button.addAction(parallel(fadeIn(.2f),color(Color.GREEN)));
-//                    QuestionPopup.getWindow().addAction(Actions.fadeOut(1.5f, Interpolation.smooth));
+                    // Here the hiding of the window and its transparency can
+                    // be delayed by adding a runnable action through a sequence or after
+                    // action in the above button
                     QuestionPopup.hideQuestionWindow();
+
                 } else{
-                    if(PlayScreen.activePlayer.equals("player1")){
+
+                    wrong.play();
+
+                    if(PlayScreen.activePlayer.equals("player1"))
+                    {
                         PlayScreen.activePlayer = "player2";
                     }else{
                         PlayScreen.activePlayer = "player1";
                     }
 
                     button.addAction(parallel(fadeIn(.2f),color(Color.RED)));
-//                    QuestionPopup.getWindow().addAction(Actions.fadeOut(1.5f, Interpolation.smooth));
                     QuestionPopup.hideQuestionWindow();
                     System.out.println("this is not the right answer");
                 }
+                // Unfreezing the input of the game by activating back the SPACE
+                // button as the proceeding mean
                 PlayScreen.inputActivationState = PlayScreen.activeInputState;
             }
         });

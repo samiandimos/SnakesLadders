@@ -47,12 +47,13 @@ public class QuestionPopup {
 
     // Used in the show() method of the PlayScreen class to create
     // and setup our question window and transparency inside the stage
+    private static String windowTitle = "";
     public static void createQuestionWindow()
     {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         // Set a darker transparent background
         transparentBackground();
-        window = new Window("Quiz", skin);
+        window = new Window(windowTitle, skin);
         // Start by hiding the window (setting the alpha value zero)
         window.setColor(1, 1, 1, 0);
 
@@ -94,8 +95,6 @@ public class QuestionPopup {
         }
 
 
-
-
         if (CourseProperties.checkForAlgebra()) {
             QAStorage alg = new QAStorage(ALGQuestions.algQues[randNr], ALGQuestions.algAns[randNr], ALGQuestions.algAns[randNr][ALGQuestions.algRightAns[randNr]]);
 
@@ -109,20 +108,33 @@ public class QuestionPopup {
 
         }
 
+//        if (CourseProperties.checkForNone())
+//        {
+//            window.setVisible(false);
+//        }
+
+
         window.pack();
         window.setPosition((PlayScreen.mapW - window.getWidth()) / 2f, ((PlayScreen.mapH - window.getHeight()) / 2f) + 4);
         Gdx.input.setInputProcessor(PlayScreen.playStage);
         window.toFront();
+        windowTitle = "Player " + PlayScreen.activePlayer;
     }
 
-    // Used in runable action of movePawn() method
+    // Used in runnable action of movePawn() method
     public static void showQuestionWindow()
     {
         int randNr = random.nextInt(50);
         updateQuestionWindow(randNr);
 
-        transparentImg.addAction(Actions.after(Actions.delay(.1f, Actions.fadeIn(.6f, Interpolation.smooth))));
-        window.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
+        if (Dice2.tileNum == 100)
+        {
+            transparentImg.setVisible(false);
+            window.setVisible(false);
+        }else {
+            transparentImg.addAction(Actions.after(Actions.delay(.1f, Actions.fadeIn(.6f, Interpolation.smooth))));
+            window.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
+        }
     }
 
     // Used in AnswerButtons button listener

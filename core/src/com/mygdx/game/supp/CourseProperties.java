@@ -7,6 +7,7 @@ import static com.mygdx.game.supp.Pawn.getTileProperties;
 
 public class CourseProperties {
 
+
     public static boolean checkForPbl(){
         MapProperties tilesProperties = getTileProperties(tileNum);
         boolean containpbl = tilesProperties.containsKey("pbl");
@@ -29,5 +30,12 @@ public class CourseProperties {
         return false;
     }
 
+    /*public static boolean checkForNone(){
+        MapProperties tileProperties = getTileProperties(tileNum);
+        boolean containNone = tileProperties.containsKey("none");
+        if (containNone) {
+            return true; }
+        return false;
+    }*/
 
 }

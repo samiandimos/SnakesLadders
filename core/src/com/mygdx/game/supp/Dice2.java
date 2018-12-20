@@ -40,8 +40,8 @@ public class Dice2
                 if (playingPawn.checkTileForSpecial(tileNum)) // If contains special
                 // Movement to special tile
                 {
-                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
-//                    targetTileNum = tileNum; // Debug code
+//                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
+                    targetTileNum = tileNum; // Debug code to remove special tiles (comment out the above and uncomment this)
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
                     // Setting the new tile number and save it for the current player
                     tileNum = targetTileNum;
@@ -54,13 +54,13 @@ public class Dice2
                     playingPawn.setTileNum(tileNum);
                 }
 
-                if (playingPawn.getTileNum() == 100) {
+                if (playingPawn.getTileNum() == 100)
+                {
                     // Runnable action added so the pawn moves first to the
                     // 100th tile and after that the EndScreens shows up
                     playingPawn.pawn.addAction(Actions.after(Actions.delay(2f, new RunnableAction(){
                         @Override
                         public void run() {
-
                             PlayScreen.parent.changeScreen(TileBoard3.ENDGAME);
                         }
                     })));

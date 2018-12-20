@@ -2,9 +2,13 @@ package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.views.PlayScreen;
 
@@ -34,6 +38,13 @@ public class ScoreWindow
 //        float scoreWindow1PosX = 128 ;
 //        float scoreWindow1PosY = 768 ;
 
+        //*********************************************************
+        Image sign = new Image(new Texture(Gdx.files.internal("woodSign192x1006.png")));
+        PlayScreen.playStage.addActor(sign);
+        sign.setPosition((PlayScreen.mapW - 192) / 200f, (PlayScreen.mapH - 100) / 1.23f);
+        sign.scaleBy(-.96f);
+        //*********************************************************
+
         scoreLabel1 = new Label("" + Score.getPlScore1(), skin );
         Label player1Name = new Label("Player1", skin);
         Image playerIcon = new Image(new Texture(Gdx.files.internal("icon_mini.png")));
@@ -44,28 +55,29 @@ public class ScoreWindow
         scoreLabel1.setColor(Color.WHITE);
         scoreLabel1.setFontScale(2.5f);
         scoreLabel1.setVisible(true);
-//        scoreLabel1.setWrap(true);
+
 
         scoreTable1 = new Table();
         scoreTable1.pack();
         scoreTable1.setSize(192, 192);
-        scoreTable1.setPosition((PlayScreen.mapW - scoreTable1.getWidth()) / 100f, (PlayScreen.mapH - scoreTable1.getHeight()) / 1.20f);
+        scoreTable1.setPosition((PlayScreen.mapW - scoreTable1.getWidth()) / 35f, (PlayScreen.mapH - scoreTable1.getHeight()) / 1.19f);
         scoreTable1.toFront();
-//        scoreTable1.setKeepWithinStage(true);
-//        scoreTable1.setResizable(false);
-//        scoreTable1.setMovable(false);
 
         scoreTable1.add(player1Name).pad(0,0,10,0);
-//        scoreTable1.row();
         scoreTable1.add(playerIcon).pad(0, 10, 10, 0);
         scoreTable1.row();
         scoreTable1.add(scoreLabel1);
 //        scoreTable1.debug();
 
+//        scoreTable1.align(Align.bottomLeft);
+
         scoreTable1.setColor(1,1,1,0);
         PlayScreen.playStage.addActor(scoreTable1);
 
 //        Gdx.input.setInputProcessor(PlayScreen.playStage);
+
+
+
     }
 
 // creating a scoreWindow for player 2 (set up inside the show() method of the PlayScreen class)

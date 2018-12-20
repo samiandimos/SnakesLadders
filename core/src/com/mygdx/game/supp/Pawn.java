@@ -112,15 +112,7 @@ public class Pawn
         dice -= 1;
         SequenceAction sequenceAction = new SequenceAction();
 
-        // Creating our Runable Action and adding it at the end of a sequential set of actions of the Pawn,
-        // so our popup window shows up after all other actions have been completed
-        RunnableAction runPopup = new RunnableAction() {
-            @Override
-            public void run() {
-                QuestionPopup.showQuestionWindow();
-                // System.out.println("sadfasdfsdaf");
-            }
-        };
+
 
         while(dice >= 0)
         {
@@ -137,6 +129,22 @@ public class Pawn
             sequenceAction.addAction(Actions.moveTo((Float) targetTileProperties.get("x"), (Float) targetTileProperties.get("y"), 1, Interpolation.smooth));
         }
 
+        // QuestionPopup.showQuestionWindow() method, has been inserted as runnable action with a small delay
+        // This delay fixes the occasion where its nested method updateQuestionWindow(randNr) don't have the
+        // time to get and set the question and its answers inside the window
+
+        // Creating our Runable Action and adding it at the end of a sequential set of actions of the Pawn,
+        // so our popup window shows up after all other actions have been completed
+        RunnableAction runPopup = new RunnableAction() {
+            @Override
+            public void run() {
+                QuestionPopup.showQuestionWindow();
+            }
+        };
+        sequenceAction.addAction(Actions.delay(.3f, runPopup));
+        pawn.addAction(sequenceAction);
+
+
 
         // Debug code
         /*if (sequenceAction.getActions().size == 0)
@@ -144,12 +152,13 @@ public class Pawn
             System.out.println("\nList is EMPTY\n");
         }else{
             System.out.printf("\nList NOT Empty: list size %d\n", sequenceAction.getActions().size);
+            sequenceAction.getActions().removeIndex(0);
+
+            for (Action i : sequenceAction.getActions())
+            {
+                System.out.print(i + " ");
+            }
         }*/
 
-        // QuestionPopup.showQuestionWindow() method, has been inserted as runnable action with a small delay
-        // This delay fixes the occasion where its nested method updateQuestionWindow(randNr) don't have the
-        // time to get and set the question and its answers inside the window
-        sequenceAction.addAction(Actions.delay(.3f, runPopup));
-        pawn.addAction(sequenceAction);
     }
 }

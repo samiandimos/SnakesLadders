@@ -27,7 +27,7 @@ public class Dice2
 
     public static void rollAndMove(Pawn pawn, int newTileNum)
     {
-        diceSound = Gdx.audio.newSound(Gdx.files.internal("dice.mp3"));
+        diceSound = Gdx.audio.newSound(Gdx.files.internal("audio/dice.mp3"));
             diceSound.play();
 
             tileNum = newTileNum;

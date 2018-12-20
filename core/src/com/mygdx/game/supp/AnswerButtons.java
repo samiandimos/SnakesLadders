@@ -16,13 +16,15 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class AnswerButtons {
 
-    private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-    private static Sound correct = Gdx.audio.newSound(Gdx.files.internal("audio/correct.mp3"));
-    private static Sound wrong = Gdx.audio.newSound(Gdx.files.internal("audio/wrong.mp3"));
-    static int score ;
+     Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+     Sound correct = Gdx.audio.newSound(Gdx.files.internal("audio/correct.mp3"));
+     Sound wrong = Gdx.audio.newSound(Gdx.files.internal("audio/wrong.mp3"));
+
 
     public static void createButton(final String text, final String rightAnswer){
-
+        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        final Sound correct = Gdx.audio.newSound(Gdx.files.internal("audio/correct.mp3"));
+        final Sound wrong = Gdx.audio.newSound(Gdx.files.internal("audio/wrong.mp3"));
         final Button button = new TextButton(text,skin);
         button.setTransform(true);
         button.scaleBy(.1f);

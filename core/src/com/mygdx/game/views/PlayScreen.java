@@ -12,8 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
-import com.sun.org.apache.bcel.internal.classfile.Unknown;
-import org.omg.CORBA.UNKNOWN;
+
 
 
 public class PlayScreen implements Screen

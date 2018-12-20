@@ -40,8 +40,8 @@ public class Dice2
                 if (playingPawn.checkTileForSpecial(tileNum)) // If contains special
                 // Movement to special tile
                 {
-//                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
-                    targetTileNum = tileNum; // Debug code to remove special tiles (comment out the above and uncomment this)
+                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
+//                    targetTileNum = tileNum; // Debug code to remove special tiles (comment out the above and uncomment this)
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
                     // Setting the new tile number and save it for the current player
                     tileNum = targetTileNum;

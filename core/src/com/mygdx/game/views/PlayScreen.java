@@ -75,8 +75,11 @@ public class PlayScreen implements Screen
         }
 
         // Setting inside the playStage our question popup window
+
         QuestionPopup.createQuestionWindow();
+
         // Setting inside the playStage the two score windows
+
         ScoreWindow.createScoreWindow1();
         ScoreWindow.createScoreWindow2();
     }
@@ -85,6 +88,7 @@ public class PlayScreen implements Screen
     // Setting variables (activeInputState and inactiveInputState) for getting the com.badlogic.gdx.Input.Keys
     // manipulating this way when the players are able to play
     // (Used in AnswerButtons listener)
+
     private int inactiveInputState = Input.Keys.UNKNOWN;
     public static int activeInputState = Input.Keys.SPACE;
     public static int inputActivationState = activeInputState;

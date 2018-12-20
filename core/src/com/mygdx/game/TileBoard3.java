@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
+import com.mygdx.game.supp.Pawn;
 import com.mygdx.game.views.*;
 
 public class TileBoard3 extends Game
@@ -54,13 +55,16 @@ public class TileBoard3 extends Game
     public void render() {
         super.render();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
-        {
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+
             Gdx.app.exit();
         }
     }
+
     @Override
     public void dispose(){
+        
+//        this.getScreen().dispose();
         super.dispose();
     }
 }

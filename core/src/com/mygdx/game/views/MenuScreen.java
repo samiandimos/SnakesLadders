@@ -16,29 +16,27 @@ import com.mygdx.game.TileBoard3;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class MenuScreen implements Screen {
-    private final Stage stage;
+    private  Stage menuStage;
     private TileBoard3 parent;
 
 //    Texture background;
 
     public MenuScreen(TileBoard3 tileBoard3){
         parent = tileBoard3;
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        menuStage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(menuStage);
+
     }
 
     @Override
     public void show() {
 
-        Table table = new Table();
-        table.setFillParent(true);
-//        table.setDebug(true);
-
-
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        final TextButton onePlayer = new TextButton("One Player",skin);
-        final TextButton twoPlayers = new TextButton("Two players", skin);
+        Table table = new Table();
+        table.setFillParent(true);
+         TextButton onePlayer = new TextButton("One Player",skin);
+         TextButton twoPlayers = new TextButton("Two players", skin);
 
         TextButton exit = new TextButton("Exit",skin);
 
@@ -64,6 +62,8 @@ public class MenuScreen implements Screen {
                 TileBoard3.noOfPlayers = 1;
                 parent.changeScreen(TileBoard3.PLAYGAME);
 
+//                onePlayer.clearListeners();
+
             }
         });
 
@@ -72,26 +72,27 @@ public class MenuScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 TileBoard3.noOfPlayers = 2;
                 parent.changeScreen(TileBoard3.PLAYGAME);
+//                twoPlayers.clearListeners();
 
             }
         });
-        stage.addActor(table);
+        menuStage.addActor(table);
 
     }
 
     @Override
-    public void render(float delta)
-    {
+    public void render(float delta) {
+
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-        stage.draw();
+        menuStage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        menuStage.draw();
     }
 
     @Override
-    public void resize(int width, int height)
-    {
-        stage.getViewport().update(width, height, true);
+    public void resize(int width, int height) {
+
+        menuStage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -111,7 +112,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();
+        menuStage.dispose();
         parent.dispose();
     }
 }

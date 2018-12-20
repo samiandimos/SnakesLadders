@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
@@ -12,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.views.PlayScreen;
 
 
-public class Pawn
-{
+public class Pawn {
+
     private static MapLayers layerList;
     private static MapLayer layer;
     private static MapObjects tileList; // List of objects
@@ -21,37 +20,37 @@ public class Pawn
     public static MapProperties tileProperties; // List with object properties
 
     public Image pawn;
-    private int tileNum = 0;
+    private int tileNum = 93 ;
     private String name = "";
 
 
     // Current tile number setter
-    public void setTileNum(int tileNum)
-    {
+    public void setTileNum(int tileNum) {
+
         this.tileNum = tileNum;
     }
 
     // Current tile number getter
-    public int getTileNum()
-    {
+    public int getTileNum() {
+
         return this.tileNum;
     }
 
     // Manipulating the name of each player
-    public void setName(String name)
-    {
+    public void setName(String name) {
+
         this.name = name;
     }
 
-    public String getName()
-    {
+    public String getName() {
+
         return name;
     }
 
-    private Texture texture;
 
-    public void setInStage (int playerStartingPosition)
-    {
+
+    public void setInStage (int playerStartingPosition) {
+        Texture texture;
         // Getting the starting position of the pawn Depending on the Player Number
         MapProperties startingTileProperties = getTileProperties(playerStartingPosition);
 
@@ -67,7 +66,7 @@ public class Pawn
         pawn.setSize(texture.getWidth() * .8f, texture.getHeight() * .8f);
         pawn.setPosition((Float) startingTileProperties.get("x"), (Float) startingTileProperties.get("y"));
         PlayScreen.playStage.addActor(pawn);
-//        texture.dispose();
+
     }
 
 

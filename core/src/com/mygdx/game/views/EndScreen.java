@@ -23,27 +23,24 @@ public class EndScreen implements Screen {
     private TileBoard3 parent;
 
     public EndScreen(TileBoard3 tileBoard3){
+
         parent = tileBoard3;
         endStage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(endStage);
+
 
     }
 
     @Override
     public void show() {
 
+        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         Table table  = new Table();
         table.setFillParent(true);
 
-
-        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-
-        final TextButton mainMenu = new TextButton("Main Menu",skin);
+        TextButton mainMenu = new TextButton("Main Menu",skin);
         TextButton exit = new TextButton("Exit",skin);
-
-        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("passed.jpg"))));
-
         table.add(mainMenu).fillX().uniformX();
         table.row().pad(10,0,10,0);
         table.add(exit).fillX().uniformX();
@@ -53,7 +50,7 @@ public class EndScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
 
               parent.changeScreen(TileBoard3.MENU);
-                mainMenu.debug();
+
             }
         });
         exit.addListener(new ChangeListener() {
@@ -71,6 +68,7 @@ public class EndScreen implements Screen {
                 parent.changeScreen(TileBoard3.MENU);
             }
         })));
+//        table.setBackground(new TextureRegionDrawable (new TextureRegion(new Texture("passed.jpg"))));
 
 
 
@@ -89,13 +87,14 @@ public class EndScreen implements Screen {
     }
 
     private void update(float delta) {
+
         endStage.act(delta);
     }
 
     @Override
-    public void resize(int width, int height)
-    {
-endStage.getViewport().update(width,height,true);
+    public void resize(int width, int height) {
+
+     endStage.getViewport().update(width,height,true);
     }
 
     @Override
@@ -115,7 +114,7 @@ endStage.getViewport().update(width,height,true);
 
     @Override
     public void dispose() {
-endStage.dispose();
-parent.dispose();
+     endStage.dispose();
+     parent.dispose();
     }
 }

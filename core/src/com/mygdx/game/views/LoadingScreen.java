@@ -59,14 +59,18 @@ public class LoadingScreen implements Screen {
     public void show() {
 
         logo.addAction(sequence(alpha(0),scaleTo(0f,0f ),
-                parallel(   fadeIn(1.5f, Interpolation.pow2)),
-                scaleTo(1f,1f,1.5f,Interpolation.pow5 ),
-                moveTo(450, 200, 1.5f, Interpolation.swing)));
+                parallel(   fadeIn(2f, Interpolation.pow2)),
+                scaleTo(1f,1f,2f,Interpolation.pow5 ),
+                moveTo(450, 200, 1.5f, Interpolation.swing),
+                fadeOut(.5f)));
 
-        loadingStage.addAction(Actions.after(Actions.delay(2f, new RunnableAction() {
+
+
+        loadingStage.addAction(Actions.after(Actions.delay(3f, new RunnableAction() {
             @Override
             public void run() {
                 bip.play();
+
             }
         })));
 

@@ -33,7 +33,7 @@ public class Dice2
             tileNum = newTileNum;
             playingPawn = pawn;
 
-            dice = random.nextInt(6) + 1;
+            dice = random.nextInt(2) + 1;
             DiceDisplay.diceImage(dice);
             tileNum += dice;
             if (tileNum <= 100) {
@@ -54,17 +54,23 @@ public class Dice2
                     playingPawn.setTileNum(tileNum);
                 }
 
-                if (playingPawn.getTileNum() == 100)
-                {
-                    // Runnable action added so the pawn moves first to the
-                    // 100th tile and after that the EndScreens shows up
-                    playingPawn.pawn.addAction(Actions.after(Actions.delay(2f, new RunnableAction(){
-                        @Override
-                        public void run() {
-                            PlayScreen.parent.changeScreen(TileBoard3.ENDGAME);
-                        }
-                    })));
-                }
+//                if (playingPawn.getTileNum() == 100 || tileNum == 100 ) {
+//
+//                    // Runnable action added so the pawn moves first to the
+//                    // 100th tile and after that the EndScreens shows up
+//
+//                    playingPawn.pawn.addAction(Actions.after(Actions.delay(4f, new RunnableAction(){
+//                        @Override
+//                        public void run() {
+////                            QuestionPopup.getWindow().clear();
+//                            PlayScreen.parent.changeScreen(TileBoard3.ENDGAME);
+//
+////                            switch (tileNum) {
+////                                case  100:
+////                            }
+//                        }
+//                    })));
+//                }
 
             } else {
                 tileNum -= dice;

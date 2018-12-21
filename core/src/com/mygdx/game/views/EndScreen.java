@@ -2,31 +2,38 @@ package com.mygdx.game.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.TileBoard3;
 
 public class EndScreen implements Screen {
-    private  Stage endStage;
+
+    public static Stage endStage;
+
     private TileBoard3 parent;
+    private Image bravo ;
+    private Sound cheering ;
+
+
 
     public EndScreen(TileBoard3 tileBoard3){
 
+
         parent = tileBoard3;
-        endStage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(endStage);
+        parent = tileBoard3;
+        this.endStage=new Stage();
+
+
+
 
 
     }
@@ -35,7 +42,6 @@ public class EndScreen implements Screen {
     public void show() {
 
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-
         Table table  = new Table();
         table.setFillParent(true);
 
@@ -44,15 +50,18 @@ public class EndScreen implements Screen {
         table.add(mainMenu).fillX().uniformX();
         table.row().pad(10,0,10,0);
         table.add(exit).fillX().uniformX();
+        endStage.addActor(table);
 
         mainMenu.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
               parent.changeScreen(TileBoard3.MENU);
+//              Gdx.input.setInputProcessor(MenuScreen.menuStage);
 
             }
         });
+
         exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -60,15 +69,29 @@ public class EndScreen implements Screen {
             }
         });
 
-        endStage.addActor(table);
 
-        endStage.addAction(Actions.after(Actions.delay(4f, new RunnableAction() {
-            @Override
-            public void run() {
-                parent.changeScreen(TileBoard3.MENU);
-            }
-        })));
-//        table.setBackground(new TextureRegionDrawable (new TextureRegion(new Texture("passed.jpg"))));
+
+
+
+
+
+
+
+//        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("passed.jpg"))));
+
+
+
+
+
+
+
+
+//        endStage.addAction(Actions.after(Actions.delay(4f, new RunnableAction() {
+//            @Override
+//            public void run() {
+//                parent.changeScreen(TileBoard3.MENU);
+//            }
+//        })));
 
 
 
@@ -80,7 +103,7 @@ public class EndScreen implements Screen {
 
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        endStage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+
         endStage.draw();
 
         update(delta);

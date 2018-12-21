@@ -3,8 +3,8 @@ package com.mygdx.game.supp;
 
 public class Score {
 
-    private static int plScore1;
-    private static int plScore2;
+    public static int plScore1;
+    public static int plScore2;
 
 
     public static void setPlScore1(int plScore1) {

@@ -9,20 +9,20 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
+import static com.mygdx.game.supp.Dice2.tileNum;
 
 
+public class PlayScreen implements Screen {
 
-public class PlayScreen implements Screen
-{
     public static TileBoard3 parent;
     public static Stage playStage;
-
     private OrthographicCamera camera = new OrthographicCamera();
     private FillViewport viewport = new FillViewport(mapW, mapH, camera);
-
     public static TiledMap tiledMap = new TmxMapLoader().load("board64B.tmx");
     private OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
@@ -43,7 +43,6 @@ public class PlayScreen implements Screen
         {
             player1 = new Pawn();
             player1.setName("Player1");
-//            System.out.println(player1.getName());
             PlayScreen.noOfPlayers = noOfPlayers;
         }
         if(noOfPlayers == 2)
@@ -52,16 +51,18 @@ public class PlayScreen implements Screen
             player1.setName("Player1");
             player2 = new Pawn();
             player2.setName("Player2");
-//            System.out.println(player1.getName() + " \n" + player2.getName());
             PlayScreen.noOfPlayers = noOfPlayers;
         }
     }
 
     @Override
-    public void show()
-    {
+    public void show() {
+
+
         playStage = new Stage(viewport);
         camera.setToOrtho(false, mapW, mapH);
+
+
         camera.update();
 
         // Setting the players pawns in stage
@@ -92,10 +93,11 @@ public class PlayScreen implements Screen
     private int inactiveInputState = Input.Keys.UNKNOWN;
     public static int activeInputState = Input.Keys.SPACE;
     public static int inputActivationState = activeInputState;
-
     public static String activePlayer = "player1";
-    private void checkAndPlay()
-    {
+
+
+    private void checkAndPlay() {
+
         if (Gdx.input.isKeyJustPressed(inputActivationState))
         {
             inputActivationState = inactiveInputState;
@@ -120,6 +122,24 @@ public class PlayScreen implements Screen
                 Dice2.rollAndMove(player1, player1.getTileNum());
             }
         }
+
+        // Runnable action added so the pawn moves first to the
+        // 100th tile and after that the EndScreens shows up
+
+        if ( tileNum == 100 ) {
+            playStage.addAction(Actions.after(Actions.delay(1f, new RunnableAction(){
+                @Override
+                public void run() {
+//                    tileNum *= 0 ;
+                    parent.changeScreen(TileBoard3.FINISHGAME);
+
+                }
+            })));
+        }
+
+
+
+
     }
 
     @Override
@@ -164,12 +184,14 @@ public class PlayScreen implements Screen
     }
 
     @Override
-    public void dispose()
-    {
-        playStage.dispose();
+    public void dispose() {
+
         parent.dispose();
+        playStage.dispose();
         tiledMap.dispose();
         renderer.dispose();
         DiceDisplay.tex.dispose();
+
+
     }
 }

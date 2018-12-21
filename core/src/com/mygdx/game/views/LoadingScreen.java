@@ -23,18 +23,17 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 public class LoadingScreen implements Screen {
 
     private  TileBoard3 parent;
-    private Stage loadingStage;
+    public static Stage loadingStage;
     private Image logo;
     private Sound bip;
-    private BitmapFont font;
-    private Batch logoBatch ;
-    private Batch text ;
+
+
+
 
     public LoadingScreen(final TileBoard3 tileBoard3) {
 
-        parent=tileBoard3;
+        parent = tileBoard3;
         this.loadingStage=new Stage();
-        Gdx.input.setInputProcessor(loadingStage);
 
         Texture logoTex = new Texture(Gdx.files.internal("logo.png"));
         bip=Gdx.audio.newSound(Gdx.files.internal("audio/intro.mp3"));
@@ -42,16 +41,6 @@ public class LoadingScreen implements Screen {
         logo.setOrigin(450,200 );
         logo.setPosition(450, 200);
         loadingStage.addActor(logo);
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -107,6 +96,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
+        loadingStage.getViewport().update(width,height,true);
 
     }
 
@@ -130,10 +120,8 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void dispose() {
-        font.dispose();
-        text.dispose();
+
         parent.dispose();
-        logoBatch.dispose();
         loadingStage.dispose();
         bip.dispose();
 

@@ -10,22 +10,25 @@ public class CourseProperties {
 
     public static boolean checkForPbl(){
         MapProperties tilesProperties = getTileProperties(tileNum);
-        boolean containpbl = tilesProperties.containsKey("pbl");
-        if (containpbl){
+        boolean containPbl = tilesProperties.containsKey("pbl");
+        if (containPbl){
             return  true;}
             return false;
     }
     public static boolean checkForOop(){
         MapProperties tilesProperties = getTileProperties(tileNum);
-        boolean containoop = tilesProperties.containsKey("oop");
-        if (containoop){
+        boolean containOop = tilesProperties.containsKey("oop");
+
+        if (containOop){
             return  true;}
         return false;
     }
     public static boolean checkForAlgebra(){
+
         MapProperties tilesProperties = getTileProperties(tileNum);
-        boolean containalgebra = tilesProperties.containsKey("algebra");
-        if (containalgebra){
+        boolean containAlgebra = tilesProperties.containsKey("algebra");
+
+        if (containAlgebra){
             return  true;}
         return false;
     }

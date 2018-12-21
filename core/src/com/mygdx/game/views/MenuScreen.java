@@ -14,19 +14,20 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.TileBoard3;
 
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.mygdx.game.supp.Pawn;
 
 public class MenuScreen implements Screen {
-    private  Stage menuStage;
+    public static Stage menuStage;
     private TileBoard3 parent;
 
-//    Texture background;
 
     public MenuScreen(TileBoard3 tileBoard3){
         parent = tileBoard3;
         menuStage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(menuStage);
+//        Gdx.input.setInputProcessor(menuStage);
 
     }
+
 
     @Override
     public void show() {
@@ -59,10 +60,13 @@ public class MenuScreen implements Screen {
         onePlayer.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+
                 TileBoard3.noOfPlayers = 1;
                 parent.changeScreen(TileBoard3.PLAYGAME);
 
-//                onePlayer.clearListeners();
+
+
+
 
             }
         });
@@ -70,9 +74,9 @@ public class MenuScreen implements Screen {
         twoPlayers.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+
                 TileBoard3.noOfPlayers = 2;
                 parent.changeScreen(TileBoard3.PLAYGAME);
-//                twoPlayers.clearListeners();
 
             }
         });

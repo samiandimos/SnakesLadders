@@ -9,7 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.views.PlayScreen;
+
+import java.util.concurrent.TimeUnit.*;
+
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -65,11 +69,19 @@ public class AnswerButtons {
 
                     button.addAction(parallel(fadeIn(.2f),color(Color.RED)));
                     QuestionPopup.hideQuestionWindow();
-                    System.out.println("this is not the right answer");
+                    System.out.println("\nthis is not the right answer");
                 }
+
                 // Unfreezing the input of the game by activating back the SPACE
-                // button as the proceeding mean
-                PlayScreen.inputActivationState = PlayScreen.activeInputState;
+                // button and letting players play again.
+                // Scheduling the above task after a small delay
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        System.out.println("SPACE IS OPEN NOW");
+                        PlayScreen.inputActivationState = PlayScreen.activeInputState;
+                    }
+                }, .3f);
             }
         });
 

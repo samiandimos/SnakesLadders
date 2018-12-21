@@ -2,6 +2,7 @@ package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.mygdx.game.TileBoard3;
@@ -40,8 +41,8 @@ public class Dice2
                 if (playingPawn.checkTileForSpecial(tileNum)) // If contains special
                 // Movement to special tile
                 {
-//                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
-                    targetTileNum = tileNum; // Debug code to remove special tiles (comment out the above and uncomment this)
+                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
+//                    targetTileNum = tileNum; // Debug code to remove special tiles (comment out the above and uncomment this)
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
                     // Setting the new tile number and save it for the current player
                     tileNum = targetTileNum;

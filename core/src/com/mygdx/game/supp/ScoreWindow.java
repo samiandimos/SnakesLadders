@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.views.PlayScreen;
 
 
@@ -32,11 +35,11 @@ public class ScoreWindow {
 
     public static void createScoreWindow1() {
 
-        Image frame1 = new Image(new Texture(Gdx.files.internal("frame.png")));
+        Image frame1 = new Image(new Texture(Gdx.files.internal("frame02.png")));
         PlayScreen.playStage.addActor(frame1);
         frame1.setPosition(40 ,870);
         frame1.setSize(290, 128);
-//        sign.scaleBy(-.96f);
+//        sign.scaleBy(-.96f );
 
 
         scoreLabel1 = new Label("" + Score.getPlScore1(), FontGenerator.font() );
@@ -52,18 +55,21 @@ public class ScoreWindow {
         scoreLabel1.setFontScale(1.5f);
         scoreLabel1.setVisible(true);
 
+        // Tables background
+        Texture frameTexture = new Texture(Gdx.files.internal("frame02.png"));
+        TextureRegionDrawable frameDrawable = new TextureRegionDrawable(frameTexture);
 
         scoreTable1 = new Table();
         scoreTable1.pack();
         scoreTable1.setSize(128, 128);
         scoreTable1.setPosition(125,870);
 
-        scoreTable1.toFront();
         scoreTable1.add(player1Name).pad(0,0,10,0);
 //        scoreTable1.add(playerIcon1).pad(0, 10, 10, 0);
         scoreTable1.row();
         scoreTable1.add(scoreLabel1);
         scoreTable1.setColor(1,1,1,0);
+        scoreTable1.debug();
         PlayScreen.playStage.addActor(scoreTable1);
 
         Gdx.input.setInputProcessor(PlayScreen.playStage);

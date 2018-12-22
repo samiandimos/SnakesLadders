@@ -55,7 +55,7 @@ public class ScoreWindow {
         scoreTable1.row();
         scoreTable1.add(scoreLabel1).padBottom(10);
         scoreTable1.setColor(1,1,1,0);
-        scoreTable1.debug();
+//        scoreTable1.debug();
 
         PlayScreen.playStage.addActor(scoreTable1);
 //        Gdx.input.setInputProcessor(PlayScreen.playStage);
@@ -76,13 +76,13 @@ public class ScoreWindow {
         scoreTable2.setBackground(tableBackground);
         scoreTable2.pack();
         scoreTable2.setSize(256 , 136);
-        scoreTable2.setPosition(1146,820);
+        scoreTable2.setPosition(1125,820);
 
         scoreTable2.add(player2Name).pad(0,0,10,0);
         scoreTable2.row();
         scoreTable2.add(scoreLabel2).padBottom(10);
         scoreTable2.setColor(1,1,1,0);
-        scoreTable2.debug();
+//        scoreTable2.debug();
 
         PlayScreen.playStage.addActor(scoreTable2);
 //        Gdx.input.setInputProcessor(PlayScreen.playStage);

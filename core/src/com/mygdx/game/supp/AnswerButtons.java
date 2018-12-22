@@ -52,10 +52,12 @@ public class AnswerButtons {
 
                     if (PlayScreen.activePlayer.equals("player1")) {
                         Score.setPlScore1(5);
+                        ScoreWindow.updateScoreTable1();
                     }
 
                     if (PlayScreen.activePlayer.equals("player2")) {
                         Score.setPlScore2(5);
+                        ScoreWindow.updateScoreTable2();
                     }
 
                     button.addAction(parallel(fadeIn(.2f), color(Color.GREEN)));

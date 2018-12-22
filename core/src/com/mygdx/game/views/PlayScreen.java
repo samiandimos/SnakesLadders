@@ -164,13 +164,19 @@ public class PlayScreen implements Screen {
         checkAndPlay();
 
 
-        // Debug Actors Z-Index
+        // Debug code
+        // Actors Z-Indexes
         if (Gdx.input.isKeyJustPressed(Input.Keys.D))
         {
             for (Actor i : playStage.getActors())
             {
                 System.out.println(i.getName() + " HAS INDEX " + i.getZIndex());
             }
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C))
+        {
+            DiceDisplay.diceImage.setZIndex(0);
         }
     }
 

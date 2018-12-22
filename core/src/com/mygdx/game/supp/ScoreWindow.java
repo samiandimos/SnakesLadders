@@ -100,38 +100,25 @@ public class ScoreWindow {
     {
         if (activePlayer.equals("player1"))
         {
-            scoreTable2.setZIndex(2000);
-            scoreTable1.setZIndex(3001);
+            scoreTable2.setZIndex(0);
+            scoreTable1.setZIndex(100);
 
-//            System.out.println("\n\nwindow z-index: " + QuestionPopup.window.getZIndex());
-//            System.out.println("transparency z-index: " + QuestionPopup.transparentImg.getZIndex());
-//            System.out.println("score Table 1 z-index: " + scoreTable1.getZIndex());
-//            System.out.println("score Table 2 z-index: " + scoreTable2.getZIndex());
-//        }else {
-            scoreTable1.setZIndex(2000);
-            scoreTable2.setZIndex(3001);
-
-//            System.out.println("\n\nwindow z-index: " + QuestionPopup.window.getZIndex());
-//            System.out.println("transparency z-index: " + QuestionPopup.transparentImg.getZIndex());
-//            System.out.println("score Table 1 z-index: " + scoreTable1.getZIndex());
-//            System.out.println("score Table 2 z-index: " + scoreTable2.getZIndex());
+        }else {
+            scoreTable1.setZIndex(0);
+            scoreTable2.setZIndex(100);
         }
     }
 
-    private static void updateScoreTable1() {
-
-        scoreTable1.addAction(Actions.alpha(1,.2f));
+    // Update methods used inside the button listeners of AnswerButtons
+    // class so the score label gets updated with the new score immediately
+    public static void updateScoreTable1()
+    {
         scoreLabel1.setText("" + Score.getPlScore1());
 
-        if (PlayScreen.activePlayer.equals("player1"))
-        {
-
-        }
     }
-//
-    private static void updateScoreTable2() {
 
-        scoreTable2.addAction(Actions.alpha(1,.2f));
+    public static void updateScoreTable2()
+    {
         scoreLabel2.setText("" + Score.getPlScore2());
     }
 
@@ -144,13 +131,13 @@ public class ScoreWindow {
         switch(noOfPlayers )
         {
             case 1:
-                updateScoreTable1();
+                scoreTable1.addAction(Actions.alpha(1,.2f));
 
                 break;
 
             case 2 :
-                updateScoreTable1();
-                updateScoreTable2();
+                scoreTable1.addAction(Actions.alpha(1,.2f));
+                scoreTable2.addAction(Actions.alpha(1,.2f));
 
                 break;
         }

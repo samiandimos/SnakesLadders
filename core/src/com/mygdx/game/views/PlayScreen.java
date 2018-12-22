@@ -65,24 +65,22 @@ public class PlayScreen implements Screen {
 
         camera.update();
 
-        // Setting the players pawns in stage
+
+        // Setting inside the playStage the players pawns and their score windows
         if (noOfPlayers == 1) {
             player1.setInStage(1000);
+            ScoreWindow.createScoreWindow1();
         }
         if (noOfPlayers == 2)
         {
             player1.setInStage(1000);
+            ScoreWindow.createScoreWindow1();
             player2.setInStage(2000);
+            ScoreWindow.createScoreWindow2();
         }
 
         // Setting inside the playStage our question popup window
-
         QuestionPopup.createQuestionWindow();
-
-        // Setting inside the playStage the two score windows
-
-        ScoreWindow.createScoreWindow1();
-        ScoreWindow.createScoreWindow2();
     }
 
 

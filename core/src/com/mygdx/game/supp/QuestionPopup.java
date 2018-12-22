@@ -18,8 +18,8 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 public class QuestionPopup {
 
 
-    private static Window window;
-    private static Image transparentImg;
+    public static Window window;
+    public static Image transparentImg;
     private static Texture texture;
 
     public static Window getWindow() {
@@ -40,6 +40,7 @@ public class QuestionPopup {
     private static void transparentBackground() {
         texture = new Texture(Gdx.files.internal("transparency.png"));
         transparentImg = new Image(texture);
+        transparentImg.setName("Transparency");
         transparentImg.setColor(1, 1, 1, 0);
 
         PlayScreen.playStage.addActor(transparentImg);
@@ -54,9 +55,10 @@ public class QuestionPopup {
         // Set a darker transparent background
         transparentBackground();
         window = new Window(windowTitle, skin);
+        window.setName("Question Window");
+
         // Start by hiding the window (setting the alpha value zero)
         window.setColor(1, 1, 1, 0);
-
 
         window.setResizable(false);
         window.setMovable(false);
@@ -132,8 +134,8 @@ public class QuestionPopup {
             transparentImg.setVisible(false);
             window.setVisible(false);
         }else {
-            transparentImg.setZIndex(3000);
-            window.setZIndex(3000);
+//            transparentImg.setZIndex(3000);
+//            window.setZIndex(3000);
             transparentImg.addAction(Actions.after(Actions.delay(.1f, Actions.fadeIn(.6f, Interpolation.smooth))));
             window.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
         }

@@ -63,6 +63,7 @@ public class Pawn {
 
         // Creating a pawn in the starting position
         pawn = new Image(texture);
+        pawn.setName(name + " pawn");
         pawn.setSize(texture.getWidth() * .8f, texture.getHeight() * .8f);
         pawn.setPosition((Float) startingTileProperties.get("x"), (Float) startingTileProperties.get("y"));
         PlayScreen.playStage.addActor(pawn);

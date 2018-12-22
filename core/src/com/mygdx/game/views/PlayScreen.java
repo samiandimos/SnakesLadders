@@ -8,9 +8,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
@@ -98,9 +100,11 @@ public class PlayScreen implements Screen {
 
         if (Gdx.input.isKeyJustPressed(inputActivationState))
         {
+            ScoreWindow.showScoreWindow(noOfPlayers);
+
             inputActivationState = inactiveInputState;
             if (noOfPlayers == 2) {
-                ScoreWindow.showScoreWindow(noOfPlayers);
+                ScoreWindow.setActiveScoreWindow(activePlayer);
                 if (activePlayer.equals("player1")) {
                     System.out.println("Player1 Plays");
                     System.out.println("Player1 Score:" + Score.getPlScore1());
@@ -113,7 +117,6 @@ public class PlayScreen implements Screen {
                 }
 
             } else {
-                ScoreWindow.showScoreWindow(noOfPlayers);
                 activePlayer = "player1";
                 System.out.println("Player1 Plays");
                 System.out.println("Player1 Score :" + Score.getPlScore1());
@@ -159,6 +162,16 @@ public class PlayScreen implements Screen {
         playStage.draw();
 
         checkAndPlay();
+
+
+        // Debug Actors Z-Index
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D))
+        {
+            for (Actor i : playStage.getActors())
+            {
+                System.out.println(i.getName() + " HAS INDEX " + i.getZIndex());
+            }
+        }
     }
 
     @Override

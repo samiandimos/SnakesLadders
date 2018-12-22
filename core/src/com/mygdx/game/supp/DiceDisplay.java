@@ -3,6 +3,8 @@ package com.mygdx.game.supp;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.mygdx.game.views.PlayScreen;
+
 import static com.mygdx.game.views.PlayScreen.playStage;
 
 public class DiceDisplay {
@@ -10,47 +12,48 @@ public class DiceDisplay {
 //    private static int dicePosY = 512;
     private static int dicePosX = 265 * 4;
     private static int dicePosY = 240;
-
     public static Texture tex;
+    public static Image diceImage;
 
-    public static void diceImage(int dice) {
+    private static void createDiceImage(int dice)
+    {
+    }
+
+    public static void updateDiceImage(int dice) {
 
         tex = new Texture(Gdx.files.internal("dice" + dice + ".png"));
+        diceImage.setName("Dice");
+        diceImage.setPosition(dicePosX, dicePosY);
+        diceImage.setSize(tex.getWidth()/10f,tex.getHeight()/10f);
+        diceImage.toBack();
 
-        Image img = new Image(tex);
-        img.setPosition(dicePosX, dicePosY);
-        img.setSize(tex.getWidth()/10f,tex.getHeight()/10f);
-        img.toBack();
+        //        tex.dispose();
 
-//        tex.dispose();
-
-            playStage.addActor(img);
+            playStage.addActor(diceImage);
             switch (dice) {
                 case 1:
-                    img = new Image(tex);
+                    diceImage = new Image(tex);
                     break;
 
                 case 2:
-                    img = new Image(tex);
+                    diceImage = new Image(tex);
                     break;
 
                 case 3:
-                    img = new Image(tex);
+                    diceImage = new Image(tex);
                     break;
 
                 case 4:
-                    img = new Image(tex);
+                    diceImage = new Image(tex);
                     break;
 
                 case 5:
-                    img = new Image(tex);
+                    diceImage = new Image(tex);
                     break;
 
                 case 6:
-                    img = new Image(tex);
+                    diceImage = new Image(tex);
                     break;
-
             }
-
     }
 }

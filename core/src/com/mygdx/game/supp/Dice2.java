@@ -5,7 +5,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.mygdx.game.TileBoard3;
-import com.mygdx.game.views.PlayScreen;
 
 import java.util.Random;
 
@@ -34,7 +33,7 @@ public class Dice2
             playingPawn = pawn;
 
             dice = random.nextInt(6) + 1;
-            DiceDisplay.diceImage(dice);
+            DiceDisplay.updateDiceImage(dice);
             tileNum += dice;
             if (tileNum <= 100) {
                 if (playingPawn.checkTileForSpecial(tileNum)) // If contains special

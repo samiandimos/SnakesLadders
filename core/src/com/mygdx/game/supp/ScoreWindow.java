@@ -50,14 +50,18 @@ public class ScoreWindow {
         scoreTable1.pack();
         scoreTable1.setSize(256, 136);
         scoreTable1.setPosition(30,820);
+        scoreTable1.setTransform(true);
 
         scoreTable1.add(player1Name).pad(0,0,10,0);
         scoreTable1.row();
         scoreTable1.add(scoreLabel1).padBottom(10);
         scoreTable1.setColor(1,1,1,0);
 //        scoreTable1.debug();
+        scoreTable1.setName("scoreTable1");
 
         PlayScreen.playStage.addActor(scoreTable1);
+        scoreTable1.setZIndex(600000);
+
 //        Gdx.input.setInputProcessor(PlayScreen.playStage);
     }
 
@@ -77,22 +81,52 @@ public class ScoreWindow {
         scoreTable2.pack();
         scoreTable2.setSize(256 , 136);
         scoreTable2.setPosition(1125,820);
+        scoreTable2.setTransform(true);
 
         scoreTable2.add(player2Name).pad(0,0,10,0);
         scoreTable2.row();
         scoreTable2.add(scoreLabel2).padBottom(10);
         scoreTable2.setColor(1,1,1,0);
 //        scoreTable2.debug();
+        scoreTable2.setZIndex(4000);
+        scoreTable2.setName("scoreTable2");
 
         PlayScreen.playStage.addActor(scoreTable2);
 //        Gdx.input.setInputProcessor(PlayScreen.playStage);
     }
 
+    // Setting which score window will be over the transparency depending on the active player
+    public static void setActiveScoreWindow(String activePlayer)
+    {
+        if (activePlayer.equals("player1"))
+        {
+            scoreTable2.setZIndex(2000);
+            scoreTable1.setZIndex(3001);
+
+//            System.out.println("\n\nwindow z-index: " + QuestionPopup.window.getZIndex());
+//            System.out.println("transparency z-index: " + QuestionPopup.transparentImg.getZIndex());
+//            System.out.println("score Table 1 z-index: " + scoreTable1.getZIndex());
+//            System.out.println("score Table 2 z-index: " + scoreTable2.getZIndex());
+//        }else {
+            scoreTable1.setZIndex(2000);
+            scoreTable2.setZIndex(3001);
+
+//            System.out.println("\n\nwindow z-index: " + QuestionPopup.window.getZIndex());
+//            System.out.println("transparency z-index: " + QuestionPopup.transparentImg.getZIndex());
+//            System.out.println("score Table 1 z-index: " + scoreTable1.getZIndex());
+//            System.out.println("score Table 2 z-index: " + scoreTable2.getZIndex());
+        }
+    }
 
     private static void updateScoreTable1() {
 
         scoreTable1.addAction(Actions.alpha(1,.2f));
         scoreLabel1.setText("" + Score.getPlScore1());
+
+        if (PlayScreen.activePlayer.equals("player1"))
+        {
+
+        }
     }
 //
     private static void updateScoreTable2() {

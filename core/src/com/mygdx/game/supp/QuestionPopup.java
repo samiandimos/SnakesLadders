@@ -142,6 +142,7 @@ public class QuestionPopup {
     }
 
     // Used in AnswerButtons button listener
+    // Hiding the question window and simultaneously cleaning its actors for the next set of question and answers
     public static void hideQuestionWindow()
     {
         transparentImg.addAction(Actions.after(Actions.fadeOut(.6f, Interpolation.smooth)));

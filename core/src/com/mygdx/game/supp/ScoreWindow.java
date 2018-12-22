@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.views.PlayScreen;
 
@@ -69,11 +68,11 @@ public class ScoreWindow {
     public static void createScoreWindow2() {
 
         Label player2Name = new Label("Player 2", FontGenerator.font());
-        player2Name.setColor(Color.BLUE.add(0f,.2f , 1f,1f ));
+        player2Name.setColor(Color.BLUE);
         player2Name.setFontScale(1.2f);
 
         scoreLabel2 = new Label("" + Score.getPlScore2(), FontGenerator.font() );
-        scoreLabel2.setColor(Color.BLUE.add(0f,.2f , 1f,1f ));
+        scoreLabel2.setColor(Color.BLUE);
         scoreLabel2.setFontScale(1.5f);
 
         scoreTable2 = new Table();
@@ -140,6 +139,17 @@ public class ScoreWindow {
                 scoreTable2.addAction(Actions.alpha(1,.2f));
 
                 break;
+        }
+    }
+
+    public static void resetScoreTables()
+    {
+//        scoreTable1.setColor(1,1,1,0);
+        Score.setPlScore1(0);
+
+        if (PlayScreen.noOfPlayers == 2) {
+//            scoreTable2.setColor(1, 1, 1, 0);
+            Score.setPlScore2(0);
         }
     }
 }

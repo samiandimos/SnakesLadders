@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.mygdx.game.TileBoard3;
+import com.mygdx.game.views.PlayScreen;
 
 import java.util.Random;
 
@@ -39,8 +40,8 @@ public class Dice2
                 if (playingPawn.checkTileForSpecial(tileNum)) // If contains special
                 // Movement to special tile
                 {
-                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
-//                    targetTileNum = tileNum; // Debug code to remove special tiles (comment out the above and uncomment this)
+//                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
+                    targetTileNum = tileNum; // Debug code to remove special tiles (comment out the above and uncomment this)
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
                     // Setting the new tile number and save it for the current player
                     tileNum = targetTileNum;
@@ -53,23 +54,22 @@ public class Dice2
                     playingPawn.setTileNum(tileNum);
                 }
 
-//                if (playingPawn.getTileNum() == 100 || tileNum == 100 ) {
-//
-//                    // Runnable action added so the pawn moves first to the
-//                    // 100th tile and after that the EndScreens shows up
-//
-//                    playingPawn.pawn.addAction(Actions.after(Actions.delay(4f, new RunnableAction(){
-//                        @Override
-//                        public void run() {
-////                            QuestionPopup.getWindow().clear();
-//                            PlayScreen.parent.changeScreen(TileBoard3.ENDGAME);
-//
-////                            switch (tileNum) {
-////                                case  100:
-////                            }
-//                        }
-//                    })));
-//                }
+                // Setting when game will finish
+                if (playingPawn.getTileNum() == 100) {
+
+                    // Runnable action added so the pawn moves first to the
+                    // 100th tile and after that the EndScreens shows up
+                    playingPawn.pawn.addAction(Actions.after(Actions.delay(2f, new RunnableAction(){
+                        @Override
+                        public void run() {
+                            PlayScreen.parent.changeScreen(TileBoard3.FINISHGAME);
+                            Pawn.resetPawn();
+                            ScoreWindow.resetScoreTables();
+                            PlayScreen.inputActivationState = PlayScreen.activeInputState;
+                        }
+                    })));
+
+                }
 
             } else {
                 tileNum -= dice;

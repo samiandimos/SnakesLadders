@@ -3,9 +3,7 @@ package com.mygdx.game.supp;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -51,12 +49,12 @@ public class AnswerButtons {
                     correct.play();
 
                     if (PlayScreen.activePlayer.equals("player1")) {
-                        Score.setPlScore1(5);
+                        Score.increasePlScore1(5);
                         ScoreWindow.updateScoreTable1();
                     }
 
                     if (PlayScreen.activePlayer.equals("player2")) {
-                        Score.setPlScore2(5);
+                        Score.increasePlScore2(5);
                         ScoreWindow.updateScoreTable2();
                     }
 

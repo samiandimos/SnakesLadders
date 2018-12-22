@@ -10,13 +10,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
-import static com.mygdx.game.supp.Dice2.tileNum;
 
 
 public class PlayScreen implements Screen {
@@ -28,7 +24,7 @@ public class PlayScreen implements Screen {
     public static TiledMap tiledMap = new TmxMapLoader().load("board64B.tmx");
     private OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
-    // Creating an instance of the Class Pawn so to be able to use it's non static methods inside a static context
+    // Creating instances of the Class Pawn so to be able to use it's non static methods inside a static context
     private Pawn player1;
     private Pawn player2;
     public static int noOfPlayers;
@@ -39,45 +35,34 @@ public class PlayScreen implements Screen {
 
 
 
-    public PlayScreen(TileBoard3 tileBoard3, int noOfPlayers){
-        parent = tileBoard3;
-        if(noOfPlayers == 1)
-        {
-            player1 = new Pawn();
-            player1.setName("Player1");
-            PlayScreen.noOfPlayers = noOfPlayers;
-        }
-        if(noOfPlayers == 2)
-        {
-            player1 = new Pawn();
-            player1.setName("Player1");
-            player2 = new Pawn();
-            player2.setName("Player2");
-            PlayScreen.noOfPlayers = noOfPlayers;
-        }
-    }
+    public PlayScreen(TileBoard3 tileBoard3){parent = tileBoard3;}
+
 
     @Override
-    public void show() {
-
-
+    public void show()
+    {
         playStage = new Stage(viewport);
         camera.setToOrtho(false, mapW, mapH);
-
-
         camera.update();
 
 
         // Setting inside the playStage the players pawns and their score windows
         if (noOfPlayers == 1) {
+            player1 = new Pawn("Player1");
+            Pawn.addToPawnList(player1);
             player1.setInStage(1000);
             ScoreWindow.createScoreWindow1();
         }
         if (noOfPlayers == 2)
         {
+            player1 = new Pawn("Player1");
             player1.setInStage(1000);
+            Pawn.addToPawnList(player1);
             ScoreWindow.createScoreWindow1();
+
+            player2 = new Pawn( "Player2");
             player2.setInStage(2000);
+            Pawn.addToPawnList(player2);
             ScoreWindow.createScoreWindow2();
         }
 
@@ -95,7 +80,6 @@ public class PlayScreen implements Screen {
     public static int inputActivationState = activeInputState;
     public static String activePlayer = "player1";
 
-
     private void checkAndPlay() {
 
         if (Gdx.input.isKeyJustPressed(inputActivationState))
@@ -104,6 +88,7 @@ public class PlayScreen implements Screen {
 
             inputActivationState = inactiveInputState;
             if (noOfPlayers == 2) {
+
                 ScoreWindow.setActiveScoreWindow(activePlayer);
                 if (activePlayer.equals("player1")) {
                     System.out.println("Player1 Plays");
@@ -123,25 +108,8 @@ public class PlayScreen implements Screen {
                 Dice2.rollAndMove(player1, player1.getTileNum());
             }
         }
-
-        // Runnable action added so the pawn moves first to the
-        // 100th tile and after that the EndScreens shows up
-
-        if ( tileNum == 100 ) {
-            playStage.addAction(Actions.after(Actions.delay(1f, new RunnableAction(){
-                @Override
-                public void run() {
-//                    tileNum *= 0 ;
-                    parent.changeScreen(TileBoard3.FINISHGAME);
-
-                }
-            })));
-        }
-
-
-
-
     }
+
 
     @Override
     public void render(float delta)

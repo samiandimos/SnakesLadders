@@ -38,11 +38,6 @@ public class FinishScreen implements Screen {
 
     public FinishScreen(TileBoard3 tileBoard3) {
 
-
-
-
-
-
         parent=tileBoard3;
         this.finishStage = new Stage();
 
@@ -63,7 +58,6 @@ public class FinishScreen implements Screen {
 ////        gradeTex2 =  new Texture(Gdx.files.internal("grade90.png"));
 ////        gradeTex3 =  new Texture(Gdx.files.internal("grade90.png"));
 
-
     }
 
 
@@ -75,9 +69,9 @@ public class FinishScreen implements Screen {
 
         cheering.play();
         bravo.addAction(sequence(alpha(0), scaleTo(0f, 0f),
-                parallel(fadeIn(2f, Interpolation.pow2)),
-                scaleTo(1f, 1f, 2f, Interpolation.pow5),
-                moveTo(380, 160, 1.5f, Interpolation.swingOut),
+                parallel(fadeIn(1f, Interpolation.pow2)),
+                scaleTo(1f, 1f, 1f, Interpolation.pow5),
+                moveTo(380, 160, 1f, Interpolation.swingOut),
                 fadeOut(.5f)));
         bravo.addAction(Actions.after(fadeOut(1f)));
 
@@ -92,7 +86,7 @@ public class FinishScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-        finishStage.addAction(Actions.after(Actions.delay(10f, new RunnableAction() {
+        finishStage.addAction(Actions.after(Actions.delay(5f, new RunnableAction() {
             @Override
             public void run() {
 //                Pawn.tileNum *= 0;                    // to reset the tileNum for next play

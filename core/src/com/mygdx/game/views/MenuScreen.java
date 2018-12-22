@@ -61,13 +61,8 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                TileBoard3.noOfPlayers = 1;
+                PlayScreen.noOfPlayers = 1;
                 parent.changeScreen(TileBoard3.PLAYGAME);
-
-
-
-
-
             }
         });
 
@@ -75,9 +70,8 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                TileBoard3.noOfPlayers = 2;
+                PlayScreen.noOfPlayers = 2;
                 parent.changeScreen(TileBoard3.PLAYGAME);
-
             }
         });
         menuStage.addActor(table);

@@ -16,7 +16,7 @@ public class TileBoard3 extends Game {
 
     private LoadingScreen loadingScreen;
     private MenuScreen menuScreen;
-    private PlayScreen playScreen;
+    public PlayScreen playScreen;
     private FinishScreen finishScreen;
     private EndScreen endScreen;
 
@@ -58,7 +58,7 @@ public class TileBoard3 extends Game {
 
             case PLAYGAME:
 
-                if(playScreen == null) playScreen = new PlayScreen(this, noOfPlayers);
+                if(playScreen == null) playScreen = new PlayScreen(this);
                 this.setScreen(playScreen);
                 Gdx.input.setInputProcessor(PlayScreen.playStage);
                 PlayScreen.playStage.act();

@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.views.PlayScreen;
 
+import java.util.ArrayList;
+
 
 public class Pawn {
 
@@ -20,8 +22,17 @@ public class Pawn {
     public static MapProperties tileProperties; // List with object properties
 
     public Image pawn;
-    public int tileNum = 0 ;
+    private int tileNum = 95 ;
     private String name = "";
+    // Create an array of two positions to store the pawn instances
+    public static ArrayList<Pawn> pawnList = new ArrayList<Pawn>(2);
+
+
+    // Pawn constructor
+    public Pawn(String playerName)
+    {
+        setName(playerName);
+    }
 
 
     // Current tile number setter
@@ -31,8 +42,8 @@ public class Pawn {
     }
 
     // Current tile number getter
-    public int getTileNum() {
-
+    public int getTileNum()
+    {
         return this.tileNum;
     }
 
@@ -47,6 +58,20 @@ public class Pawn {
         return name;
     }
 
+    public static void addToPawnList(Pawn instantiatedPawn )
+    {
+        pawnList.add(instantiatedPawn);
+    }
+
+    // Resetting pawnList and each pawn's instance tile number
+    public static void resetPawn()
+    {
+        for ( Pawn i : pawnList)
+        {
+            i.setTileNum(95);
+        }
+        pawnList.clear();
+    }
 
 
     public void setInStage (int playerStartingPosition) {
@@ -67,9 +92,7 @@ public class Pawn {
         pawn.setSize(texture.getWidth() * .8f, texture.getHeight() * .8f);
         pawn.setPosition((Float) startingTileProperties.get("x"), (Float) startingTileProperties.get("y"));
         PlayScreen.playStage.addActor(pawn);
-
     }
-
 
 
     // Getting the properties of the current tile using the dice
@@ -143,7 +166,6 @@ public class Pawn {
         };
         sequenceAction.addAction(Actions.delay(.3f, runPopup));
         pawn.addAction(sequenceAction);
-
 
 
         // Debug code

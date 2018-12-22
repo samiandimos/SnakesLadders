@@ -33,7 +33,7 @@ public class Dice2
             tileNum = newTileNum;
             playingPawn = pawn;
 
-            dice = random.nextInt(2) + 1;
+            dice = random.nextInt(6) + 1;
             DiceDisplay.diceImage(dice);
             tileNum += dice;
             if (tileNum <= 100) {

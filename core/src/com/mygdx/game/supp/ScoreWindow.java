@@ -48,8 +48,8 @@ public class ScoreWindow {
 //        Image playerIcon1 = new Image(new Texture(Gdx.files.internal("icon_mini.png")));
 
 
-        player1Name.setFontScale(1.5f);
-        player1Name.setPosition(70, 900);
+        player1Name.setFontScale(1.2f);
+//        player1Name.setPosition(70, 900);
 //        player1Name.setSize(250, 64);
 
         scoreLabel1.setColor(Color.WHITE);
@@ -63,33 +63,30 @@ public class ScoreWindow {
         scoreTable1 = new Table();
         scoreTable1.setBackground(tableBackground);
         scoreTable1.pack();
-        scoreTable1.setSize(264, 160);
-        scoreTable1.setPosition(125,870);
+        scoreTable1.setSize(256, 136);
+        scoreTable1.setPosition(30,820);
 
         scoreTable1.add(player1Name).pad(0,0,10,0);
 //        scoreTable1.add(playerIcon1).pad(0, 10, 10, 0);
         scoreTable1.row();
-        scoreTable1.add(scoreLabel1);
-        scoreTable1.setColor(1,1,1,0);
+        scoreTable1.add(scoreLabel1).padBottom(10);
+        scoreTable1.setColor(1,1,1,1);
         scoreTable1.debug();
         PlayScreen.playStage.addActor(scoreTable1);
 
         Gdx.input.setInputProcessor(PlayScreen.playStage);
-
-
-
     }
 
 // creating a scoreWindow for player 2 (set up inside the show() method of the PlayScreen class)
 
     public static void createScoreWindow2() {
 
-        if (PlayScreen.noOfPlayers==2){
-
-            Image frame2 = new Image(new Texture(Gdx.files.internal("frame.png")));
-        PlayScreen.playStage.addActor(frame2);
-        frame2.setPosition(1080 ,870);
-        frame2.setSize(290, 128);}
+//        if (PlayScreen.noOfPlayers==2){
+//
+//            Image frame2 = new Image(new Texture(Gdx.files.internal("frame.png")));
+//        PlayScreen.playStage.addActor(frame2);
+//        frame2.setPosition(1080 ,870);
+//        frame2.setSize(290, 128);}
 
 
         scoreLabel2 = new Label("" + Score.getPlScore2(), FontGenerator.font() );
@@ -102,7 +99,6 @@ public class ScoreWindow {
         player2Name.setPosition(1060, 920);
         player2Name.setSize(256, 64);
 
-//        scoreLabel1.getGlyphLayout();
         scoreLabel2.setColor(Color.BLUE.add(0f,.2f , 1f,1f ));
         scoreLabel2.setFontScale(1.5f);
         scoreLabel2.setVisible(true);
@@ -112,22 +108,18 @@ public class ScoreWindow {
         scoreTable2.pack();
         scoreTable2.setSize(128 , 576);
         scoreTable2.setPosition(1152,640);
-        scoreTable2.toFront();
-
         scoreTable2.add(player2Name).pad(0,0,10,0);
 //        scoreTable2.add(playerIcon2).pad(0, 10, 10, 0);
         scoreTable2.row();
         scoreTable2.add(scoreLabel2);
+        scoreTable2.debug();
 
-
-        scoreTable2.setColor(1,1,1,0);
+        scoreTable2.setColor(1,1,1,1);
         PlayScreen.playStage.addActor(scoreTable2);
 
         Gdx.input.setInputProcessor(PlayScreen.playStage);
-
-
-
     }
+
 
     private static void updateScoreTable1() {
 
@@ -158,6 +150,8 @@ public class ScoreWindow {
 
     public static void showScoreWindow(int noOfPlayers)
     {
+        int onePlayer = noOfPlayers;
+        int twoPlayers = noOfPlayers;
         switch(noOfPlayers )
         {
             case 1:

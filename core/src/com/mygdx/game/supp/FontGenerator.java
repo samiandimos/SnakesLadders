@@ -79,11 +79,8 @@ public class FontGenerator {
 //        parameter.borderWidth = 1;
         parameter.color = Color.GOLDENROD;
 
-
-
         BitmapFont myFont1 = generator.generateFont(parameter);
         generator.dispose();
-
         Label.LabelStyle questionLabelStyle = new Label.LabelStyle();
         questionLabelStyle.font = myFont1;
 

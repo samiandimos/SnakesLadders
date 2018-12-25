@@ -1,6 +1,7 @@
 package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.math.Interpolation;
@@ -160,10 +161,16 @@ public class Pawn {
 
         // Creating our Runnable Action and adding it at the end of a sequential set of actions of the Pawn,
         // so our popup window shows up after all other actions have been completed
+
+        final int finalTileNum = tileNum;
         RunnableAction runPopup = new RunnableAction() {
             @Override
             public void run() {
+                Sound question = Gdx.audio.newSound(Gdx.files.internal("audio/question.mp3"));
                 QuestionPopup.showQuestionWindow();
+             if (finalTileNum <100)
+                 question.play();
+
             }
         };
         sequenceAction.addAction(Actions.delay(.3f, runPopup));

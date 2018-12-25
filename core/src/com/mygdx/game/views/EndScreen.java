@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -25,16 +26,12 @@ public class EndScreen implements Screen {
 
 
 
-    public EndScreen(TileBoard3 tileBoard3){
+    public EndScreen(TileBoard3 tileBoard3, Interpolation circleIn){
 
 
         parent = tileBoard3;
         parent = tileBoard3;
-        this.endStage=new Stage();
-
-
-
-
+        endStage=new Stage();
 
     }
 
@@ -56,8 +53,7 @@ public class EndScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-              parent.changeScreen(TileBoard3.MENU);
-//              Gdx.input.setInputProcessor(MenuScreen.menuStage);
+              parent.changeScreen(TileBoard3.MENU,Interpolation.fade);
 
             }
         });

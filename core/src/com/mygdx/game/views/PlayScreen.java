@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -35,7 +36,7 @@ public class PlayScreen implements Screen {
 
 
 
-    public PlayScreen(TileBoard3 tileBoard3){parent = tileBoard3;}
+    public PlayScreen(TileBoard3 tileBoard3, Interpolation smooth){parent = tileBoard3;}
 
 
     @Override
@@ -82,10 +83,9 @@ public class PlayScreen implements Screen {
 
     private void checkAndPlay() {
 
-        if (Gdx.input.isKeyJustPressed(inputActivationState))
-        {
-            ScoreWindow.showScoreWindow(noOfPlayers);
+        if (Gdx.input.isKeyJustPressed(inputActivationState)) {
 
+            ScoreWindow.showScoreWindow(noOfPlayers);
             inputActivationState = inactiveInputState;
             if (noOfPlayers == 2) {
 
@@ -134,16 +134,17 @@ public class PlayScreen implements Screen {
 
         // Debug code
         // Actors Z-Indexes
-        if (Gdx.input.isKeyJustPressed(Input.Keys.D))
-        {
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+
             for (Actor i : playStage.getActors())
             {
                 System.out.println(i.getName() + " HAS INDEX " + i.getZIndex());
             }
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C))
-        {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+
             DiceDisplay.diceImage.setZIndex(0);
         }
     }

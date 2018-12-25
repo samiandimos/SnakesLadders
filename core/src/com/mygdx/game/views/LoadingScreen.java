@@ -4,12 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -30,7 +26,7 @@ public class LoadingScreen implements Screen {
 
 
 
-    public LoadingScreen(final TileBoard3 tileBoard3) {
+    public LoadingScreen(final TileBoard3 tileBoard3, Interpolation smooth) {
 
         parent = tileBoard3;
         this.loadingStage=new Stage();
@@ -55,7 +51,7 @@ public class LoadingScreen implements Screen {
 
 
 
-        loadingStage.addAction(Actions.after(Actions.delay(.1f, new RunnableAction() {
+        loadingStage.addAction(Actions.after(Actions.delay(2f, new RunnableAction() {
             @Override
             public void run() {
                 bip.play();
@@ -74,7 +70,7 @@ public class LoadingScreen implements Screen {
         loadingStage.addAction(Actions.after(Actions.delay(.1f, new RunnableAction() {
             @Override
             public void run() {
-                parent.changeScreen(TileBoard3.MENU);
+                parent.changeScreen(TileBoard3.MENU,Interpolation.circleIn);
             }
         })));
 

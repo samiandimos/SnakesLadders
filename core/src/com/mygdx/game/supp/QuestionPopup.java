@@ -2,13 +2,12 @@ package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.views.PlayScreen;
 
 
@@ -29,15 +28,17 @@ public class QuestionPopup {
 
 
     private static Label questionDisplay(String name) {
-        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+//        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        Label label = new Label(name, skin, "title");
+        Label label = new Label(name,FontGenerator.textLabelStyle() );  // displays the questions much better then using a skin
         label.setWrap(true);
+        label.setFontScale(1.2f);
         return label;
     }
 
     // Setting once inside the stage the transparent background
     private static void transparentBackground() {
+
         texture = new Texture(Gdx.files.internal("transparency.png"));
         transparentImg = new Image(texture);
         transparentImg.setName("Transparency");
@@ -48,21 +49,30 @@ public class QuestionPopup {
 
     // Used in the show() method of the PlayScreen class to create
     // and setup our question window and transparency inside the stage
-    private static String windowTitle = "";
+    private static String windowTitle = "Quiz" ;
+
+
+
     public static void createQuestionWindow()
     {
         Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         // Set a darker transparent background
         transparentBackground();
-        window = new Window(windowTitle, skin);
+
+
+        window = new Window("", skin);
         window.setName("Question Window");
 
         // Start by hiding the window (setting the alpha value zero)
-        window.setColor(1, 1, 1, 0);
 
-        window.setResizable(false);
+        window.setColor(1, 1, 1, 0);
+        window.setResizable(true);
         window.setMovable(false);
+        window.setKeepWithinStage(true);
+//        window.row();
+//        window.pack();
         PlayScreen.playStage.addActor(window);
+
     }
 
     // Updating the elements of the window
@@ -71,6 +81,7 @@ public class QuestionPopup {
         if (CourseProperties.checkForPbl()) {
 
             QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randNr], PBLQuestions.pblAns[randNr], PBLQuestions.pblAns[randNr][PBLQuestions.pblRightAns[randNr]]);
+
 
             window.add(questionDisplay(pbl.getQuestion())).prefWidth(800).pad(20);
             window.row();
@@ -107,14 +118,7 @@ public class QuestionPopup {
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][1],alg.getRightAnswer());
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][2],alg.getRightAnswer());
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][3],alg.getRightAnswer());
-
         }
-
-//        if (CourseProperties.checkForNone())
-//        {
-//            window.setVisible(false);
-//        }
-
 
         window.pack();
         window.setPosition((PlayScreen.mapW - window.getWidth()) / 2f, ((PlayScreen.mapH - window.getHeight()) / 2f) + 4);
@@ -124,18 +128,18 @@ public class QuestionPopup {
     }
 
     // Used in runnable action of movePawn() method
-    public static void showQuestionWindow()
-    {
+    public static void showQuestionWindow() {
+
         int randNr = random.nextInt(50);
         updateQuestionWindow(randNr);
 
-        if (Dice2.tileNum == 100)
-        {
+        if (Dice2.tileNum == 100) {
+
             transparentImg.setVisible(false);
             window.setVisible(false);
-        }else {
-//            transparentImg.setZIndex(3000);
-//            window.setZIndex(3000);
+        }
+        else {
+
             transparentImg.addAction(Actions.after(Actions.delay(.1f, Actions.fadeIn(.6f, Interpolation.smooth))));
             window.addAction(Actions.after(Actions.fadeIn(.6f, Interpolation.smooth)));
         }
@@ -143,6 +147,7 @@ public class QuestionPopup {
 
     // Used in AnswerButtons button listener
     // Hiding the question window and simultaneously cleaning its actors for the next set of question and answers
+
     public static void hideQuestionWindow()
     {
         transparentImg.addAction(Actions.after(Actions.fadeOut(.6f, Interpolation.smooth)));

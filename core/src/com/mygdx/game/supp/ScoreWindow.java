@@ -37,10 +37,10 @@ public class ScoreWindow {
 // creating a scoreWindow for player 1 (set up inside the show() method of the PlayScreen class)
     public static void createScoreWindow1() {
 
-        Label player1Name = new Label("Player 1", FontGenerator.font());
+        Label player1Name = new Label("Player 1", FontGenerator.scoreLabel());//Label("Player 1", FontGenerator.font());
         player1Name.setFontScale(1.2f);
 
-        scoreLabel1 = new Label("" + Score.getPlScore1(), FontGenerator.font() );
+        scoreLabel1 = new Label("" + Score.getPlScore1(), FontGenerator.scoreLabel() );
         scoreLabel1.setColor(Color.WHITE);
         scoreLabel1.setFontScale(1.5f);
 
@@ -67,11 +67,11 @@ public class ScoreWindow {
 // creating a scoreWindow for player 2 (set up inside the show() method of the PlayScreen class)
     public static void createScoreWindow2() {
 
-        Label player2Name = new Label("Player 2", FontGenerator.font());
+        Label player2Name = new Label("Player 2", FontGenerator.scoreLabel());
         player2Name.setColor(Color.BLUE);
         player2Name.setFontScale(1.2f);
 
-        scoreLabel2 = new Label("" + Score.getPlScore2(), FontGenerator.font() );
+        scoreLabel2 = new Label("" + Score.getPlScore2(), FontGenerator.scoreLabel() );
         scoreLabel2.setColor(Color.BLUE);
         scoreLabel2.setFontScale(1.5f);
 

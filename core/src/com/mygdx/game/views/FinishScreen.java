@@ -13,8 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.TileBoard3;
+import com.mygdx.game.supp.Grades;
 import com.mygdx.game.supp.Pawn;
 import com.mygdx.game.supp.Score;
+import com.mygdx.game.supp.ScoreWindow;
 
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
@@ -26,37 +28,18 @@ public class FinishScreen implements Screen {
 
     private TileBoard3 parent;
     public static Stage finishStage;
-    private Texture bravoTex;
-    private Image bravo;
-    private Sound cheering;
     private TextureRegionDrawable backGroundTex;
     private Image backGround ;
-    private Texture gradeTex1,gradeTex2,gradeTex3  ;
-    private Image gradeSheet ;
 
 
+    public FinishScreen(TileBoard3 tileBoard3, Interpolation smooth) {
 
-    public FinishScreen(TileBoard3 tileBoard3) {
-
-        parent=tileBoard3;
-        this.finishStage = new Stage();
-
-        cheering=Gdx.audio.newSound(Gdx.files.internal("audio/cheering.mp3"));
+        parent = tileBoard3;
+        finishStage = new Stage();
         backGroundTex =  new TextureRegionDrawable(new TextureRegion(new Texture("sky.png")));
         backGround = new Image(backGroundTex);
         backGround.toBack();
-        backGround.setFillParent(true);// to fill the screen with the backGround
-
-        bravoTex=new Texture(Gdx.files.internal("great1.png"));
-        bravo=new Image(bravoTex);
-//        bravo.setOrigin(300,200 );
-        bravo.setPosition(380, 100);
-        bravo.toFront();
-
-
-////        gradeTex1 =  new Texture(Gdx.files.internal("grade" + Score.plScore1 + ".png"));
-////        gradeTex2 =  new Texture(Gdx.files.internal("grade90.png"));
-////        gradeTex3 =  new Texture(Gdx.files.internal("grade90.png"));
+        backGround.setFillParent(true); // to fill the screen with the backGround
 
     }
 
@@ -64,20 +47,52 @@ public class FinishScreen implements Screen {
     @Override
     public void show() {
 
+
         finishStage.addActor(backGround);
-        finishStage.addActor(bravo);
 
-        cheering.play();
-        bravo.addAction(sequence(alpha(0), scaleTo(0f, 0f),
-                parallel(fadeIn(1f, Interpolation.pow2)),
-                scaleTo(1f, 1f, 1f, Interpolation.pow5),
-                moveTo(380, 160, 1f, Interpolation.swingOut),
-                fadeOut(.5f)));
-        bravo.addAction(Actions.after(fadeOut(1f)));
+            // display a grade sheet according to the score
+//        switch (PlayScreen.noOfPlayers) {
+//            case 1:
+            if (Score.plScore1 >= 80) {
+                finishStage.addActor(Grades.pl1GradeA());
+            }
 
+            if (Score.plScore1 < 80 && Score.plScore1 > 50) {
+                finishStage.addActor(Grades.plGradeB());
+            }
 
+            if (Score.plScore1 <= 50) {
+                finishStage.addActor(Grades.plGradeC());
+            }
+//            break;
+//
+//            case 2:
+//                if (Score.plScore1 >= 80) {
+//                    finishStage.addActor(Grades.pl1GradeA());
+//                }
+//
+//                if (Score.plScore1 < 80 && Score.plScore1 > 50) {
+//                    finishStage.addActor(Grades.plGradeB());
+//                }
+//
+//                if (Score.plScore1 <= 50) {
+//                    finishStage.addActor(Grades.plGradeC());
+//                }
+//
+//
+//                if (Score.plScore2 >= 80) {
+//                    finishStage.addActor(Grades.pl1GradeA());
+//                }
+//
+//                if (Score.plScore2 < 80 && Score.plScore2 > 50) {
+//                    finishStage.addActor(Grades.plGradeB());
+//                }
+//
+//                if (Score.plScore2 <= 50) {
+//                    finishStage.addActor(Grades.plGradeC());
+//                }
 
-    }
+        }
 
 
     @Override
@@ -86,12 +101,10 @@ public class FinishScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-        finishStage.addAction(Actions.after(Actions.delay(5f, new RunnableAction() {
+        finishStage.addAction(Actions.after(Actions.delay(10f, new RunnableAction() {
             @Override
             public void run() {
-//                Pawn.tileNum *= 0;                    // to reset the tileNum for next play
-                parent.changeScreen(TileBoard3.MENU);
-
+                parent.changeScreen(TileBoard3.MENU,Interpolation.SwingOut.smooth);
 
             }
         })));
@@ -131,10 +144,8 @@ public class FinishScreen implements Screen {
 
     @Override
     public void dispose() {
+
         parent.dispose();
         finishStage.dispose();
-        cheering.dispose();
-        bravoTex.dispose();
-
     }
 }

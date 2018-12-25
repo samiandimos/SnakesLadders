@@ -2,6 +2,7 @@ package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.mygdx.game.TileBoard3;
@@ -33,19 +34,21 @@ public class Dice2
             tileNum = newTileNum;
             playingPawn = pawn;
 
-            dice = random.nextInt(6) + 1;
+            dice = random.nextInt(1) + 1;
             DiceDisplay.updateDiceImage(dice);
             tileNum += dice;
             if (tileNum <= 100) {
-                if (playingPawn.checkTileForSpecial(tileNum)) // If contains special
-                // Movement to special tile
-                {
-//                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
-                    targetTileNum = tileNum; // Debug code to remove special tiles (comment out the above and uncomment this)
+                // If contains special <<>>  Movement to special tile
+                if (playingPawn.checkTileForSpecial(tileNum)) {
+                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
+
+//                  targetTileNum = tileNum; // uncomment to remove special tile for better testing
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
+
                     // Setting the new tile number and save it for the current player
                     tileNum = targetTileNum;
                     playingPawn.setTileNum(tileNum);
+
                     // Clearing the targetTileNum for the next occurrence of special tile
                     targetTileNum = 0;
 
@@ -59,10 +62,10 @@ public class Dice2
 
                     // Runnable action added so the pawn moves first to the
                     // 100th tile and after that the EndScreens shows up
-                    playingPawn.pawn.addAction(Actions.after(Actions.delay(2f, new RunnableAction(){
+                    playingPawn.pawn.addAction(Actions.after(Actions.delay(.7f, new RunnableAction(){
                         @Override
                         public void run() {
-                            PlayScreen.parent.changeScreen(TileBoard3.FINISHGAME);
+                            PlayScreen.parent.changeScreen(TileBoard3.FINISHGAME, Interpolation.fade);
                             Pawn.resetPawn();
                             ScoreWindow.resetScoreTables();
                             PlayScreen.inputActivationState = PlayScreen.activeInputState;
@@ -80,7 +83,9 @@ public class Dice2
                 playingPawn.pawn.addAction(Actions.delay(.3f, new RunnableAction(){
                     @Override
                     public void run() {
+
                         QuestionPopup.showQuestionWindow();
+
                     }
                 }));
             }

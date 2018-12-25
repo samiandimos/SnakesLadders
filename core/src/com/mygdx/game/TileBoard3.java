@@ -8,6 +8,7 @@ switching between the stages according to the active one
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.game.views.*;
 
 public class TileBoard3 extends Game {
@@ -29,7 +30,7 @@ public class TileBoard3 extends Game {
     @Override
     public void create() {
 
-        loadingScreen = new LoadingScreen(this);
+        loadingScreen = new LoadingScreen(this, Interpolation.smooth);
         setScreen(loadingScreen);
 
     }
@@ -37,12 +38,12 @@ public class TileBoard3 extends Game {
     // noOfPlayers variable updated inside menuScreen
 
     public static int noOfPlayers;
-    public void changeScreen(int screen){
+    public void changeScreen(int screen, Interpolation smooth){
         switch(screen){
 
             case LOADINGSCREEN:
 
-                if(loadingScreen == null) loadingScreen = new LoadingScreen(this);
+                if(loadingScreen == null) loadingScreen = new LoadingScreen(this,Interpolation.fade);
                 this.setScreen(loadingScreen);
                 Gdx.input.setInputProcessor(LoadingScreen.loadingStage);
                 LoadingScreen.loadingStage.act();
@@ -50,7 +51,7 @@ public class TileBoard3 extends Game {
 
             case MENU:
 
-                if(menuScreen == null) menuScreen = new MenuScreen(this);
+                if(menuScreen == null) menuScreen = new MenuScreen(this, Interpolation.fade);
                 this.setScreen(menuScreen);
                 Gdx.input.setInputProcessor(MenuScreen.menuStage);
                 MenuScreen.menuStage.act();
@@ -58,7 +59,7 @@ public class TileBoard3 extends Game {
 
             case PLAYGAME:
 
-                if(playScreen == null) playScreen = new PlayScreen(this);
+                if(playScreen == null) playScreen = new PlayScreen(this, Interpolation.fade);
                 this.setScreen(playScreen);
                 Gdx.input.setInputProcessor(PlayScreen.playStage);
                 PlayScreen.playStage.act();
@@ -66,7 +67,7 @@ public class TileBoard3 extends Game {
 
             case FINISHGAME:
 
-                if(finishScreen == null) finishScreen = new FinishScreen(this);
+                if(finishScreen == null) finishScreen = new FinishScreen(this,Interpolation.SwingOut.smooth);
                 this.setScreen(finishScreen);
                 Gdx.input.setInputProcessor(FinishScreen.finishStage);
                 FinishScreen.finishStage.act();
@@ -74,7 +75,7 @@ public class TileBoard3 extends Game {
 
             case ENDGAME:
 
-                if(endScreen == null) endScreen = new EndScreen(this);
+                if(endScreen == null) endScreen = new EndScreen(this,Interpolation.fade);
                 this.setScreen(endScreen);
                 Gdx.input.setInputProcessor(EndScreen.endStage);
                 EndScreen.endStage.act();
@@ -96,8 +97,11 @@ public class TileBoard3 extends Game {
     @Override
     public void dispose(){
 
-        super.dispose();
-        this.getScreen().dispose();
+        if (screen != null){
+            super.dispose();}
+
+//            this.getScreen().dispose();
+
 
     }
 }

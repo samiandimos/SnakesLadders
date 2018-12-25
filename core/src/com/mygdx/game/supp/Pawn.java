@@ -22,15 +22,15 @@ public class Pawn {
     public static MapProperties tileProperties; // List with object properties
 
     public Image pawn;
-    private int tileNum = 95 ;
+    private int tileNum = 0 ;
     private String name = "";
     // Create an array of two positions to store the pawn instances
     public static ArrayList<Pawn> pawnList = new ArrayList<Pawn>(2);
 
 
     // Pawn constructor
-    public Pawn(String playerName)
-    {
+    public Pawn(String playerName) {
+
         setName(playerName);
     }
 
@@ -48,6 +48,7 @@ public class Pawn {
     }
 
     // Manipulating the name of each player
+
     public void setName(String name) {
 
         this.name = name;
@@ -77,6 +78,7 @@ public class Pawn {
     public void setInStage (int playerStartingPosition) {
         Texture texture;
         // Getting the starting position of the pawn Depending on the Player Number
+
         MapProperties startingTileProperties = getTileProperties(playerStartingPosition);
 
         if (name.equals("Player1"))
@@ -156,7 +158,7 @@ public class Pawn {
         // This delay fixes the occasion where its nested method updateQuestionWindow(randNr) don't have the
         // time to get and set the question and its answers inside the window
 
-        // Creating our Runable Action and adding it at the end of a sequential set of actions of the Pawn,
+        // Creating our Runnable Action and adding it at the end of a sequential set of actions of the Pawn,
         // so our popup window shows up after all other actions have been completed
         RunnableAction runPopup = new RunnableAction() {
             @Override

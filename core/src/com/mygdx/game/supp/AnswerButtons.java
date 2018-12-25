@@ -16,9 +16,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class AnswerButtons {
 
-     Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-     Sound correct = Gdx.audio.newSound(Gdx.files.internal("audio/correct.mp3"));
-     Sound wrong = Gdx.audio.newSound(Gdx.files.internal("audio/wrong.mp3"));
+
      static int correctStats ;
      static int wrongtStats ;
      public static boolean checkForRightAnswer ;
@@ -29,16 +27,22 @@ public class AnswerButtons {
 
         checkForRightAnswer =  text.equals(rightAnswer) ;
 
-        Skin skin=new Skin(Gdx.files.internal("skin/uiskin.json"));
         final Sound correct=Gdx.audio.newSound(Gdx.files.internal("audio/correct.mp3"));
         final Sound wrong=Gdx.audio.newSound(Gdx.files.internal("audio/wrong.mp3"));
-        final Button button=new TextButton(text, skin);
-        button.setTransform(true);
-        button.scaleBy(.1f);
+
+//        final Button button=new TextButton(text, skin);
+
+          final Button button = new TextButton(text,
+                  (TextButton.TextButtonStyle) TextButtonStyle.myButtonStyle());// better question/ans text display
+        button.setTransform(false);
+        button.scaleBy(.2f, .2f);
+        button.row();
+        button.pack();
+
+
 
         QuestionPopup.getWindow().add(button);
         QuestionPopup.getWindow().row();
-
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -83,6 +87,7 @@ public class AnswerButtons {
                 // Unfreezing the input of the game by activating back the SPACE
                 // button and letting players play again.
                 // Scheduling the above task after a small delay
+
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {

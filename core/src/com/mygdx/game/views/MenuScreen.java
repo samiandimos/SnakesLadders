@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -21,7 +22,7 @@ public class MenuScreen implements Screen {
     private TileBoard3 parent;
 
 
-    public MenuScreen(TileBoard3 tileBoard3){
+    public MenuScreen(TileBoard3 tileBoard3, Interpolation smooth){
         parent = tileBoard3;
         menuStage = new Stage(new ScreenViewport());
 //        Gdx.input.setInputProcessor(menuStage);
@@ -62,7 +63,7 @@ public class MenuScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
 
                 PlayScreen.noOfPlayers = 1;
-                parent.changeScreen(TileBoard3.PLAYGAME);
+                parent.changeScreen(TileBoard3.PLAYGAME, Interpolation.smooth);
             }
         });
 
@@ -71,7 +72,7 @@ public class MenuScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
 
                 PlayScreen.noOfPlayers = 2;
-                parent.changeScreen(TileBoard3.PLAYGAME);
+                parent.changeScreen(TileBoard3.PLAYGAME,Interpolation.smooth);
             }
         });
         menuStage.addActor(table);

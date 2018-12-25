@@ -184,9 +184,9 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
 		font: font
-		fontColor: black
+		fontColor: white
 		background: textfield
-		cursor: black
+		cursor: white
 		selection: pale-blue
 	}
 }

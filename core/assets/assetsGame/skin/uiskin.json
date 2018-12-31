@@ -90,7 +90,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
 		font: font-label,
-		fontColor: { a: 1 },
+		fontColor: { a:1 },
 		background: textfield,
 		cursor: cursor,
 		selection: text-selection,

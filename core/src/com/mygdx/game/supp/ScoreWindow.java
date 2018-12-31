@@ -29,6 +29,7 @@ public class ScoreWindow {
     private static Table scoreTable2;
     private static Label scoreLabel1;
     private static Label scoreLabel2;
+
     // Tables-Windows background
     private static Texture backgroundTexture = new Texture(Gdx.files.internal("frame02.png"));
     private static Drawable tableBackground = new TextureRegionDrawable(new TextureRegion(backgroundTexture));
@@ -144,11 +145,9 @@ public class ScoreWindow {
 
     public static void resetScoreTables()
     {
-//        scoreTable1.setColor(1,1,1,0);
         Score.setPlScore1(0);
 
         if (PlayScreen.noOfPlayers == 2) {
-//            scoreTable2.setColor(1, 1, 1, 0);
             Score.setPlScore2(0);
         }
     }

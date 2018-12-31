@@ -26,8 +26,8 @@ public class PlayScreen implements Screen {
     private OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
     // Creating instances of the Class Pawn so to be able to use it's non static methods inside a static context
-    private Pawn player1;
-    private Pawn player2;
+    public static Pawn player1;
+    public static Pawn player2;
     public static int noOfPlayers;
 
     // Dimensions of TiledMap
@@ -72,9 +72,9 @@ public class PlayScreen implements Screen {
     }
 
 
-    // Setting variables (activeInputState and inactiveInputState) for getting the com.badlogic.gdx.Input.Keys
-    // manipulating this way when the players are able to play
-    // (Used in AnswerButtons listener)
+//    // Setting variables (activeInputState and inactiveInputState) for getting the com.badlogic.gdx.Input.Keys
+//    // manipulating this way when the players are able to play
+//    // (Used in AnswerButtons listener)
 
     private int inactiveInputState = Input.Keys.UNKNOWN;
     public static int activeInputState = Input.Keys.SPACE;
@@ -90,6 +90,7 @@ public class PlayScreen implements Screen {
             if (noOfPlayers == 2) {
 
                 ScoreWindow.setActiveScoreWindow(activePlayer);
+
                 if (activePlayer.equals("player1")) {
                     System.out.println("Player1 Plays");
                     System.out.println("Player1 Score:" + Score.getPlScore1());
@@ -129,7 +130,7 @@ public class PlayScreen implements Screen {
         playStage.act();
         playStage.draw();
 
-        checkAndPlay();
+       checkAndPlay();
 
 
         // Debug code
@@ -173,6 +174,7 @@ public class PlayScreen implements Screen {
     public void dispose() {
 
         parent.dispose();
+        System.gc();
         playStage.dispose();
         tiledMap.dispose();
         renderer.dispose();

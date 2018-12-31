@@ -25,7 +25,6 @@ public class MenuScreen implements Screen {
     public MenuScreen(TileBoard3 tileBoard3, Interpolation smooth){
         parent = tileBoard3;
         menuStage = new Stage(new ScreenViewport());
-//        Gdx.input.setInputProcessor(menuStage);
 
     }
 

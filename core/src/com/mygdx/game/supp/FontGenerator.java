@@ -39,43 +39,46 @@ public class FontGenerator {
 
     public static Label.LabelStyle textLabelStyle(){
 
-        Skin skin =new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Lato-Black.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Lato-Heavy.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 18;
-        parameter.borderWidth = 1;
+//      parameter.borderWidth = 1;
+        parameter.color = Color.GOLDENROD ;
+        parameter.shadowColor = Color.BLACK;
+
 //        if (CourseProperties.checkForOop()){
-            parameter.color = Color.GOLD;
-            parameter.shadowColor = Color.BLACK;
+//        parameter.color = Color.GOLDENROD ;
+//        parameter.shadowColor = Color.BLACK;
 //        }
 //        if (CourseProperties.checkForPbl()){
 //            parameter.color = Color.FOREST;
 //            parameter.shadowColor = Color.BLACK;
-//        }
-//        if (CourseProperties.checkForAlgebra()){
+//        }                                            // activate this to change color of question
+//        if (CourseProperties.checkForAlgebra()){      // according to the course if wanted
 //            parameter.color = Color.RED;
 //            parameter.shadowColor = Color.BLACK;
 //        }
 //        parameter.shadowOffsetX = 1;
 //        parameter.shadowOffsetY = 1;
 //        parameter.shadowColor = new Color(Color.BLACK);
-        BitmapFont myFont = generator.generateFont(parameter); // font size 24 pixels
+        BitmapFont myFont = generator.generateFont(parameter);
         generator.dispose();
 
         Label.LabelStyle questionLabelStyle = new Label.LabelStyle();
         questionLabelStyle.font = myFont;
-        questionLabelStyle.background = skin.getDrawable("textfield");//getting drawable text field from json
+
         return questionLabelStyle ;
     }
 
 
 // method for font to use for displaying statistics and answers
+
     public static BitmapFont fontForText(){
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Lato-Black.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 15;
+        parameter.size = 20;
 //        parameter.borderWidth = 1;
         parameter.color = Color.GOLDENROD;
 
@@ -85,6 +88,27 @@ public class FontGenerator {
         questionLabelStyle.font = myFont1;
 
         return myFont1 ;
+    }
+
+    public static Label.LabelStyle statsLabel(){
+
+        FreeTypeFontGenerator myGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Lato-Black.ttf"));
+        // creating new parameters to customise the font according to our need
+        FreeTypeFontGenerator.FreeTypeFontParameter settings = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+        settings.size = 20;
+        settings.borderWidth = 1;
+        settings.shadowColor = Color.BLACK;
+//        settings.color.add()
+
+
+        BitmapFont myFont = myGenerator.generateFont(settings);
+        myGenerator.dispose();
+
+        Label.LabelStyle statsLabelStyle = new Label.LabelStyle();
+        statsLabelStyle.font = myFont;
+
+        return statsLabelStyle ;
     }
 
 }

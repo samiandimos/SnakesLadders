@@ -31,14 +31,12 @@ public class Pawn {
 
     // Pawn constructor
     public Pawn(String playerName) {
-
         setName(playerName);
     }
 
 
     // Current tile number setter
     public void setTileNum(int tileNum) {
-
         this.tileNum = tileNum;
     }
 
@@ -176,20 +174,6 @@ public class Pawn {
         sequenceAction.addAction(Actions.delay(.3f, runPopup));
         pawn.addAction(sequenceAction);
 
-
-        // Debug code
-        /*if (sequenceAction.getActions().size == 0)
-        {
-            System.out.println("\nList is EMPTY\n");
-        }else{
-            System.out.printf("\nList NOT Empty: list size %d\n", sequenceAction.getActions().size);
-            sequenceAction.getActions().removeIndex(0);
-
-            for (Action i : sequenceAction.getActions())
-            {
-                System.out.print(i + " ");
-            }
-        }*/
 
     }
 }

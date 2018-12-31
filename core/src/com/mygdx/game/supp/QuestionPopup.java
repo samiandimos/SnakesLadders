@@ -14,6 +14,7 @@ import com.mygdx.game.views.PlayScreen;
 import static com.badlogic.gdx.math.MathUtils.random;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
+
 public class QuestionPopup {
 
 
@@ -28,11 +29,16 @@ public class QuestionPopup {
 
 
     private static Label questionDisplay(String name) {
-//        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         Label label = new Label(name,FontGenerator.textLabelStyle() );  // displays the questions much better then using a skin
         label.setWrap(true);
-        label.setFontScale(1.2f);
+        label.setFontScale(1.3f);
+        label.pack();
+//        label.setHeight(400);
+//        label.setWidth(800);
+
+
+
         return label;
     }
 
@@ -53,14 +59,13 @@ public class QuestionPopup {
 
 
 
-    public static void createQuestionWindow()
-    {
-        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+    public static void createQuestionWindow() {
+
         // Set a darker transparent background
         transparentBackground();
 
 
-        window = new Window("", skin);
+        window = new Window("", WindowStyle.boardWindowStyle());// better window display ...
         window.setName("Question Window");
 
         // Start by hiding the window (setting the alpha value zero)
@@ -68,9 +73,14 @@ public class QuestionPopup {
         window.setColor(1, 1, 1, 0);
         window.setResizable(true);
         window.setMovable(false);
-        window.setKeepWithinStage(true);
-//        window.row();
-//        window.pack();
+//        window.setModal(true);
+
+        window.setKeepWithinStage(false);
+        window.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        window.row();
+        window.pack();
+
         PlayScreen.playStage.addActor(window);
 
     }
@@ -83,7 +93,7 @@ public class QuestionPopup {
             QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randNr], PBLQuestions.pblAns[randNr], PBLQuestions.pblAns[randNr][PBLQuestions.pblRightAns[randNr]]);
 
 
-            window.add(questionDisplay(pbl.getQuestion())).prefWidth(800).pad(20);
+            window.add(questionDisplay(pbl.getQuestion())).prefWidth(600).pad(20);
             window.row();
 
             AnswerButtons.createButton(PBLQuestions.pblAns[randNr][0],pbl.getRightAnswer());
@@ -97,7 +107,7 @@ public class QuestionPopup {
         if (CourseProperties.checkForOop()) {
             QAStorage oop = new QAStorage(OOPQuestions.oopQues[randNr], OOPQuestions.oopAns[randNr], OOPQuestions.oopAns[randNr][OOPQuestions.oopRightAns[randNr]]);
 
-            window.add(questionDisplay(oop.getQuestion())).prefWidth(800).pad(20);
+            window.add(questionDisplay(oop.getQuestion())).prefWidth(600).pad(20);
             window.row();
 
             AnswerButtons.createButton(OOPQuestions.oopAns[randNr][0],oop.getRightAnswer());
@@ -111,7 +121,7 @@ public class QuestionPopup {
         if (CourseProperties.checkForAlgebra()) {
             QAStorage alg = new QAStorage(ALGQuestions.algQues[randNr], ALGQuestions.algAns[randNr], ALGQuestions.algAns[randNr][ALGQuestions.algRightAns[randNr]]);
 
-            window.add(questionDisplay(alg.getQuestion())).prefWidth(800).pad(20);
+            window.add(questionDisplay(alg.getQuestion())).prefWidth(600).pad(20);
             window.row();
 
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][0],alg.getRightAnswer());
@@ -120,7 +130,10 @@ public class QuestionPopup {
             AnswerButtons.createButton(ALGQuestions.algAns[randNr][3],alg.getRightAnswer());
         }
 
+
+        window.row();
         window.pack();
+        window.setTransform(true);
         window.setPosition((PlayScreen.mapW - window.getWidth()) / 2f, ((PlayScreen.mapH - window.getHeight()) / 2f) + 4);
         Gdx.input.setInputProcessor(PlayScreen.playStage);
         window.toFront();

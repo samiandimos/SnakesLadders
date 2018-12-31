@@ -136,19 +136,19 @@ public class PBLQuestions
 
             {"build a database with all your literature", "Formatting problems especially when you work with others","If you use a referencing tool, your format will be always be correct" , "All references will be included and you will not have too many"},//1
 
-
+                                //------------- 10quest ----------
 
             {"Using other’s work to back up your conclusion", "Using your own work", "using someone else’s work and presenting it as yours without stating the source", "Quoting fro other authors with mentioning the source of your quote"},//2
 
 
-            {"Factual info", "Use single words", "Artistic elements", "Take over a special wording from another author neither subjective evaluations nor characteristic formulations"},//3
+            {"Factual info", "Use single words", "Artistic elements", "Take over a special wording from another author\n neither subjective evaluations nor characteristic formulations"},//3
 
             { "Plagiarism", "Methodological work","Use of theory", "Documentation"},//0
 
             {"describe how they individually contribute to the understanding/analysis of the problem", "describes how you have organised your work ( process analysis )", "Describes the selection of methods, principles or theories for analysing the problem formulation", "Describes the flow of methods used in the project"},//1
 
 
-            {"Describes the element relevant for your work (relevant for the problem formulation)", "Describes existing knowledge related to the problem formulation","describes existing knowledge of existing art" , "Provides an overall l description of what is already researched and provide you with ideas on where you can contribute"},//2
+            {"Describes the element relevant for your work (relevant for the problem formulation)", "Describes existing knowledge related to the problem formulation","describes existing knowledge of existing art" , "Provides an overall l description of what is already researched\n and provide you with ideas on where you can contribute"},//2
 
 
             {"Describe the technical decisions and implementation process, provide examples of code", "Involves documentation of everything you have done when developing","Describe the design, layout, functionality etc","describes how you have organised your work ( process analysis )" },//3
@@ -164,6 +164,7 @@ public class PBLQuestions
 
             {"Formation", "Development", "Application", "Consumption"},//3
 
+                               //------------- 20 quest ----------
 
 
             { "Temptation", "Implementation","System maintenance", "System Design"},//0
@@ -178,11 +179,11 @@ public class PBLQuestions
 
 
 
-            {"System design", "Integrate the unit tested code and test it to make sure if it works as expected","Perform all the testing activities (Functional and non functional) to make sure that the system meets the requirements" , "Track your progress on testing through tools like traceability metrics, ALM…"},//0
+            {"System design", "Integrate the unit tested code and test it to make sure if it works as expected","Perform all the testing activities\nto make sure that the system meets the requirements" , "Track your progress on testing through tools like traceability metrics, ALM…"},//0
 
 
 
-            {"Perform all the testing activities (Functional and non functional) to make sure that the system meets the requirements","System design" ,"Integrate the unit tested code and test it to make sure if it works as expected"  , "Track your progress on testing through tools like traceability metrics, ALM…"},//1
+            {"Perform all the testing activities to make sure that the system meets the requirements","System design" ,"Integrate the unit tested code and test it to make sure if it works as expected"  , "Track your progress on testing through tools like traceability metrics, ALM…"},//1
 
 
             {"implementation", "Make sure that the application is up and running in the respective environment ", "In case user encounters and defect, make sure to note and  mark the issues faced", "In case any issue is  marked the updated code is deployed in the environment"},//0
@@ -209,7 +210,7 @@ public class PBLQuestions
             {"how true to life a problem is","how well the problem correlates with state standards" , "how easy a problem is to solve", "how many students are in a problem-solving group"},//1
 
 
-            {"Problem-based learning has teachers reflect on the problems in their classes", "Problem-based learning has students teach each other how to solve problems","Problem-based learning helps students learn content while solving complex and authentic problems" , "Problem-based learning has students solve many problems in rapid succession"},//2
+            {"Problem-based learning has teachers reflect on the problems in their classes", "Problem-based learning has students teach each other how to solve problems","Problem-based learning helps students learn content while \nsolving complex and authentic problems" , "Problem-based learning has students solve many problems in rapid succession"},//2
 
 
             {"one class period ", "three weeks","ten minutes", "two school years"},//3
@@ -230,7 +231,7 @@ public class PBLQuestions
             {"Student-directed", "School-directed", "Teacher-directed" , "Parent-directed"},//0
 
 
-            {"an education model led by teachers that uses memorisation and testing","an education model that poses a question and allows students to research answers" ,"an education model that relies on lectures and notes" , "an education model used only in schools"},//1
+            {"education model led by teachers that uses memorisation and testing","an education model that poses a question and allows students to research answers" ,"an education model that relies on lectures and notes" , "an education model used only in schools"},//1
 
 
             { "finale" ," cooperative experience","final product", "culminating project", },//2
@@ -261,8 +262,7 @@ public class PBLQuestions
     // Here each array cell represents the position of the correct answer inside the above Array Table pblAns
 
     // randomize the correct answer for each question
-    static int[]
-            pblRightAns ={ 0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,0,2,3,0, 2,3,0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,2,3,1,0};
+    static int[] pblRightAns ={ 0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,0,2,3,0, 2,3,0,1,2,3, 0,1,2,3, 0,1,2,3, 0,1,2,3,1,0};
 
 
 

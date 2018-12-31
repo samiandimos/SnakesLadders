@@ -2,26 +2,26 @@ package com.mygdx.game.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.TileBoard3;
-import com.mygdx.game.supp.Grades;
-import com.mygdx.game.supp.Pawn;
-import com.mygdx.game.supp.Score;
-import com.mygdx.game.supp.ScoreWindow;
+import com.mygdx.game.supp.*;
 
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
-import static com.mygdx.game.supp.Dice2.tileNum;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 
 public class FinishScreen implements Screen {
@@ -36,64 +36,74 @@ public class FinishScreen implements Screen {
 
         parent = tileBoard3;
         finishStage = new Stage();
-        backGroundTex =  new TextureRegionDrawable(new TextureRegion(new Texture("sky.png")));
+
+        backGroundTex =  new TextureRegionDrawable(new TextureRegion(new Texture("background.jpg")));
         backGround = new Image(backGroundTex);
         backGround.toBack();
         backGround.setFillParent(true); // to fill the screen with the backGround
+
+
+
 
     }
 
 
     @Override
     public void show() {
-
-
+        backGround.setFillParent(true); // to fill the screen with the backGround
         finishStage.addActor(backGround);
 
-            // display a grade sheet according to the score
-//        switch (PlayScreen.noOfPlayers) {
-//            case 1:
-            if (Score.plScore1 >= 80) {
-                finishStage.addActor(Grades.pl1GradeA());
-            }
+        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        Table table = new Table();
+        table.setBackground(backGroundTex);
+        table.setPosition(0,0 );
 
-            if (Score.plScore1 < 80 && Score.plScore1 > 50) {
-                finishStage.addActor(Grades.plGradeB());
-            }
+        final TextButton BACK_TO_MENU = new TextButton("BACK TO MENU",skin);
 
-            if (Score.plScore1 <= 50) {
-                finishStage.addActor(Grades.plGradeC());
-            }
-//            break;
-//
-//            case 2:
-//                if (Score.plScore1 >= 80) {
-//                    finishStage.addActor(Grades.pl1GradeA());
-//                }
-//
-//                if (Score.plScore1 < 80 && Score.plScore1 > 50) {
-//                    finishStage.addActor(Grades.plGradeB());
-//                }
-//
-//                if (Score.plScore1 <= 50) {
-//                    finishStage.addActor(Grades.plGradeC());
-//                }
-//
-//
-//                if (Score.plScore2 >= 80) {
-//                    finishStage.addActor(Grades.pl1GradeA());
-//                }
-//
-//                if (Score.plScore2 < 80 && Score.plScore2 > 50) {
-//                    finishStage.addActor(Grades.plGradeB());
-//                }
-//
-//                if (Score.plScore2 <= 50) {
-//                    finishStage.addActor(Grades.plGradeC());
-//                }
+//        table.row().pad(10,0,10,0);
+        table.add(BACK_TO_MENU).size(16     , 16).padLeft(10).padBottom(0);
+        table.scaleBy(.1f);
+//        table.setSize(32,32 );
+//        table.setFillParent(true);
+//        BACK_TO_MENU.scaleBy(.003f);
+//        BACK_TO_MENU.setSize(20,10 );
 
+
+
+
+        // display a grade sheet according to the score
+
+  // adding 2 actions in sequence, display the grade sheet for each player if yes,
+ //and then statistics for each player if  yes
+
+        finishStage.addAction(sequence(new RunnableAction() {
+            @Override
+            public void run() {
+//                BACK_TO_MENU.remove();
+                StatisticsDisplay.showStatsWindow();
+
+    }
+
+        }, Actions.delay(8f), (new RunnableAction() {
+            @Override
+            // action to remove the stats from the screen and add a button(BACK TO MENU)
+
+            public void run() {
+//                StatisticsDisplay.ClearStatsWindow();
+                BACK_TO_MENU.addAction(fadeIn(.8f));
+                finishStage.addActor(BACK_TO_MENU);
+            }
         }
+        )));
+// adding a button after delay
+        BACK_TO_MENU.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.changeScreen(TileBoard3.MENU,Interpolation.smooth);
+            }
+        });
 
+    }
 
     @Override
     public void render(float delta) {
@@ -101,15 +111,15 @@ public class FinishScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-        finishStage.addAction(Actions.after(Actions.delay(10f, new RunnableAction() {
+        finishStage.addAction(Actions.after(Actions.delay(20f, new RunnableAction() {
             @Override
             public void run() {
-                parent.changeScreen(TileBoard3.MENU,Interpolation.SwingOut.smooth);
+                parent.changeScreen(TileBoard3.ENDGAME,Interpolation.smooth);
 
             }
         })));
 
-
+        finishStage.act();
         update(delta);
         finishStage.draw();
     }
@@ -147,5 +157,6 @@ public class FinishScreen implements Screen {
 
         parent.dispose();
         finishStage.dispose();
+
     }
 }

@@ -18,7 +18,7 @@ public class Dice2
     public static int dice;
 
     private TileBoard3 parent;
-    private static Sound diceSound;
+
 
     // Creating an instance of the Class Pawn so to be able to use it's methods in a static context
 //    Pawn playingPawn = new Pawn();
@@ -26,9 +26,9 @@ public class Dice2
 
 
 
-    public static void rollAndMove(Pawn pawn, int newTileNum)
-    {
-        diceSound = Gdx.audio.newSound(Gdx.files.internal("audio/dice.mp3"));
+    public static void rollAndMove(Pawn pawn, int newTileNum) {
+
+        Sound diceSound = Gdx.audio.newSound(Gdx.files.internal("audio/dice.mp3"));
             diceSound.play();
 
             tileNum = newTileNum;
@@ -40,9 +40,9 @@ public class Dice2
             if (tileNum <= 100) {
                 // If contains special <<>>  Movement to special tile
                 if (playingPawn.checkTileForSpecial(tileNum)) {
-                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
+                targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
 
-//                  targetTileNum = tileNum; // uncomment to remove special tile for better testing
+//                  targetTileNum = tileNum; // uncomment to remove special tile for a faster testing
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
 
                     // Setting the new tile number and save it for the current player
@@ -65,7 +65,7 @@ public class Dice2
                     playingPawn.pawn.addAction(Actions.after(Actions.delay(.7f, new RunnableAction(){
                         @Override
                         public void run() {
-                            PlayScreen.parent.changeScreen(TileBoard3.FINISHGAME, Interpolation.fade);
+                            PlayScreen.parent.changeScreen(TileBoard3.FINISHGAME, Interpolation.smooth);
                             Pawn.resetPawn();
                             ScoreWindow.resetScoreTables();
                             PlayScreen.inputActivationState = PlayScreen.activeInputState;
@@ -80,16 +80,15 @@ public class Dice2
                 // QuestionPopup.showQuestionWindow() method, has been inserted as runnable action with a small delay
                 // This delay fixes the occasion where its nested method updateQuestionWindow(randNr) don't have the
                 // time to get and set the question and its answers inside the window
+
                 playingPawn.pawn.addAction(Actions.delay(.3f, new RunnableAction(){
+
                     @Override
                     public void run() {
-
                         QuestionPopup.showQuestionWindow();
-
                     }
                 }));
             }
-
             System.out.println(dice + "  " + tileNum);
     }
 }

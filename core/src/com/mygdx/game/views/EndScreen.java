@@ -133,7 +133,8 @@ public class EndScreen implements Screen {
 
     @Override
     public void dispose() {
-     endStage.dispose();
+
      parent.dispose();
+     endStage.dispose();
     }
 }

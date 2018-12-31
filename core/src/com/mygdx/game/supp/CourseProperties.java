@@ -16,6 +16,7 @@ public  class CourseProperties {
             return false;
     }
     public static boolean checkForOop(){
+
         MapProperties tilesProperties = getTileProperties(tileNum);
        boolean containOop = tilesProperties.containsKey("oop");
 

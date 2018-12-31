@@ -17,7 +17,7 @@ public class TextButtonStyle {
        TextButton.TextButtonStyle myTextButtonStyle = new TextButton.TextButtonStyle();
         myTextButtonStyle.font = FontGenerator.fontForText();         // feed it our font
         myTextButtonStyle.up =  skin.getDrawable("button");    // get drawable region for button, need to read
-                                                                   // json file and find it!!!
+                                                                         // json file and find it!!!
 
         return myTextButtonStyle;
     }

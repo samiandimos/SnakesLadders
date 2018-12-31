@@ -45,40 +45,50 @@ public class TileBoard3 extends Game {
 
                 if(loadingScreen == null) loadingScreen = new LoadingScreen(this,Interpolation.fade);
                 this.setScreen(loadingScreen);
-                Gdx.input.setInputProcessor(LoadingScreen.loadingStage);
                 LoadingScreen.loadingStage.act();
+                Gdx.input.setInputProcessor(LoadingScreen.loadingStage);
+                super.dispose();
+                System.gc();
                 break;
 
             case MENU:
 
                 if(menuScreen == null) menuScreen = new MenuScreen(this, Interpolation.fade);
                 this.setScreen(menuScreen);
-                Gdx.input.setInputProcessor(MenuScreen.menuStage);
                 MenuScreen.menuStage.act();
+                Gdx.input.setInputProcessor(MenuScreen.menuStage);
+                super.dispose();
+                System.gc();
                 break;
 
             case PLAYGAME:
 
                 if(playScreen == null) playScreen = new PlayScreen(this, Interpolation.fade);
                 this.setScreen(playScreen);
-                Gdx.input.setInputProcessor(PlayScreen.playStage);
                 PlayScreen.playStage.act();
+                Gdx.input.setInputProcessor(PlayScreen.playStage);
+                super.dispose();
+                System.gc();
                 break;
 
             case FINISHGAME:
 
                 if(finishScreen == null) finishScreen = new FinishScreen(this,Interpolation.SwingOut.smooth);
                 this.setScreen(finishScreen);
-                Gdx.input.setInputProcessor(FinishScreen.finishStage);
                 FinishScreen.finishStage.act();
+                Gdx.input.setInputProcessor(FinishScreen.finishStage);
+                super.dispose();
+                System.gc();
                 break;
 
             case ENDGAME:
 
                 if(endScreen == null) endScreen = new EndScreen(this,Interpolation.fade);
                 this.setScreen(endScreen);
-                Gdx.input.setInputProcessor(EndScreen.endStage);
                 EndScreen.endStage.act();
+                Gdx.input.setInputProcessor(EndScreen.endStage);
+                super.dispose();
+                System.gc();
                 break;
         }
     }
@@ -97,9 +107,9 @@ public class TileBoard3 extends Game {
     @Override
     public void dispose(){
 
-        if (screen != null){
-            super.dispose();}
 
+            super.dispose();
+            System.gc();
 //            this.getScreen().dispose();
 
 

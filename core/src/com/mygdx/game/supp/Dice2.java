@@ -34,7 +34,7 @@ public class Dice2
             tileNum = newTileNum;
             playingPawn = pawn;
 
-            dice = random.nextInt(1) + 1;
+            dice = random.nextInt(6) + 1;
             DiceDisplay.updateDiceImage(dice);
             tileNum += dice;
             if (tileNum <= 100) {

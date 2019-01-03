@@ -67,7 +67,7 @@ public class LoadingScreen implements Screen {
         Gdx.gl.glClearColor(.2f, 0.5f, 0.7f, 0.8f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        loadingStage.addAction(Actions.after(Actions.delay(.1f, new RunnableAction() {
+        loadingStage.addAction(Actions.after(Actions.delay(5f, new RunnableAction() {
             @Override
             public void run() {
                 parent.changeScreen(TileBoard3.MENU,Interpolation.circleIn);

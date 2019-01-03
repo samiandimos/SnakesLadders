@@ -23,7 +23,7 @@ public class Pawn {
     public static MapProperties tileProperties; // List with object properties
 
     public Image pawn;
-    private int tileNum = 0 ;
+    private int tileNum = 90 ;
     private String name = "";
     // Create an array of two positions to store the pawn instances
     public static ArrayList<Pawn> pawnList = new ArrayList<Pawn>(2);

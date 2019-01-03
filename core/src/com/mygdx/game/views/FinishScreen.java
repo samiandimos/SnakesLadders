@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
@@ -59,43 +58,11 @@ public class FinishScreen implements Screen {
         table.setPosition(0,0 );
 
         final TextButton BACK_TO_MENU = new TextButton("BACK TO MENU",skin);
-
-//        table.row().pad(10,0,10,0);
-        table.add(BACK_TO_MENU).size(16     , 16).padLeft(10).padBottom(0);
-        table.scaleBy(.1f);
-//        table.setSize(32,32 );
-//        table.setFillParent(true);
-//        BACK_TO_MENU.scaleBy(.003f);
-//        BACK_TO_MENU.setSize(20,10 );
+        table.add(BACK_TO_MENU);
 
 
 
-
-        // display a grade sheet according to the score
-
-  // adding 2 actions in sequence, display the grade sheet for each player if yes,
- //and then statistics for each player if  yes
-
-        finishStage.addAction(sequence(new RunnableAction() {
-            @Override
-            public void run() {
-//                BACK_TO_MENU.remove();
-                StatisticsDisplay.showStatsWindow();
-
-    }
-
-        }, Actions.delay(8f), (new RunnableAction() {
-            @Override
-            // action to remove the stats from the screen and add a button(BACK TO MENU)
-
-            public void run() {
-//                StatisticsDisplay.ClearStatsWindow();
-                BACK_TO_MENU.addAction(fadeIn(.8f));
-                finishStage.addActor(BACK_TO_MENU);
-            }
-        }
-        )));
-// adding a button after delay
+          // 2 actions in sequence
         BACK_TO_MENU.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -103,6 +70,24 @@ public class FinishScreen implements Screen {
             }
         });
 
+
+        finishStage.addAction(sequence(new RunnableAction() {
+            @Override
+            public void run() {
+                StatisticsDisplay.showStatsWindow();
+
+    }
+        }, Actions.delay(8f), (new RunnableAction() {
+            @Override
+            // action to remove the stats from the screen and add a button(BACK TO MENU)
+
+            public void run() {
+                BACK_TO_MENU.addAction(fadeIn(.8f));
+                finishStage.addActor(BACK_TO_MENU);
+                BACK_TO_MENU.setPosition(380,0 );
+            }
+        }
+        )));
     }
 
     @Override
@@ -114,7 +99,7 @@ public class FinishScreen implements Screen {
         finishStage.addAction(Actions.after(Actions.delay(20f, new RunnableAction() {
             @Override
             public void run() {
-                parent.changeScreen(TileBoard3.ENDGAME,Interpolation.smooth);
+                parent.changeScreen(TileBoard3.MENU,Interpolation.smooth);
 
             }
         })));

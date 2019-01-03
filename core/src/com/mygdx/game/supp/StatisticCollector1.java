@@ -1,7 +1,8 @@
 package com.mygdx.game.supp;
 
-import static com.mygdx.game.supp.Dice2.tileNum;
-
+/**class for setting and getting questions and answers and using them in AnswerButton class
+ * to increment right answers in general or for each course
+ * **/
 public class StatisticCollector1 {
 
 
@@ -32,7 +33,9 @@ public class StatisticCollector1 {
 //---------------------------------------- ALG  --------------------------------------------------------
 
     static int pl1AlgQuestionsCounter ;
-    public static void setPl1AlgQuestionsCounter(int pl1AlgQuestionsCounter) {
+    public static void setPl1AlgQuestionsCounter(int pl1AlgQuestionsCounter, boolean checkForAlgebra ) {
+
+         if (checkForAlgebra == CourseProperties.checkForAlgebra())
             StatisticCollector1.pl1AlgQuestionsCounter += pl1AlgQuestionsCounter;
     }
 
@@ -42,7 +45,9 @@ public class StatisticCollector1 {
 //---------------------------------------- OOP  --------------------------------------------------------
 
     static int pl1OopQuestionsCounter ;
-    public static void setPl1OopQuestionsCounter(int pl1OopQuestionsCounter) {
+    public static void setPl1OopQuestionsCounter(int pl1OopQuestionsCounter, boolean checkForOop) {
+
+        if (checkForOop == CourseProperties.checkForOop())
             StatisticCollector1.pl1OopQuestionsCounter += pl1OopQuestionsCounter;
     }
 
@@ -53,7 +58,9 @@ public class StatisticCollector1 {
 
     static int pl1PblQuestionsCounter ;
 
-    public static void setPl1PblQuestionsCounter(int pl1PblQuestionsCounter) {
+    public static void setPl1PblQuestionsCounter(int pl1PblQuestionsCounter, boolean checkForPbl) {
+
+        if (checkForPbl == CourseProperties.checkForPbl())
             StatisticCollector1.pl1PblQuestionsCounter += pl1PblQuestionsCounter;
     }
 
@@ -65,7 +72,9 @@ public class StatisticCollector1 {
 
 
     static int AlgRightP1;
-    public static void setAlgRightP1(int algRightP1) {
+    public static void setAlgRightP1(int algRightP1, boolean checkForAlgebra) {
+
+        if (checkForAlgebra == CourseProperties.checkForAlgebra())
             AlgRightP1 += algRightP1;
     }
 
@@ -76,8 +85,10 @@ public class StatisticCollector1 {
 //---------------------------------------- OOP  --------------------------------------------------------
 
     static int oopRightP1;
-    public static void setOopRightP1(int oopRightP1) {
-          StatisticCollector1.oopRightP1 = +oopRightP1;
+    public static void setOopRightP1(int oopRightP1, boolean checkForOop) {
+
+        if (checkForOop == CourseProperties.checkForOop())
+            StatisticCollector1.oopRightP1 = +oopRightP1;
     }
 
 
@@ -87,8 +98,10 @@ public class StatisticCollector1 {
 
 //---------------------------------------- PBL  --------------------------------------------------------
    static int pblRightP1;
-    public static void setPblRightP1(int pblRightP1) {
-           StatisticCollector1.pblRightP1 += pblRightP1;
+    public static void setPblRightP1(int pblRightP1, boolean checkForPbl) {
+
+        if (checkForPbl == CourseProperties.checkForPbl())
+            StatisticCollector1.pblRightP1 += pblRightP1;
     }
 
     public static int getPblRightP1() {
@@ -111,26 +124,37 @@ public class StatisticCollector1 {
     }
 
 
+//---------------------------------------- counter of questions for player2----------------------------------------
+
+    static int pl2QuestionCounter ;
+
+    public static void setPl2QuestionCounter(int pl2QuestionCounter) {
+        StatisticCollector1.pl2QuestionCounter += pl2QuestionCounter;
+    }
+
+    public static int getPl2QuestionCounter() {
+        return pl2QuestionCounter;
+    }
+
 //---------------------------------------- counter of Answers for each  course ----------------------------------------
-
-
-
-    //---------------------------------------------------=====================--------------------------------------
-    //---------------------------------------- player2  --------------------------------------
    private static int pl2AlgQuestionsCounter ;
    private static int pl2OopQuestionsCounter ;
    private static int pl2PblQuestionsCounter ;
 
 
-    public static void setPl2AlgQuestionsCounter(int pl2AlgQuestionsCounter) {
-        StatisticCollector1.pl2AlgQuestionsCounter += pl2AlgQuestionsCounter;
+    public static void setPl2AlgQuestionsCounter(int pl2AlgQuestionsCounter,boolean checkForAlgebra) {
+
+        if (checkForAlgebra == CourseProperties.checkForAlgebra())
+            StatisticCollector1.pl2AlgQuestionsCounter += pl2AlgQuestionsCounter;
     }
     public static int getPl2AlgQuestionsCounter() {
         return pl2AlgQuestionsCounter;
     }
 
-    public static void setPl2OopQuestionsCounter(int pl2OopQuestionsCounter) {
-        StatisticCollector1.pl2OopQuestionsCounter += pl2OopQuestionsCounter;
+    public static void setPl2OopQuestionsCounter(int pl2OopQuestionsCounter, boolean checkForOop) {
+
+        if (checkForOop == CourseProperties.checkForOop())
+            StatisticCollector1.pl2OopQuestionsCounter += pl2OopQuestionsCounter;
     }
 
     public static int getPl2OopQuestionsCounter() {
@@ -138,8 +162,10 @@ public class StatisticCollector1 {
     }
 
 
-    public static void setPl2PblQuestionsCounter(int pl2PblQuestionsCounter) {
-        StatisticCollector1.pl2PblQuestionsCounter += pl2PblQuestionsCounter;
+    public static void setPl2PblQuestionsCounter(int pl2PblQuestionsCounter, boolean checkForPbl) {
+
+        if (checkForPbl == CourseProperties.checkForPbl())
+            StatisticCollector1.pl2PblQuestionsCounter += pl2PblQuestionsCounter;
     }
 
     public static int getPl2PblQuestionsCounter() {
@@ -153,24 +179,30 @@ public class StatisticCollector1 {
 
 
 
-    public static void setAlgRightP2(int algRightP2) {
-        AlgRightP2 += algRightP2;
+    public static void setAlgRightP2(int algRightP2 , boolean checkForAlgebra) {
+
+        if (checkForAlgebra == CourseProperties.checkForAlgebra())
+            AlgRightP2 += algRightP2;
     }
 
     public static int getAlgRightP2() {
         return AlgRightP2;
     }
 
-    public static void setOopRightP2(int oopRightP2) {
-        StatisticCollector1.oopRightP2 += oopRightP2;
+    public static void setOopRightP2(int oopRightP2 , boolean checkForOop) {
+
+        if (checkForOop == CourseProperties.checkForOop())
+            StatisticCollector1.oopRightP2 += oopRightP2;
     }
 
     public static int getOopRightP2() {
         return oopRightP2;
     }
 
-    public static void setPblRightP2(int pblRightP2) {
-        StatisticCollector1.pblRightP2 += pblRightP2;
+    public static void setPblRightP2(int pblRightP2, boolean checkForPbl) {
+
+        if (checkForPbl == CourseProperties.checkForPbl())
+            StatisticCollector1.pblRightP2 += pblRightP2;
     }
 
 
@@ -178,123 +210,6 @@ public class StatisticCollector1 {
         return pblRightP2;
     }
 
-
-
-
-    static int pl2QuestionCounter ;
-    public static void setPl2QuestionCounter(int pl2QuestionCounter) {
-        do {
-            StatisticCollector1.pl2QuestionCounter += pl2QuestionCounter;
-        }while (tileNum<100);
-    }
-    public static int getPl2QuestionCounter() {
-        return pl2QuestionCounter;
-    }
-
-
-//   ----------------------------------------
-
-//    static int  pl1QuestionSum ;
-//    public static void pl1QuestionSum() {
-//        do {
-//            pl1QuestionSum += getPl1QuestionCounter();
-//
-//        } while (tileNum < 100);
-//    }
-//    public static int getPl1QuestionSum(){
-//        return pl1QuestionSum ;
-//    }
-//
-//
-//    static int  pl1AnswerSum ;
-//    public static void pl1AnswerSum(){
-//        do {
-//            pl1AnswerSum += getAnswerRightP1();
-//
-//        }while (tileNum<100);}
-//
-//    public static int getPl1AnswerSum(){
-//        return pl1AnswerSum ;
-//    }
-//
-//    static int pl1AlgQuesSum ;
-//    public static void pl1AlgQuesSum(){
-//        do {
-//            pl1AlgQuesSum += getPl1AlgQuestionsCounter() ;
-//        }while (tileNum<100);}
-//
-//    public static int getPl1AlgQuesSum(){
-//        return pl1AlgQuesSum ;
-//    }
-//
-//
-//    static int pl1AlgAnswerSum ;
-//    public static void pl1AlgAnswerSum(){
-//        do {
-//            pl1AlgAnswerSum += getAlgRightP1() ;
-//        }while (tileNum<100);}
-//
-//    public static int getPl1AlgAnswerSum(){
-//        return pl1AlgAnswerSum ;
-//    }
-//
-//
-//    static int pl1OopQuesSum ;
-//    public static void pl1OopQuesSum(){
-//        do {
-//            pl1OopQuesSum += getPl1OopQuestionsCounter() ;
-//        }while (tileNum<100);}
-//
-//    public static int getPl1OopQuesSum(){
-//        return pl1OopQuesSum ;
-//    }
-//
-//    static int pl1OopAnswerSum ;
-//    public static void pl1OopAnswerSum(){
-//        do {
-//            pl1OopAnswerSum += getOopRightP1() ;
-//        }while (tileNum<100);}
-//
-//    public static int getPl1OopAnswerSum(){
-//        return pl1OopAnswerSum ;
-//    }
-//
-//    static int pl1PblQuesSum ;
-//    public static void pl1PblQuesSum(){
-//        do {
-//            pl1PblQuesSum += getPl1PblQuestionsCounter() ;
-//        }while (tileNum<100);}
-//
-//    public static int getPl1PblQuesSum(){
-//        return pl1PblQuesSum ;
-//    }
-//
-//    static int pl1PblAnswerSum ;
-//    public static void pl1PblAnswerSum(){
-//        do {
-//            pl1PblAnswerSum += getPblRightP1() ;
-//        }while (tileNum<100);}
-//
-//    public static int getPl1PblAnswerSum(){
-//        return pl1PblAnswerSum ;
-//    }
-
-
-
-    //---------------------------------------- player2  --------------------------------------
-//    static int pl2QuestionSum ;
-//    public static int pl2QuestionSum(){
-//        do {
-//            pl2QuestionSum += getPl2QuestionCounter() ;
-//
-//        }while (tileNum<100);
-//        return pl2QuestionSum ;
-//    }
-
-
-
-
-    //---------------------------------------------------=====================--------------------------------------
 
 
 }

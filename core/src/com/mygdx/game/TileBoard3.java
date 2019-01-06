@@ -37,17 +37,16 @@ public class TileBoard3 extends Game {
 
     // noOfPlayers variable updated inside menuScreen
 
-    public static int noOfPlayers;
+//    public static int noOfPlayers;
     public void changeScreen(int screen, Interpolation smooth){
-        switch(screen){
 
+        switch(screen){
             case LOADINGSCREEN:
 
                 if(loadingScreen == null) loadingScreen = new LoadingScreen(this,Interpolation.smooth);
                 this.setScreen(loadingScreen);
                 Gdx.input.setInputProcessor(LoadingScreen.loadingStage);
                 LoadingScreen.loadingStage.act();
-
                 break;
 
             case MENU:
@@ -56,7 +55,6 @@ public class TileBoard3 extends Game {
                 this.setScreen(menuScreen);
                 Gdx.input.setInputProcessor(MenuScreen.menuStage);
                 MenuScreen.menuStage.act();
-
                 break;
 
             case PLAYGAME:
@@ -65,7 +63,6 @@ public class TileBoard3 extends Game {
                 this.setScreen(playScreen);
                 Gdx.input.setInputProcessor(PlayScreen.playStage);
                 PlayScreen.playStage.act();
-
                 break;
 
             case FINISHGAME:
@@ -74,7 +71,6 @@ public class TileBoard3 extends Game {
                 this.setScreen(finishScreen);
                 Gdx.input.setInputProcessor(FinishScreen.finishStage);
                 FinishScreen.finishStage.act();
-
                 break;
 
             case ENDGAME:
@@ -83,7 +79,6 @@ public class TileBoard3 extends Game {
                 this.setScreen(endScreen);
                 Gdx.input.setInputProcessor(EndScreen.endStage);
                 EndScreen.endStage.act();
-
                 break;
         }
     }
@@ -102,10 +97,11 @@ public class TileBoard3 extends Game {
     @Override
     public void dispose(){
 
-        if (screen != null){
-            super.dispose();}
 
-//            this.getScreen().dispose();
+            super.dispose();
+            System.gc();
+
+
 
 
     }

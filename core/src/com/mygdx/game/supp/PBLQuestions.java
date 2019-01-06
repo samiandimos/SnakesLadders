@@ -178,11 +178,11 @@ public class PBLQuestions
 
 
 
-            {"System design", "Integrate the unit tested code and test it to make sure if it works as expected","Perform all the testing activities  to make sure that the system meets the requirements" , "Track your progress on testing through tools like traceability metrics, ALM…"},//0
+            {"System design", "Integrate the unit tested code and test it\n to make sure if it works as expected","Perform all the testing activities  to make sure that the system meets the requirements" , "Track your progress on testing through tools like traceability metrics, ALM…"},//0
 
 
 
-            {"Perform all the testing activities (Functional and non functional) to make sure that the system meets the requirements","System design" ,"Integrate the unit tested code and test it to make sure if it works as expected"  , "Track your progress on testing through tools like traceability metrics, ALM…"},//1
+            {"Perform all the testing activities (Functional and non functional)\n to make sure that the system meets the requirements","System design" ,"Integrate the unit tested code and test it to make sure if it works as expected"  , "Track your progress on testing through tools like traceability metrics, ALM…"},//1
 
 
             {"implementation", "Make sure that the application is up and running in the respective environment ", "In case user encounters and defect, make sure to note and  mark the issues faced", "In case any issue is  marked the updated code is deployed in the environment"},//0

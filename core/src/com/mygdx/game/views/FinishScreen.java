@@ -3,6 +3,7 @@ package com.mygdx.game.views;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
@@ -16,6 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
 
@@ -27,21 +32,20 @@ public class FinishScreen implements Screen {
 
     private TileBoard3 parent;
     public static Stage finishStage;
-    private TextureRegionDrawable backGroundTex;
+    public TextureRegionDrawable backGroundTex;
     private Image backGround ;
+    private OrthographicCamera camera = new OrthographicCamera();
+    private ScreenViewport viewport = new ScreenViewport() ;
 
 
     public FinishScreen(TileBoard3 tileBoard3, Interpolation smooth) {
 
         parent = tileBoard3;
-        finishStage = new Stage();
-
+        finishStage = new Stage(viewport);
         backGroundTex =  new TextureRegionDrawable(new TextureRegion(new Texture("background.jpg")));
         backGround = new Image(backGroundTex);
         backGround.toBack();
         backGround.setFillParent(true); // to fill the screen with the backGround
-
-
 
 
     }
@@ -49,6 +53,9 @@ public class FinishScreen implements Screen {
 
     @Override
     public void show() {
+        camera.setToOrtho(false,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        camera.update();
+
         backGround.setFillParent(true); // to fill the screen with the backGround
         finishStage.addActor(backGround);
 
@@ -58,11 +65,9 @@ public class FinishScreen implements Screen {
         table.setPosition(0,0 );
 
         final TextButton BACK_TO_MENU = new TextButton("BACK TO MENU",skin);
-        table.add(BACK_TO_MENU);
+        table.add(BACK_TO_MENU).fillX().uniformX();
 
 
-
-          // 2 actions in sequence
         BACK_TO_MENU.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -70,6 +75,7 @@ public class FinishScreen implements Screen {
             }
         });
 
+        // 2 actions in sequence
 
         finishStage.addAction(sequence(new RunnableAction() {
             @Override
@@ -82,8 +88,8 @@ public class FinishScreen implements Screen {
             // action to remove the stats from the screen and add a button(BACK TO MENU)
 
             public void run() {
-                BACK_TO_MENU.addAction(fadeIn(.8f));
                 finishStage.addActor(BACK_TO_MENU);
+                BACK_TO_MENU.addAction(fadeIn(.8f));
                 BACK_TO_MENU.setPosition(380,0 );
             }
         }
@@ -92,11 +98,17 @@ public class FinishScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        camera.update();
+        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport.apply(true);
 
 
-        finishStage.addAction(Actions.after(Actions.delay(20f, new RunnableAction() {
+
+        finishStage.addAction(Actions.after(Actions.delay(30f, new RunnableAction() {
             @Override
             public void run() {
                 parent.changeScreen(TileBoard3.MENU,Interpolation.smooth);
@@ -105,8 +117,8 @@ public class FinishScreen implements Screen {
         })));
 
         finishStage.act();
-        update(delta);
         finishStage.draw();
+        update(delta);
     }
 
 
@@ -119,7 +131,6 @@ public class FinishScreen implements Screen {
     public void resize(int width, int height) {
 
         finishStage.getViewport().update(width,height,true);
-
     }
 
     @Override
@@ -142,6 +153,9 @@ public class FinishScreen implements Screen {
 
         parent.dispose();
         finishStage.dispose();
+
+
+
 
     }
 }

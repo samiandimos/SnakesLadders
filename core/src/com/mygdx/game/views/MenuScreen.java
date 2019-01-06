@@ -32,14 +32,13 @@ public class MenuScreen implements Screen {
     @Override
     public void show() {
 
-        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        Table table = new Table();
-        table.setFillParent(true);
+         Table table = new Table();
+         table.setFillParent(true);
          TextButton onePlayer = new TextButton("One Player",skin);
          TextButton twoPlayers = new TextButton("Two players", skin);
-
-        TextButton exit = new TextButton("Exit",skin);
+         TextButton exit = new TextButton("Exit",skin);
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background.jpg"))));
 

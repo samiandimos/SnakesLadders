@@ -11,12 +11,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class WindowStyle {
 
+    public  static Texture backgroundTexture = new Texture(Gdx.files.internal("frame1.png"));
 
 // constructor to create my own windowStyle  and return it for further use
 
     public static Window.WindowStyle boardWindowStyle() {
 
-        Texture backgroundTexture=new Texture(Gdx.files.internal("frame1.png"));
+
         Drawable tableBackground=new TextureRegionDrawable(new TextureRegion(backgroundTexture));
 
 

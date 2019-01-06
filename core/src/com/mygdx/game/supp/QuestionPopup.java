@@ -1,16 +1,12 @@
 package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
-
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.views.PlayScreen;
-
-
 import static com.badlogic.gdx.math.MathUtils.random;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
@@ -26,19 +22,12 @@ public class QuestionPopup {
         return window;
     }
 
-
-
     private static Label questionDisplay(String name) {
 
         Label label = new Label(name,FontGenerator.textLabelStyle() );  // displays the questions much better then using a skin
         label.setWrap(true);
         label.setFontScale(1.3f);
         label.pack();
-//        label.setHeight(400);
-//        label.setWidth(800);
-
-
-
         return label;
     }
 
@@ -73,9 +62,7 @@ public class QuestionPopup {
         window.setColor(1, 1, 1, 0);
         window.setResizable(true);
         window.setMovable(false);
-//        window.setModal(true);
-
-        window.setKeepWithinStage(false);
+        window.setKeepWithinStage(true);
         window.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         window.row();

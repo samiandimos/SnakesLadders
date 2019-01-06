@@ -10,8 +10,7 @@ import com.mygdx.game.views.PlayScreen;
 import static com.mygdx.game.views.PlayScreen.playStage;
 
 public class DiceDisplay {
-//    private static int dicePosX = 256;
-//    private static int dicePosY = 512;
+
     private static int dicePosX = 265 * 4;
     private static int dicePosY = 240;
     public static Texture tex;
@@ -33,9 +32,9 @@ public class DiceDisplay {
 
     }
 
-    private static void removeDiceImage()
-    {
+    private static void removeDiceImage() {
         diceImage.remove();
+
     }
 
 

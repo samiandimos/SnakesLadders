@@ -21,6 +21,7 @@ public class Pawn {
     private static MapObjects tileList; // List of objects
     public static MapObject tile; // An object from the list
     public static MapProperties tileProperties; // List with object properties
+    public static Sound question = Gdx.audio.newSound(Gdx.files.internal("audio/question.mp3"));
 
     public Image pawn;
     private int tileNum = 0 ;
@@ -164,7 +165,7 @@ public class Pawn {
         RunnableAction runPopup = new RunnableAction() {
             @Override
             public void run() {
-                Sound question = Gdx.audio.newSound(Gdx.files.internal("audio/question.mp3"));
+
                 QuestionPopup.showQuestionWindow();
              if (finalTileNum <100)
                  question.play();

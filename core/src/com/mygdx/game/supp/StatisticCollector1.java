@@ -166,10 +166,11 @@ public class StatisticCollector1 {
 
         if (checkForPbl == CourseProperties.checkForPbl())
             StatisticCollector1.pl2PblQuestionsCounter += pl2PblQuestionsCounter;
+
     }
 
     public static int getPl2PblQuestionsCounter() {
-        return pl2PblQuestionsCounter;
+            return pl2PblQuestionsCounter;
     }
     static int AlgRightP2;
 

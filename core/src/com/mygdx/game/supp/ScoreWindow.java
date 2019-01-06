@@ -87,12 +87,10 @@ public class ScoreWindow {
         scoreTable2.row();
         scoreTable2.add(scoreLabel2).padBottom(10);
         scoreTable2.setColor(1,1,1,0);
-//        scoreTable2.debug();
         scoreTable2.setZIndex(4000);
         scoreTable2.setName("scoreTable2");
 
         PlayScreen.playStage.addActor(scoreTable2);
-//        Gdx.input.setInputProcessor(PlayScreen.playStage);
     }
 
     // Setting which score window will be over the transparency depending on the active player
@@ -148,6 +146,7 @@ public class ScoreWindow {
         Score.setPlScore1(0);
 
         if (PlayScreen.noOfPlayers == 2) {
+            Score.setPlScore1(0);
             Score.setPlScore2(0);
         }
     }

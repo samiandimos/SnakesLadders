@@ -11,6 +11,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
@@ -29,6 +32,7 @@ public class PlayScreen implements Screen {
     public static Pawn player1;
     public static Pawn player2;
     public static int noOfPlayers;
+    public ImageButton sound ;
 
     // Dimensions of TiledMap
     public static int mapW = 1408;
@@ -36,15 +40,30 @@ public class PlayScreen implements Screen {
 
 
 
-    public PlayScreen(TileBoard3 tileBoard3, Interpolation smooth){parent = tileBoard3;}
+    public PlayScreen(TileBoard3 tileBoard3, Interpolation smooth){
+        parent = tileBoard3;}
 
 
     @Override
-    public void show()
-    {
+    public void show() {
+
         playStage = new Stage(viewport);
         camera.setToOrtho(false, mapW, mapH);
         camera.update();
+//        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+//        Table table = new Table() ;
+//         sound = new ImageButton(skin.getDrawable("sound"));
+//        table.add(sound);
+//        sound.setPosition(660, 950);
+//        sound.setZIndex(4000);
+//        sound.scaleBy(1.5f);
+//        playStage.addActor(sound);
+//          sound.toFront();
+
+
+
+
+
 
 
         // Setting inside the playStage the players pawns and their score windows
@@ -179,6 +198,10 @@ public class PlayScreen implements Screen {
         tiledMap.dispose();
         renderer.dispose();
         DiceDisplay.tex.dispose();
+        AnswerButtons.wrong.dispose();
+        AnswerButtons.correct.dispose();
+        Pawn.question.dispose();
+        WindowStyle.backgroundTexture.dispose();
 
 
     }

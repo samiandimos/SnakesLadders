@@ -21,13 +21,9 @@ public class Dice2
     private static Sound diceSound;
 
     // Creating an instance of the Class Pawn so to be able to use it's methods in a static context
-//    Pawn playingPawn = new Pawn();
     public static Pawn playingPawn;
 
-
-
-    public static void rollAndMove(Pawn pawn, int newTileNum)
-    {
+    public static void rollAndMove(Pawn pawn, int newTileNum) {
         diceSound = Gdx.audio.newSound(Gdx.files.internal("audio/dice.mp3"));
             diceSound.play();
 
@@ -39,10 +35,10 @@ public class Dice2
             tileNum += dice;
             if (tileNum <= 100) {
                 // If contains special <<>>  Movement to special tile
+                
                 if (playingPawn.checkTileForSpecial(tileNum)) {
-//                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
-
-                  targetTileNum = tileNum; // uncomment to remove special tile for better testing
+                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
+//                  targetTileNum = tileNum; // uncomment to remove special tile for better testing
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
 
                     // Setting the new tile number and save it for the current player
@@ -65,10 +61,12 @@ public class Dice2
                     playingPawn.pawn.addAction(Actions.after(Actions.delay(.7f, new RunnableAction(){
                         @Override
                         public void run() {
-                            PlayScreen.parent.changeScreen(TileBoard3.FINISHGAME, Interpolation.fade);
+                            PlayScreen.parent.changeScreen(TileBoard3.FINISHGAME, Interpolation.smooth);
                             Pawn.resetPawn();
                             ScoreWindow.resetScoreTables();
                             PlayScreen.inputActivationState = PlayScreen.activeInputState;
+                            System.gc();
+
                         }
                     })));
 

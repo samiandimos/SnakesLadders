@@ -10,8 +10,7 @@ import com.mygdx.game.views.PlayScreen;
 
 import java.util.Random;
 
-public class Dice2
-{
+public class Dice2 {
    public static int tileNum;
     private static int targetTileNum;
     private static Random random = new Random();
@@ -30,7 +29,7 @@ public class Dice2
             tileNum = newTileNum;
             playingPawn = pawn;
 
-            dice = random.nextInt(6) + 1;
+            dice = random.nextInt(1) + 1;
             DiceDisplay.updateDiceImage(dice);
             tileNum += dice;
             if (tileNum <= 100) {
@@ -62,6 +61,7 @@ public class Dice2
                         @Override
                         public void run() {
                             PlayScreen.parent.changeScreen(TileBoard3.FINISHGAME, Interpolation.smooth);
+                            QuestionPopup.getWindow().remove();
                             Pawn.resetPawn();
                             ScoreWindow.resetScoreTables();
                             PlayScreen.inputActivationState = PlayScreen.activeInputState;

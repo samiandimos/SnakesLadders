@@ -1,15 +1,19 @@
 package com.mygdx.game.views;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.TileBoard3;
@@ -20,6 +24,15 @@ import com.mygdx.game.supp.Pawn;
 public class MenuScreen implements Screen {
     public static Stage menuStage;
     private TileBoard3 parent;
+    private Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+    private Skin skin1 = new Skin(Gdx.files.internal("skin/uiskin.json"));
+    private Texture tex = new Texture("background.jpg");
+
+    private Sound MUSIC = Gdx.audio.newSound(Gdx.files.internal("audio/puzzle.mp3"));
+    private Texture volumeTex = new Texture("volume.png");
+    private Texture volumeTexMute = new Texture("mute.png");
+    private Drawable drawableVolume = new TextureRegionDrawable(new TextureRegion(volumeTex));
+    private Drawable drawableVolumeMute = new TextureRegionDrawable(new TextureRegion(volumeTexMute));
 
 
     public MenuScreen(TileBoard3 tileBoard3, Interpolation smooth){
@@ -32,21 +45,25 @@ public class MenuScreen implements Screen {
     @Override
     public void show() {
 
-         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+
 
          Table table = new Table();
          table.setFillParent(true);
          TextButton onePlayer = new TextButton("One Player",skin);
          TextButton twoPlayers = new TextButton("Two players", skin);
          TextButton exit = new TextButton("Exit",skin);
+         final ImageButton music = new ImageButton(drawableVolume,drawableVolume,drawableVolumeMute);//giving 3 images to the button to be able to                                                                                                          //switch between when button is clicked
+         table.setBackground(new TextureRegionDrawable(new TextureRegion(tex)));
+         table.add(onePlayer).fillX().uniformX();
+         table.row().pad(10,0,10,0);
+         table.add(twoPlayers).fillX().uniformX();
+         table.row().pad(10,0,10,0);
+         table.add(exit).fillX().uniformX();
+         table.row().pad(10,0,10,0);
+         table.add(music).fillX().uniformX();
+         table.row().pad(10,0,10,0);
+         table.pack();
 
-        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background.jpg"))));
-
-        table.add(onePlayer).fillX().uniformX();
-        table.row().pad(10,0,10,0);
-        table.add(twoPlayers).fillX().uniformX();
-        table.row().pad(10,0,10,0);
-        table.add(exit).fillX().uniformX();
 
 
         exit.addListener(new ChangeListener() {
@@ -74,6 +91,26 @@ public class MenuScreen implements Screen {
             }
         });
         menuStage.addActor(table);
+
+
+
+        MUSIC.play();
+        music.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+// if the button is checked, set to true and it will switch the image to muted
+
+                if (music.isChecked()){
+                    music.setChecked(true);
+                    MUSIC.stop();
+                }
+                   else
+                       music.setChecked(false);
+                       MUSIC.resume();
+
+            }
+        });
 
     }
 
@@ -111,5 +148,11 @@ public class MenuScreen implements Screen {
     public void dispose() {
         menuStage.dispose();
         parent.dispose();
+        skin.dispose();
+        skin1.dispose();
+        tex.dispose();
+        MUSIC.dispose();
+        volumeTex.dispose();
+        volumeTexMute.dispose();
     }
 }

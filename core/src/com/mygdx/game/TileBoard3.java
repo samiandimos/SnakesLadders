@@ -37,8 +37,7 @@ public class TileBoard3 extends Game {
 
     // noOfPlayers variable updated inside menuScreen
 
-//    public static int noOfPlayers;
-    public void changeScreen(int screen, Interpolation smooth){
+    public void changeScreen(int screen, Interpolation interpolation){
 
         switch(screen){
             case LOADINGSCREEN:
@@ -89,17 +88,21 @@ public class TileBoard3 extends Game {
         super.render();
 
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-
             Gdx.app.exit();
         }
     }
 
     @Override
     public void dispose(){
+        super.dispose();
+
+            if (this.getScreen() == null){
+                System.gc();
+                this.getScreen().dispose();
+                super.dispose();
+            }
 
 
-            super.dispose();
-            System.gc();
 
 
 

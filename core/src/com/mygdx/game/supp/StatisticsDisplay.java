@@ -168,13 +168,13 @@ public class StatisticsDisplay {
         switch (PlayScreen.noOfPlayers){
             case 1:
                 CreatePlayer1StatsWindow();
-                StatisticsDisplay.statsWindow1.setPosition(380, 150);
+                StatisticsDisplay.statsWindow1.setPosition(490, 150);
                 break;
             case 2 :
                 CreatePlayer1StatsWindow();
                 StatisticsDisplay.statsWindow1.setPosition(0, 150);
                 CreatePlayer2StatsWindow();
-                StatisticsDisplay.statsWindow2.setPosition(800, 150);
+                StatisticsDisplay.statsWindow2.setPosition(1000, 150);
                 break;
         }
 

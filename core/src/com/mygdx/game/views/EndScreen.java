@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,8 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.TileBoard3;
+
+import java.util.logging.MemoryHandler;
 
 public class EndScreen implements Screen {
 
@@ -23,6 +27,8 @@ public class EndScreen implements Screen {
     private TileBoard3 parent;
     private Image bravo ;
     private Sound cheering ;
+    private Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+    private Texture tex = new Texture("background.jpg");
 
 
 
@@ -38,10 +44,10 @@ public class EndScreen implements Screen {
     @Override
     public void show() {
 
-        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+
         Table table  = new Table();
         table.setFillParent(true);
-
+        table.setBackground(new TextureRegionDrawable(new TextureRegion(tex)));
         TextButton mainMenu = new TextButton("Main Menu",skin);
         TextButton exit = new TextButton("Exit",skin);
         table.add(mainMenu).fillX().uniformX();
@@ -53,7 +59,9 @@ public class EndScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-              parent.changeScreen(TileBoard3.MENU,Interpolation.fade);
+                parent.changeScreen(TileBoard3.MENU,Interpolation.fade);
+                System.gc();
+
 
             }
         });
@@ -64,31 +72,6 @@ public class EndScreen implements Screen {
             Gdx.app.exit();
             }
         });
-
-
-
-
-
-
-
-
-
-//        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("passed.jpg"))));
-
-
-
-
-
-
-
-
-//        endStage.addAction(Actions.after(Actions.delay(4f, new RunnableAction() {
-//            @Override
-//            public void run() {
-//                parent.changeScreen(TileBoard3.MENU);
-//            }
-//        })));
-
 
 
     }
@@ -136,5 +119,6 @@ public class EndScreen implements Screen {
 
      parent.dispose();
      endStage.dispose();
+     skin.dispose();
     }
 }

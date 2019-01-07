@@ -16,7 +16,7 @@ public class QuestionPopup {
 
     public static Window window;
     public static Image transparentImg;
-    private static Texture texture;
+    public static Texture texture;
 
     public static Window getWindow() {
         return window;

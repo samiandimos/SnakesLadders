@@ -50,15 +50,7 @@ public class PlayScreen implements Screen {
         playStage = new Stage(viewport);
         camera.setToOrtho(false, mapW, mapH);
         camera.update();
-//        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-//        Table table = new Table() ;
-//         sound = new ImageButton(skin.getDrawable("sound"));
-//        table.add(sound);
-//        sound.setPosition(660, 950);
-//        sound.setZIndex(4000);
-//        sound.scaleBy(1.5f);
-//        playStage.addActor(sound);
-//          sound.toFront();
+
 
 
 
@@ -197,11 +189,13 @@ public class PlayScreen implements Screen {
         playStage.dispose();
         tiledMap.dispose();
         renderer.dispose();
+        QuestionPopup.texture.dispose();
         DiceDisplay.tex.dispose();
         AnswerButtons.wrong.dispose();
         AnswerButtons.correct.dispose();
         Pawn.question.dispose();
         WindowStyle.backgroundTexture.dispose();
+        WindowStyle.backgroundTexture1.dispose();
 
 
     }

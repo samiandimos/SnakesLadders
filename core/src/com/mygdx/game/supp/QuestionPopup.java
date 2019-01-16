@@ -3,6 +3,7 @@ package com.mygdx.game.supp;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -124,7 +125,7 @@ public class QuestionPopup {
         window.setPosition((PlayScreen.mapW - window.getWidth()) / 2f, ((PlayScreen.mapH - window.getHeight()) / 2f) + 4);
         Gdx.input.setInputProcessor(PlayScreen.playStage);
         window.toFront();
-        windowTitle = "Player " + PlayScreen.activePlayer;
+        windowTitle = "Player " + PlayerSwitch.activePlayer;
     }
 
     // Used in runnable action of movePawn() method
@@ -148,14 +149,30 @@ public class QuestionPopup {
     // Used in AnswerButtons button listener
     // Hiding the question window and simultaneously cleaning its actors for the next set of question and answers
 
-    public static void hideQuestionWindow()
-    {
-        transparentImg.addAction(Actions.after(Actions.fadeOut(.6f, Interpolation.smooth)));
+    public static void hideQuestionWindow() {
+
+//        transparentImg.addAction(Actions.after(Actions.fadeOut(.6f, Interpolation.smooth)));
+
+
+
         window.addAction(Actions.after(sequence(Actions.fadeOut(.6f, Interpolation.smooth), new RunnableAction(){
             @Override
             public void run() {
+                window.addAction(Actions.removeActor(window));
                 window.clear();
             }
         })));
+
+        transparentImg.addAction(sequence(Actions.fadeOut(.6f, Interpolation.smooth),new RunnableAction(){
+        @Override
+            public void run() {
+                transparentImg.addAction(Actions.removeActor(transparentImg));
+                transparentImg.clear();
+            }
+        }
+        ));
+
+
+
     }
 }

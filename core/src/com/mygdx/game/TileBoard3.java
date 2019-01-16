@@ -46,6 +46,8 @@ public class TileBoard3 extends Game {
                 this.setScreen(loadingScreen);
                 Gdx.input.setInputProcessor(LoadingScreen.loadingStage);
                 LoadingScreen.loadingStage.act();
+                System.gc();
+                super.dispose();
                 break;
 
             case MENU:
@@ -54,6 +56,8 @@ public class TileBoard3 extends Game {
                 this.setScreen(menuScreen);
                 Gdx.input.setInputProcessor(MenuScreen.menuStage);
                 MenuScreen.menuStage.act();
+                System.gc();
+                super.dispose();
                 break;
 
             case PLAYGAME:
@@ -62,6 +66,8 @@ public class TileBoard3 extends Game {
                 this.setScreen(playScreen);
                 Gdx.input.setInputProcessor(PlayScreen.playStage);
                 PlayScreen.playStage.act();
+                System.gc();
+                super.dispose();
                 break;
 
             case FINISHGAME:
@@ -70,6 +76,8 @@ public class TileBoard3 extends Game {
                 this.setScreen(finishScreen);
                 Gdx.input.setInputProcessor(FinishScreen.finishStage);
                 FinishScreen.finishStage.act();
+                System.gc();
+                super.dispose();
                 break;
 
             case ENDGAME:
@@ -78,6 +86,8 @@ public class TileBoard3 extends Game {
                 this.setScreen(endScreen);
                 Gdx.input.setInputProcessor(EndScreen.endStage);
                 EndScreen.endStage.act();
+                System.gc();
+                super.dispose();
                 break;
         }
     }
@@ -94,18 +104,12 @@ public class TileBoard3 extends Game {
 
     @Override
     public void dispose(){
-        super.dispose();
-
-            if (this.getScreen() == null){
+                super.dispose();
                 System.gc();
                 this.getScreen().dispose();
-                super.dispose();
-            }
-
-
-
 
 
 
     }
+
 }

@@ -32,7 +32,7 @@ public class PlayScreen implements Screen {
     public static Pawn player1;
     public static Pawn player2;
     public static int noOfPlayers;
-    public ImageButton sound ;
+
 
     // Dimensions of TiledMap
     public static int mapW = 1408;
@@ -59,68 +59,15 @@ public class PlayScreen implements Screen {
 
 
         // Setting inside the playStage the players pawns and their score windows
-        if (noOfPlayers == 1) {
-            player1 = new Pawn("Player1");
-            Pawn.addToPawnList(player1);
-            player1.setInStage(1000);
-            ScoreWindow.createScoreWindow1();
-        }
-        if (noOfPlayers == 2)
-        {
-            player1 = new Pawn("Player1");
-            player1.setInStage(1000);
-            Pawn.addToPawnList(player1);
-            ScoreWindow.createScoreWindow1();
+        ScoreDisplay.scorePanel();
 
-            player2 = new Pawn( "Player2");
-            player2.setInStage(2000);
-            Pawn.addToPawnList(player2);
-            ScoreWindow.createScoreWindow2();
-        }
 
         // Setting inside the playStage our question popup window
         QuestionPopup.createQuestionWindow();
     }
 
 
-//    // Setting variables (activeInputState and inactiveInputState) for getting the com.badlogic.gdx.Input.Keys
-//    // manipulating this way when the players are able to play
-//    // (Used in AnswerButtons listener)
 
-    private int inactiveInputState = Input.Keys.UNKNOWN;
-    public static int activeInputState = Input.Keys.SPACE;
-    public static int inputActivationState = activeInputState;
-    public static String activePlayer = "player1";
-
-    private void checkAndPlay() {
-
-        if (Gdx.input.isKeyJustPressed(inputActivationState)) {
-
-            ScoreWindow.showScoreWindow(noOfPlayers);
-            inputActivationState = inactiveInputState;
-            if (noOfPlayers == 2) {
-
-                ScoreWindow.setActiveScoreWindow(activePlayer);
-
-                if (activePlayer.equals("player1")) {
-                    System.out.println("Player1 Plays");
-                    System.out.println("Player1 Score:" + Score.getPlScore1());
-                    Dice2.rollAndMove(player1, player1.getTileNum());
-
-                } else {
-                    System.out.println("Player2 Plays");
-                    System.out.println("Player 2 Score: " + Score.getPlScore2());
-                    Dice2.rollAndMove(player2, player2.getTileNum());
-                }
-
-            } else {
-                activePlayer = "player1";
-                System.out.println("Player1 Plays");
-                System.out.println("Player1 Score :" + Score.getPlScore1());
-                Dice2.rollAndMove(player1, player1.getTileNum());
-            }
-        }
-    }
 
 
     @Override
@@ -141,24 +88,10 @@ public class PlayScreen implements Screen {
         playStage.act();
         playStage.draw();
 
-       checkAndPlay();
+       PlayerSwitch.checkAndPlay(); // method for player switch
+       DebugPlayer.debugZIndex(); // Debug code Actors Z-Indexes
 
 
-        // Debug code
-        // Actors Z-Indexes
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-
-            for (Actor i : playStage.getActors())
-            {
-                System.out.println(i.getName() + " HAS INDEX " + i.getZIndex());
-            }
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-
-            DiceDisplay.diceImage.setZIndex(0);
-        }
     }
 
     @Override

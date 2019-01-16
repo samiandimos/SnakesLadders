@@ -36,8 +36,8 @@ public class Dice2 {
                 // If contains special <<>>  Movement to special tile
                 
                 if (playingPawn.checkTileForSpecial(tileNum)) {
-                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
-//                  targetTileNum = tileNum; // uncomment to remove special tile for better testing
+//                    targetTileNum = playingPawn.getTargetTileNum(Pawn.getTileProperties(tileNum));
+                  targetTileNum = tileNum; // uncomment to remove special tile for better testing
                     playingPawn.movePawn(tileNum, targetTileNum, dice);
 
                     // Setting the new tile number and save it for the current player
@@ -64,7 +64,7 @@ public class Dice2 {
                             QuestionPopup.getWindow().remove();
                             Pawn.resetPawn();
                             ScoreWindow.resetScoreTables();
-                            PlayScreen.inputActivationState = PlayScreen.activeInputState;
+                            PlayerSwitch.inputActivationState = PlayerSwitch.activeInputState;
                             System.gc();
 
                         }

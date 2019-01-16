@@ -1,8 +1,6 @@
 package com.mygdx.game.supp;
 
 import com.badlogic.gdx.maps.MapProperties;
-
-import static com.mygdx.game.supp.Dice2.dice;
 import static com.mygdx.game.supp.Dice2.tileNum;
 import static com.mygdx.game.supp.Pawn.getTileProperties;
 

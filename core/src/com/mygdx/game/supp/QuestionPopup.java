@@ -3,7 +3,6 @@ package com.mygdx.game.supp;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -151,14 +150,11 @@ public class QuestionPopup {
 
     public static void hideQuestionWindow() {
 
-//        transparentImg.addAction(Actions.after(Actions.fadeOut(.6f, Interpolation.smooth)));
-
-
 
         window.addAction(Actions.after(sequence(Actions.fadeOut(.6f, Interpolation.smooth), new RunnableAction(){
             @Override
             public void run() {
-                window.addAction(Actions.removeActor(window));
+                window.addAction(Actions.removeActor(window));// better to remove it from the stage
                 window.clear();
             }
         })));
@@ -171,8 +167,6 @@ public class QuestionPopup {
             }
         }
         ));
-
-
 
     }
 }

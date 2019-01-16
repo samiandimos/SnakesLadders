@@ -18,8 +18,6 @@ import com.mygdx.game.views.PlayScreen;
 
  * score window to display the score in a window on the playStage
 
- *
-
  * **/
 
 
@@ -141,8 +139,7 @@ public class ScoreWindow {
         }
     }
 
-    public static void resetScoreTables()
-    {
+    public static void resetScoreTables() {
         Score.setPlScore1(0);
 
         if (PlayScreen.noOfPlayers == 2) {

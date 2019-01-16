@@ -2,11 +2,10 @@ package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.mygdx.game.views.PlayScreen;
-
 import static com.mygdx.game.views.PlayScreen.playStage;
 
 public class DiceDisplay {
@@ -34,6 +33,7 @@ public class DiceDisplay {
 
     private static void removeDiceImage() {
         diceImage.remove();
+        diceImage.addAction(Actions.removeActor(diceImage));
 
     }
 

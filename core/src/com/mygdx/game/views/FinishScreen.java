@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
@@ -75,13 +76,13 @@ public class FinishScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
 
                 parent.changeScreen(TileBoard3.MENU,Interpolation.smooth);
-                StatisticsDisplay.removeStatsWindow(noOfPlayers);
+                StatisticsDisplay.removeStatsWindow(noOfPlayers);// display stats according to nr of players
+                System.gc();
             }
 
         });
 
         // 2 actions in sequence
-
         finishStage.addAction(sequence(new RunnableAction() {
             @Override
             public void run() {
@@ -120,6 +121,7 @@ public class FinishScreen implements Screen {
 
                 parent.changeScreen(TileBoard3.ENDGAME,Interpolation.smooth);
                StatisticsDisplay.removeStatsWindow(noOfPlayers);
+                System.gc();
             }
         })));
 

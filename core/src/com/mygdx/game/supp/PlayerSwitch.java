@@ -2,7 +2,6 @@ package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-
 import static com.mygdx.game.views.PlayScreen.*;
 
 public class PlayerSwitch {

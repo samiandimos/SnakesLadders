@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 
 public class FontGenerator {
 
@@ -28,10 +28,9 @@ public class FontGenerator {
         settings.shadowColor = new Color(Color.BROWN); //  R
 
         BitmapFont myFont = myGenerator.generateFont(settings);
-        myGenerator.dispose();
-
         Label.LabelStyle scoreLabelStyle = new Label.LabelStyle();
         scoreLabelStyle.font = myFont;
+        myGenerator.dispose();
 
         return scoreLabelStyle ;
     }
@@ -43,28 +42,10 @@ public class FontGenerator {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Lato-Heavy.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 18;
-//      parameter.borderWidth = 1;
         parameter.color = Color.GOLDENROD ;
         parameter.shadowColor = Color.BLACK;
-
-//        if (CourseProperties.checkForOop()){
-//        parameter.color = Color.GOLDENROD ;
-//        parameter.shadowColor = Color.BLACK;
-//        }
-//        if (CourseProperties.checkForPbl()){
-//            parameter.color = Color.FOREST;
-//            parameter.shadowColor = Color.BLACK;
-//        }                                            // activate this to change color of question
-//        if (CourseProperties.checkForAlgebra()){      // according to the course if wanted
-//            parameter.color = Color.RED;
-//            parameter.shadowColor = Color.BLACK;
-//        }
-//        parameter.shadowOffsetX = 1;
-//        parameter.shadowOffsetY = 1;
-//        parameter.shadowColor = new Color(Color.BLACK);
-        BitmapFont myFont = generator.generateFont(parameter);
         generator.dispose();
-
+        BitmapFont myFont = generator.generateFont(parameter);
         Label.LabelStyle questionLabelStyle = new Label.LabelStyle();
         questionLabelStyle.font = myFont;
 
@@ -78,10 +59,8 @@ public class FontGenerator {
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Lato-Black.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 20;
-//        parameter.borderWidth = 1;
         parameter.color = Color.GOLDENROD;
-
+        parameter.size = 20;
         BitmapFont myFont1 = generator.generateFont(parameter);
         generator.dispose();
         Label.LabelStyle questionLabelStyle = new Label.LabelStyle();
@@ -95,16 +74,11 @@ public class FontGenerator {
         FreeTypeFontGenerator myGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Lato-Black.ttf"));
         // creating new parameters to customise the font according to our need
         FreeTypeFontGenerator.FreeTypeFontParameter settings = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
         settings.size = 20;
         settings.borderWidth = 1;
         settings.shadowColor = Color.BLACK;
-//        settings.color.add()
-
-
         BitmapFont myFont = myGenerator.generateFont(settings);
         myGenerator.dispose();
-
         Label.LabelStyle statsLabelStyle = new Label.LabelStyle();
         statsLabelStyle.font = myFont;
 

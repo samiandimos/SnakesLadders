@@ -1,18 +1,15 @@
 package com.mygdx.game.supp;
 
-import com.badlogic.ashley.core.Entity;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.*;
-
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
-import com.mygdx.game.views.PlayScreen;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-import static com.mygdx.game.views.PlayScreen.*;
+
 
 
 

@@ -1,10 +1,6 @@
 package com.mygdx.game.supp;
 
 
-import java.util.Random;
-
-import static com.badlogic.gdx.math.MathUtils.random;
-
 public class QAStorage {
     private String question ;
     private String[] answers ;

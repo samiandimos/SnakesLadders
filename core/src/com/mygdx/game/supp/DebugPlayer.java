@@ -3,7 +3,6 @@ package com.mygdx.game.supp;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
 import static com.mygdx.game.views.PlayScreen.playStage;
 
 public class DebugPlayer {

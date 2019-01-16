@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.views.PlayScreen;
-
 import java.util.Random;
 
 public class Dice2 {

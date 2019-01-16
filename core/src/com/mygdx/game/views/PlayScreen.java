@@ -27,21 +27,18 @@ public class PlayScreen implements Screen {
     private FillViewport viewport = new FillViewport(mapW, mapH, camera);
     public static TiledMap tiledMap = new TmxMapLoader().load("board64B.tmx");
     private OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(tiledMap);
-
-    // Creating instances of the Class Pawn so to be able to use it's non static methods inside a static context
     public static Pawn player1;
     public static Pawn player2;
     public static int noOfPlayers;
-
-
-    // Dimensions of TiledMap
-    public static int mapW = 1408;
+    public static int mapW = 1408;// Dimensions of TiledMap
     public static int mapH = 1152;
 
 
 
     public PlayScreen(TileBoard3 tileBoard3, Interpolation smooth){
-        parent = tileBoard3;}
+
+        parent = tileBoard3;
+    }
 
 
     @Override
@@ -51,19 +48,9 @@ public class PlayScreen implements Screen {
         camera.setToOrtho(false, mapW, mapH);
         camera.update();
 
+        ScoreDisplay.scorePanel();// Setting inside the playStage the players pawns and their score windows
+        QuestionPopup.createQuestionWindow(); // Setting inside the playStage our question popup window
 
-
-
-
-
-
-
-        // Setting inside the playStage the players pawns and their score windows
-        ScoreDisplay.scorePanel();
-
-
-        // Setting inside the playStage our question popup window
-        QuestionPopup.createQuestionWindow();
     }
 
 
@@ -71,20 +58,16 @@ public class PlayScreen implements Screen {
 
 
     @Override
-    public void render(float delta)
-    {
+    public void render(float delta) {
+
         Gdx.gl.glClearColor(.9038f, .9038f, .9038f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         camera.update();
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
         renderer.setView((OrthographicCamera) viewport.getCamera());
         renderer.setView(camera);
         renderer.render();
-
-        // Instead of batch and sprites
         playStage.act();
         playStage.draw();
 

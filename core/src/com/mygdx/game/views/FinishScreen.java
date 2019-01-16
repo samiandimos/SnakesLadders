@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.TileBoard3;
@@ -23,6 +25,7 @@ import com.mygdx.game.supp.*;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.mygdx.game.views.PlayScreen.noOfPlayers;
 
 
 public class FinishScreen implements Screen {
@@ -52,13 +55,13 @@ public class FinishScreen implements Screen {
 
     @Override
     public void show() {
+
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         camera.setToOrtho(false,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         camera.update();
-
         backGround.setFillParent(true); // to fill the screen with the backGround
         finishStage.addActor(backGround);
 
-         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         Table table = new Table();
         table.setBackground(backGroundTex);
         table.setPosition(0,0 );
@@ -67,24 +70,14 @@ public class FinishScreen implements Screen {
         table.add(BACK_TO_MENU).fillX().uniformX();
 
 
-        BACK_TO_MENU.addListener(new ChangeListener() {
+        BACK_TO_MENU.addListener(new ClickListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void clicked(InputEvent event, float x, float y) {
+
                 parent.changeScreen(TileBoard3.MENU,Interpolation.smooth);
-                System.gc();
-
-                if (PlayScreen.noOfPlayers==1){
-                    StatisticsDisplay.statsWindow1.clear();// this to not draw 3 stats windows after auto switch to endScreen
-                    StatisticsDisplay.statsWindow1.remove();//
-                }
-                if (PlayScreen.noOfPlayers==2){
-                    StatisticsDisplay.statsWindow1.clear();
-                    StatisticsDisplay.statsWindow1.remove();
-                    StatisticsDisplay.statsWindow2.clear();
-                    StatisticsDisplay.statsWindow2.remove();
-                }
-
+                StatisticsDisplay.removeStatsWindow(noOfPlayers);
             }
+
         });
 
         // 2 actions in sequence
@@ -92,7 +85,8 @@ public class FinishScreen implements Screen {
         finishStage.addAction(sequence(new RunnableAction() {
             @Override
             public void run() {
-                StatisticsDisplay.showStatsWindow();
+                // method responsible of clearing and removing previous results
+                StatisticsDisplay.showStatsWindow(noOfPlayers);
 
     }
         }, Actions.delay(3f), (new RunnableAction() {
@@ -125,17 +119,7 @@ public class FinishScreen implements Screen {
             public void run() {
 
                 parent.changeScreen(TileBoard3.ENDGAME,Interpolation.smooth);
-
-                if (PlayScreen.noOfPlayers==1){
-                    StatisticsDisplay.statsWindow1.clear();
-                    StatisticsDisplay.statsWindow1.remove();
-                }
-                if (PlayScreen.noOfPlayers==2){
-                    StatisticsDisplay.statsWindow1.remove();// this to not draw 3 stats windows after pressing
-                    StatisticsDisplay.statsWindow1.clear();// button BACK_TO_MENU
-                    StatisticsDisplay.statsWindow2.clear();
-                    StatisticsDisplay.statsWindow2.remove();
-                }
+               StatisticsDisplay.removeStatsWindow(noOfPlayers);
             }
         })));
 

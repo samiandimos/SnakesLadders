@@ -22,8 +22,6 @@ public class AnswerButtons {
 
     public static void createButton(final String text, final String rightAnswer) {
 
-
-
         final Button button = new TextButton(text,
                 (TextButton.TextButtonStyle) TextButtonStyle.myButtonStyle());// better question/ans text display
         button.setTransform(false);
@@ -44,8 +42,8 @@ public class AnswerButtons {
                 super.setTapCountInterval(tapCountInterval);
             }
         });
-// click listener to control right or wrong answers
 
+// click listener to control right or wrong answers
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -53,7 +51,7 @@ public class AnswerButtons {
                 if (text.equals(rightAnswer) ) {
                     setTapCountInterval(1);// setting tap count interval to only one click
 
-                    if (PlayScreen.activePlayer.equals( "player1") && getTapCount() == 1 ){
+                    if (PlayerSwitch.activePlayer.equals( "player1") && getTapCount() == 1 ){
                         correct.play();
                         Score.increasePlScore1(5);
 
@@ -71,7 +69,7 @@ public class AnswerButtons {
 
                     }
 
-                    if (PlayScreen.activePlayer.equals( "player2") && getTapCount() == 1 ){
+                    if (PlayerSwitch.activePlayer.equals( "player2") && getTapCount() == 1 ){
                         correct.play();
 
                         Score.increasePlScore2(5);
@@ -97,20 +95,22 @@ public class AnswerButtons {
 
 
 
-                    if (PlayScreen.activePlayer.equals("player1") && getTapCount() == 1 ) {
+                    if (PlayerSwitch.activePlayer.equals("player1") && getTapCount() == 1 ) {
                         wrong.play();
+
                         StatisticCollector1.setPl1QuestionCounter(1);
                         StatisticCollector1.setPl1AlgQuestionsCounter(1,true);
                         StatisticCollector1.setPl1OopQuestionsCounter(1,true);
                         StatisticCollector1.setPl1PblQuestionsCounter(1,true);
 
 
-                        PlayScreen.activePlayer="player2";
+                        PlayerSwitch.activePlayer="player2";
 
 
                     } else {
                         wrong.play();
-                        PlayScreen.activePlayer="player1";
+
+                        PlayerSwitch.activePlayer="player1";
                         StatisticCollector1.setPl2QuestionCounter(1);
                         StatisticCollector1.setPl2AlgQuestionsCounter(1,true);
                         StatisticCollector1.setPl2OopQuestionsCounter(1,true);
@@ -127,7 +127,7 @@ public class AnswerButtons {
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
-                        inputActivationState = activeInputState;
+                        PlayerSwitch.inputActivationState = PlayerSwitch.activeInputState;
                         System.out.println("\nSPACE IS ENABLED AGAIN");
                     }
                 }, .3f);

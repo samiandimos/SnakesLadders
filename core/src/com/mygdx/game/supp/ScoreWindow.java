@@ -145,7 +145,7 @@ public class ScoreWindow {
     {
         Score.setPlScore1(0);
 
-        if (PlayScreen.noOfPlayers == 2) {
+        if (PlayerSwitch.noOfPlayers == 2) {
             Score.setPlScore1(0);
             Score.setPlScore2(0);
         }

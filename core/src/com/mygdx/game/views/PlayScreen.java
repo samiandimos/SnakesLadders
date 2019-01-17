@@ -18,6 +18,10 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.*;
 
+import static com.mygdx.game.supp.DebugPlayers.debugZIndex;
+import static com.mygdx.game.supp.PlayerSwitch.checkAndPlay;
+import static com.mygdx.game.supp.ScoreDisplay.scorePanel;
+
 
 public class PlayScreen implements Screen {
 
@@ -29,9 +33,6 @@ public class PlayScreen implements Screen {
     private OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
     // Creating instances of the Class Pawn so to be able to use it's non static methods inside a static context
-    public static Pawn player1;
-    public static Pawn player2;
-    public static int noOfPlayers;
 
 
     // Dimensions of TiledMap
@@ -51,21 +52,12 @@ public class PlayScreen implements Screen {
         camera.setToOrtho(false, mapW, mapH);
         camera.update();
 
+        QuestionPopup.createQuestionWindow();// Setting inside the playStage our question popup window
+        scorePanel();// Setting inside the playStage the players pawns and their score windows
 
 
 
-
-
-
-
-        // Setting inside the playStage the players pawns and their score windows
-        ScoreDisplay.scorePanel();
-
-
-        // Setting inside the playStage our question popup window
-        QuestionPopup.createQuestionWindow();
     }
-
 
 
 
@@ -88,8 +80,8 @@ public class PlayScreen implements Screen {
         playStage.act();
         playStage.draw();
 
-       PlayerSwitch.checkAndPlay(); // method for player switch
-       DebugPlayer.debugZIndex(); // Debug code Actors Z-Indexes
+        debugZIndex();// Debug code Actors Z-Indexes
+        checkAndPlay();// method for the switch between players
 
 
     }

@@ -23,7 +23,7 @@ public class Pawn {
     public static Sound question = Gdx.audio.newSound(Gdx.files.internal("audio/question.mp3"));
 
     public Image pawn;
-    private int tileNum = 95 ;
+    private int tileNum = 0 ;
     private String name = "";
     // Create an array of two positions to store the pawn instances
     public static ArrayList<Pawn> pawnList = new ArrayList<Pawn>(2);

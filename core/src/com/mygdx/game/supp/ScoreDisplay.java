@@ -1,9 +1,9 @@
 package com.mygdx.game.supp;
 
+import static com.mygdx.game.supp.PlayerSwitch.*;
 import static com.mygdx.game.views.PlayScreen.*;
 
 public class ScoreDisplay {
-
 
     public static void scorePanel(){
 

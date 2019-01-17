@@ -22,6 +22,8 @@ public class AnswerButtons {
 
     public static void createButton(final String text, final String rightAnswer) {
 
+
+
         final Button button = new TextButton(text,
                 (TextButton.TextButtonStyle) TextButtonStyle.myButtonStyle());// better question/ans text display
         button.setTransform(false);
@@ -42,8 +44,8 @@ public class AnswerButtons {
                 super.setTapCountInterval(tapCountInterval);
             }
         });
-
 // click listener to control right or wrong answers
+
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -97,7 +99,6 @@ public class AnswerButtons {
 
                     if (PlayerSwitch.activePlayer.equals("player1") && getTapCount() == 1 ) {
                         wrong.play();
-
                         StatisticCollector1.setPl1QuestionCounter(1);
                         StatisticCollector1.setPl1AlgQuestionsCounter(1,true);
                         StatisticCollector1.setPl1OopQuestionsCounter(1,true);
@@ -109,7 +110,6 @@ public class AnswerButtons {
 
                     } else {
                         wrong.play();
-
                         PlayerSwitch.activePlayer="player1";
                         StatisticCollector1.setPl2QuestionCounter(1);
                         StatisticCollector1.setPl2AlgQuestionsCounter(1,true);

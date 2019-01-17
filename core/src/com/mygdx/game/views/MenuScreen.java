@@ -20,6 +20,7 @@ import com.mygdx.game.TileBoard3;
 
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.mygdx.game.supp.Pawn;
+import com.mygdx.game.supp.PlayerSwitch;
 
 public class MenuScreen implements Screen {
     public static Stage menuStage;
@@ -60,7 +61,7 @@ public class MenuScreen implements Screen {
          table.row().pad(10,0,10,0);
          table.add(exit).fillX().uniformX();
          table.row().pad(10,0,10,0);
-         table.add(music).fillX().uniformX();
+         table.add(music);
          table.row().pad(10,0,10,0);
          table.pack();
 
@@ -77,7 +78,7 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                PlayScreen.noOfPlayers = 1;
+                PlayerSwitch.noOfPlayers = 1;
                 parent.changeScreen(TileBoard3.PLAYGAME, Interpolation.smooth);
             }
         });
@@ -86,7 +87,7 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                PlayScreen.noOfPlayers = 2;
+                PlayerSwitch.noOfPlayers = 2;
                 parent.changeScreen(TileBoard3.PLAYGAME,Interpolation.smooth);
             }
         });

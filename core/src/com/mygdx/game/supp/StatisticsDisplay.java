@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.mygdx.game.views.FinishScreen;
 import com.mygdx.game.views.PlayScreen;
 import static com.mygdx.game.supp.StatisticCollector1.*;
-import static com.mygdx.game.views.PlayScreen.noOfPlayers;
 
 public class StatisticsDisplay {
 
@@ -159,15 +158,14 @@ public class StatisticsDisplay {
         statsWindow2.add(pl2PblStats).pad(5);
         pl2PblStats.setColor(Color.BLUE);
         statsWindow2.row();
-
         statsWindow2.pack();
 
         FinishScreen.finishStage.addActor(statsWindow2);
 
     }
-    public static void showStatsWindow(int noOfPlayers) {
+    public static void showStatsWindow() {
 
-        switch (noOfPlayers){
+        switch (PlayerSwitch.noOfPlayers){
             case 1:
                 CreatePlayer1StatsWindow();
                 StatisticsDisplay.statsWindow1.setPosition(490, 150);
@@ -182,21 +180,6 @@ public class StatisticsDisplay {
 
     }
 
-public static void removeStatsWindow(int noOfPlayers){
 
-    switch (noOfPlayers){
-        case 1:
-        StatisticsDisplay.statsWindow1.clear();// this to not draw 3 stats windows after auto switch to endScreen
-        StatisticsDisplay.statsWindow1.remove();//
-            break;
-
-    case 2:
-        StatisticsDisplay.statsWindow1.clear();
-        StatisticsDisplay.statsWindow1.remove();
-        StatisticsDisplay.statsWindow2.clear();
-        StatisticsDisplay.statsWindow2.remove();
-        break;
-    }
-}
 
 }

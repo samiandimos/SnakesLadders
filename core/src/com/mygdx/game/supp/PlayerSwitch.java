@@ -2,7 +2,6 @@ package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-
 import static com.mygdx.game.views.PlayScreen.*;
 
 public class PlayerSwitch {
@@ -11,10 +10,13 @@ public class PlayerSwitch {
     public static int activeInputState = Input.Keys.SPACE;
     public static int inputActivationState = activeInputState;
     public static String activePlayer = "player1";
+    public static Pawn player1;
+    public static Pawn player2;
+    public static int noOfPlayers;
 
-    /** Setting variables (activeInputState and inactiveInputState) for getting the
-     * com.badlogic.gdx.Input.Keysmanipulating this way when the players are able to play
-    (Used in AnswerButtons listener) **/
+    //    // Setting variables (activeInputState and inactiveInputState) for getting the com.badlogic.gdx.Input.Keys
+//    // manipulating this way when the players are able to play
+//    // (Used in AnswerButtons listener)
 
     public static void checkAndPlay(){
 
@@ -25,6 +27,7 @@ public class PlayerSwitch {
                 if (noOfPlayers == 2) {
 
                     ScoreWindow.setActiveScoreWindow(activePlayer);
+
                     if (activePlayer.equals("player1")) {
                         System.out.println("Player1 Plays");
                         System.out.println("Player1 Score:" + Score.getPlScore1());
@@ -44,6 +47,6 @@ public class PlayerSwitch {
                 }
             }
         }
-    }
+ }
 
 
